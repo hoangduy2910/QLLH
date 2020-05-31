@@ -1,0 +1,117 @@
+<h3>
+  <a href="javascript:window.location.href=window.location.href">Danh sách học sinh</a>
+</h3>
+<div class="container">
+  <nav class="navbar navbar-light bg-light">
+    <button type="button" class="btn btn-primary" (click)="openModal(fasle, null)">Thêm học sinh</button>
+    <form class="form-inline">
+      <input class="form-control mr-sm-2" type="search" id="tenHocSinh" placeholder="Nhập tên học sinh" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit" (click)="timKiemHocSinh(1)">Tìm kiếm</button>
+    </form>
+  </nav>
+</div>
+<div class="container">
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Mã học sinh</th>
+            <th scope="col">Tên học sinh</th>
+            <th scope="col">Lớp</th>
+            <th scope="col">GVCN</th>
+            <th scope="col">Giới tính</th>
+            <th scope="col">Hành động</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let hs of listHocSinh.data; index as i">
+            <td>{{ hs.maHs }}</td>
+            <td>{{ hs.tenHs }}</td>
+            <td>{{ hs.tenLop }}</td>
+            <td>{{ hs.tenGv }}</td>
+            <td>{{ hs.gioiTinh }}</td>
+            <td>
+              <button type="button" class="btn btn-success" (click)="openModal(true, i)">Sửa</button>
+              <button type="button" class="btn btn-danger">Xóa</button>
+            </td>
+          </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- Pagination -->
+<div class="pagination-bar">
+  <nav aria-label="Page navigation example">
+    <ul class="pagination">
+      <li class="page-item"><a class="page-link" href="javascript:void(0)" (click)="danhSachHocSinhTruoc()">Trước</a></li>
+      <li class="page-item"><a class="page-link" href="javascript:void(0)">{{ listHocSinh.page }}</a></li>
+      <li class="page-item"><a class="page-link" href="javascript:void(0)" (click)="danhSachHocSinhSau()">Sau</a></li>
+    </ul>
+  </nav>
+</div>
+<!-- End Pagination -->
+
+<!-- Modal -->
+<div class="modal fade" id="modalHocSinh" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel" *ngIf="!isEdit">Thêm học sinh</h5>
+        <h5 class="modal-title" id="exampleModalLabel" *ngIf="isEdit">Sửa học sinh</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+            <div class="col-2 label">Mã học sinh</div>
+            <div class="col-4">
+              <input type="text" class="form-control" [(ngModel)]="hocSinh.maHs" disabled />
+            </div>
+            <div class="col-2 label">Tên học sinh</div>
+            <div class="col-4">
+              <input type="text" class="form-control" placeholder="Nhập tên học sinh" [(ngModel)]="hocSinh.tenHs" />
+            </div>
+        </div>
+        <div class="row">
+          <div class="col-2 label">Tên lớp</div>
+          <div class="col-4">
+            <select class="form-control" id="lop" [(ngModel)]="hocSinh.maLop">
+              <option *ngFor="let l of listLop" [ngValue]="l.maLop">{{ l.tenLop }}</option>
+            </select>
+          </div>
+          <div class="col-2 label">Tên giáo viên</div>
+          <div class="col-4">
+            <select class="form-control" id="giaoVien" [(ngModel)]="hocSinh.maGv" searchable="Search here..">
+              <option *ngFor="let gv of listGiaoVien" [ngValue]="gv.maGv">{{ gv.tenGv }}</option>
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-2 label">Ngày sinh</div>
+          <div class="col-4">
+            <input type="date" class="form-control" [(ngModel)]="hocSinh.ngaySinh" />
+          </div>
+          <div class="col-2 label">Giới tính</div>
+          <div class="col-4">
+            <select class="form-control" id="gioiTinh" [(ngModel)]="hocSinh.gioiTinh">
+              <option>Nam</option>
+              <option>Nữ</option>
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-2 label">Địa chỉ</div>
+          <div class="col-10">
+            <input type="text" class="form-control" placeholder="Nhập địa chỉ" [(ngModel)]="hocSinh.diaChi" />
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+        <button type="submit" class="btn btn-primary" (click)="themHocSinh()" *ngIf="!isEdit">Thêm</button>
+        <button type="submit" class="btn btn-success" (click)="suaHocSinh()" *ngIf="isEdit">Sửa</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Modal -->

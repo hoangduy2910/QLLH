@@ -1,0 +1,12 @@
+.container {
+    margin-top: 50px;  
+}
+
+button.btn a {
+    color: white;
+    text-decoration: none;
+}
+
+button.btn-success {
+    margin-right: 10px;
+}

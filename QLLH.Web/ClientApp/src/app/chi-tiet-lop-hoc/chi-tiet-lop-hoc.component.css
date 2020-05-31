@@ -1,0 +1,18 @@
+.container {
+    margin-top: 50px;  
+}
+
+a {
+    color: black;
+    text-decoration: none;
+}
+
+.card {
+    float: left;
+    margin: 10px;
+    border-radius: 10px;
+}
+
+.card-text {
+    font-size: 20px;
+}

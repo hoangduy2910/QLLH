@@ -1,0 +1,115 @@
+<h3>
+  <a href="javascript:window.location.href=window.location.href">Danh sách giáo viên</a>
+</h3>
+<div class="container">
+  <nav class="navbar navbar-light bg-light">
+    <button type="button" class="btn btn-primary" (click)="openModal(false, null)">Thêm giáo viên</button>
+    <form class="form-inline">
+      <input class="form-control mr-sm-2" id="tenGiaoVien" type="search" placeholder="Nhập tên giáo viên" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit" (click)="timKiemGiaoVien(1)">Tìm kiếm</button>
+    </form>
+  </nav>
+</div>
+<div class="container">
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Mã giáo viên</th>
+            <th scope="col">Tên giáo viên</th>
+            <th scope="col">Môn giảng dạy</th>
+            <th scope="col">Giới tính</th>        
+            <th scope="col">Số điện thoại</th>
+            <th scope="col">Hành động</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let gv of listGiaoVien.data; index as i">
+            <td>{{ gv.maGv }}</td>
+            <td>{{ gv.tenGv }}</td>
+            <td>{{ gv.tenMh }}</td>
+            <td>{{ gv.gioiTinh }}</td>
+            <td>{{ gv.soDt }}</td>
+            <td>
+              <button type="button" class="btn btn-success" (click)="openModal(true, i)">Sửa</button>
+              <button type="button" class="btn btn-danger" (click)="xoaGiaoVien(i)">Xóa</button>
+            </td>
+          </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- Pagination -->
+<div class="pagination-bar">
+  <nav aria-label="Page navigation example">
+    <ul class="pagination">
+      <li class="page-item"><a class="page-link" href="javascript:void(0)" (click)="danhSachGiaoVienTruoc()">Trước</a></li>
+      <li class="page-item"><a class="page-link" href="javascript:void(0)">{{ listGiaoVien.page }}</a></li>
+      <li class="page-item"><a class="page-link" href="javascript:void(0)" (click)="danhSachGiaoVienSau()">Sau</a></li>
+    </ul>
+  </nav>
+</div>
+<!-- End Pagination -->
+
+<!-- Modal -->
+<div class="modal fade" id="modalGiaoVien" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel" *ngIf="!isEdit">Thêm giáo viên</h5>
+        <h5 class="modal-title" id="exampleModalLabel" *ngIf="isEdit">Sửa giáo viên</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+            <div class="col-2 label">Mã giáo viên</div>
+            <div class="col-4">
+              <input type="text" class="form-control" [(ngModel)]="giaoVien.maGv" disabled />
+            </div>
+            <div class="col-2 label">Tên giáo viên</div>
+            <div class="col-4">
+              <input type="text" class="form-control" placeholder="Nhập tên giáo viên" [(ngModel)]="giaoVien.tenGv" />
+            </div>
+        </div>
+        <div class="row">
+          <div class="col-2 label">Môn giảng dạy</div>
+          <div class="col-4">
+            <select class="form-control" id="monHoc" [(ngModel)]="giaoVien.maMh">
+              <option *ngFor="let mh of listMonHoc" [ngValue]="mh.maMh">{{ mh.tenMh }}</option>
+            </select>
+          </div>
+          <div class="col-2 label">Ngày sinh</div>
+          <div class="col-4">
+            <input type="date" class="form-control" id="ngaySinh" [(ngModel)]="giaoVien.ngaySinh" />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-2 label">Giới tính</div>
+          <div class="col-4">
+            <select class="form-control" id="gioiTinh" [(ngModel)]="giaoVien.gioiTinh">
+              <option>Nam</option>
+              <option>Nữ</option>
+            </select>
+          </div>
+          <div class="col-2 label">Số điện thoại</div>
+          <div class="col-4">
+            <input type="text" class="form-control" placeholder="Nhập số điện thoại" [(ngModel)]="giaoVien.soDt" />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-2 label">Địa chỉ</div>
+          <div class="col-10">
+            <input type="text" class="form-control" placeholder="Nhập địa chỉ" [(ngModel)]="giaoVien.diaChi" />
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+        <button type="submit" class="btn btn-primary" (click)="themGiaoVien()" *ngIf="!isEdit">Thêm</button>
+        <button type="submit" class="btn btn-success" (click)="suaGiaoVien()" *ngIf="isEdit">Sửa</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Modal -->
