@@ -9,8 +9,10 @@ declare var $: any;
 })
 export class QuanLyHocSinhComponent {
   isSearch: boolean = false;
+  isSearchByClass: boolean = false;
   isEdit: boolean = false;
-  size: number = 5;
+  size: number = 10;
+  tenLop: any;
   listLop: any;
   listGiaoVien: any;
 
@@ -74,6 +76,7 @@ export class QuanLyHocSinhComponent {
       res = result;
       if (res.success) {
         this.listHocSinh = res.data;
+        (<HTMLInputElement>document.getElementById("tenLop")).textContent = "Lớp";
       }
       else {
         alert(res.message);
@@ -84,7 +87,10 @@ export class QuanLyHocSinhComponent {
   danhSachHocSinhTruoc() {
     if (this.listHocSinh.page > 1) {
       var previousPage = this.listHocSinh.page - 1;
-      if (!this.isSearch) {      
+      if (this.isSearchByClass) {
+        this.timKiemHocSinhTheoLop(previousPage, this.tenLop);
+      }
+      else if (!this.isSearch) {      
         this.danhSachHocSinh(previousPage);
       } else {
         this.timKiemHocSinh(previousPage);
@@ -97,7 +103,10 @@ export class QuanLyHocSinhComponent {
   danhSachHocSinhSau() {
     if (this.listHocSinh.page < this.listHocSinh.totalPage) {
       var nextPage = this.listHocSinh.page + 1;
-      if (!this.isSearch) {   
+      if (this.isSearchByClass) {
+        this.timKiemHocSinhTheoLop(nextPage, this.tenLop);
+      }
+      else if (!this.isSearch) {   
         this.danhSachHocSinh(nextPage);
       } else {
         this.timKiemHocSinh(nextPage);
@@ -118,6 +127,28 @@ export class QuanLyHocSinhComponent {
       size: this.size
     }
     this.http.post("https://localhost:44329/api/HocSinh/get-by-name", x).subscribe(result => {
+      res = result;
+      if (res.success) {
+        this.listHocSinh = res.data;
+      }
+      else {
+        alert(res.message);
+      }
+    }, error => console.error(error));
+  }
+
+  timKiemHocSinhTheoLop(cPage, tenLop) 
+  {
+    this.tenLop = tenLop;
+    this.isSearchByClass = true;
+    (<HTMLInputElement>document.getElementById("tenLop")).textContent = tenLop;
+    var res: any;
+    let x = {
+      keyword: tenLop,
+      page: cPage,
+      size: this.size
+    }
+    this.http.post("https://localhost:44329/api/HocSinh/get-by-class", x).subscribe(result => {
       res = result;
       if (res.success) {
         this.listHocSinh = res.data;
@@ -151,8 +182,6 @@ export class QuanLyHocSinhComponent {
         gioiTinh: this.hocSinh.gioiTinh,
         diaChi: this.hocSinh.diaChi,
       };
-      console.log(hs);
-      /*
       this.http.post("https://localhost:44329/api/HocSinh/create", hs).subscribe(result => {
         res = result;
         if (res.success) {
@@ -166,14 +195,13 @@ export class QuanLyHocSinhComponent {
           alert(res.message);
         }
       }, error => console.error(error)); 
-      */
     } else {
       alert("Bạn phải nhập đủ dữ liệu !"); 
     }
   }
 
   suaHocSinh() {
-    //var res: any;
+    var res: any;
     var hs = {
       maHs: this.hocSinh.maHs,
       tenHs: this.hocSinh.tenHs,
@@ -182,9 +210,7 @@ export class QuanLyHocSinhComponent {
       ngaySinh: this.hocSinh.ngaySinh,
       gioiTinh: this.hocSinh.gioiTinh,
       diaChi: this.hocSinh.diaChi,
-    };  
-    console.log(hs); 
-    /* 
+    };   
     this.http.post("https://localhost:44329/api/HocSinh/update", hs).subscribe(result => {
       res = result;
       if (res.success) {
@@ -198,7 +224,30 @@ export class QuanLyHocSinhComponent {
         alert(res.message);
       }
     }, error => console.error(error)); 
-    */
+  }
+
+  xoaHocSinh(index) {
+    var r = confirm("Bạn có chắc là xóa học sinh này không ?");
+    if (r == true) {
+      var hs = {
+        id: this.listHocSinh.data[index].maHs,
+        keyword: ""
+      };
+      var res: any;
+      this.http.post("https://localhost:44329/api/HocSinh/remove", hs).subscribe(result => {
+        res = result;
+        if (res.success) {
+          this.hocSinh = res.data;
+          alert("Xóa thành công học sinh !");
+          this.clearModal();
+          this.danhSachHocSinh(1);
+          $('#modalHocSinh').modal('hide');
+        }
+        else {
+          alert(res.message);
+        }
+      }, error => console.error(error)); 
+    }
   }
 
   openModal(isEdit, index) {

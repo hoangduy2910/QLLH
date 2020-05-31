@@ -39,12 +39,51 @@ namespace QLLH.Web.Controllers
             return Ok(res);
         }
 
+        [HttpPost("get-by-class")]
+        public IActionResult getHocSinhByLop([FromBody] SearchReq req)
+        {
+            var res = new SingleRsp();
+            var hs = _svc.getHocSinhByLop(req.page, req.size, req.keyword);
+            res.Data = hs;
+            return Ok(res);
+        }
+
         [HttpPost("get-all")]
         public IActionResult getAllHocSinh([FromBody] SearchReq req)
         {
             var res = new SingleRsp();
             var hs = _svc.getAllHocSinh(req.page, req.size, req.keyword);
             res.Data = hs;
+            return Ok(res);
+        }
+
+        [HttpPost("get-all-no-detail")]
+        public IActionResult getAllHocSinhNoDetail()
+        {
+            var res = new SingleRsp();
+            var hs = _svc.getAllHocSinhNoDetail();
+            res.Data = hs;
+            return Ok(res);
+        }
+
+        [HttpPost("create")]
+        public IActionResult createHocSinh([FromBody] HocSinhReq req)
+        {
+            var res = _svc.createHocSinh(req);
+            return Ok(res);
+        }
+
+        [HttpPost("update")]
+        public IActionResult updateHocSinh([FromBody] HocSinhReq req)
+        {
+            var res = _svc.updateHocSinh(req);
+            return Ok(res);
+        }
+
+        [HttpPost("remove")]
+        public IActionResult removeHocSinh([FromBody] SimpleReq req)
+        {
+            var res = _svc.removeHocSinh(req.Id);
             return Ok(res);
         }
 

@@ -23,5 +23,74 @@ namespace QLLH.DAL
             m = Delete(m);
             return m.MaHs;
         }
+
+        public SingleRsp CreateHocSinh(HocSinh hs)
+        {
+            var res = new SingleRsp();
+            using (var context = new QuanLyLopHocContext())
+            {
+                using (var tran = context.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        var newHS = context.HocSinh.Add(hs);
+                        context.SaveChanges();
+                        tran.Commit();
+                    }
+                    catch (Exception ex)
+                    {
+                        tran.Rollback();
+                        res.SetError(ex.StackTrace);
+                    }
+                }
+            }
+            return res;
+        }
+
+        public SingleRsp UpdateHocSinh(HocSinh hs)
+        {
+            var res = new SingleRsp();
+            using (var context = new QuanLyLopHocContext())
+            {
+                using (var tran = context.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        var newHS = context.HocSinh.Update(hs);
+                        context.SaveChanges();
+                        tran.Commit();
+                    }
+                    catch (Exception ex)
+                    {
+                        tran.Rollback();
+                        res.SetError(ex.StackTrace);
+                    }
+                }
+            }
+            return res;
+        }
+
+        public SingleRsp RemoveHocSinh(HocSinh hs)
+        {
+            var res = new SingleRsp();
+            using (var context = new QuanLyLopHocContext())
+            {
+                using (var tran = context.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        var newHS = context.HocSinh.Remove(hs);
+                        context.SaveChanges();
+                        tran.Commit();
+                    }
+                    catch (Exception ex)
+                    {
+                        tran.Rollback();
+                        res.SetError(ex.StackTrace);
+                    }
+                }
+            }
+            return res;
+        }
     }
 }

@@ -3,7 +3,21 @@
 </h3>
 <div class="container">
   <nav class="navbar navbar-light bg-light">
-    <button type="button" class="btn btn-primary" (click)="openModal(fasle, null)">Thêm học sinh</button>
+    <div class="navHocSinh">
+      <div class="themBtn">
+        <button type="button" class="btn btn-primary" (click)="openModal(fasle, null)">Thêm học sinh</button>
+      </div>
+      <div class="dropdownLopBtn">
+        <div class="btn-group dropright">
+          <button id="tenLop" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Lớp
+          </button>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" *ngFor="let l of listLop" (click)="timKiemHocSinhTheoLop(1, l.tenLop)">{{ l.tenLop }}</a>
+          </div>
+        </div>
+      </div>
+    </div>
     <form class="form-inline">
       <input class="form-control mr-sm-2" type="search" id="tenHocSinh" placeholder="Nhập tên học sinh" aria-label="Search">
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit" (click)="timKiemHocSinh(1)">Tìm kiếm</button>
@@ -31,7 +45,7 @@
             <td>{{ hs.gioiTinh }}</td>
             <td>
               <button type="button" class="btn btn-success" (click)="openModal(true, i)">Sửa</button>
-              <button type="button" class="btn btn-danger">Xóa</button>
+              <button type="button" class="btn btn-danger" (click)="xoaHocSinh(i)">Xóa</button>
             </td>
           </tr>
         </tbody>
