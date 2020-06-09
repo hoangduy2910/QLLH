@@ -98,6 +98,12 @@ namespace QLLH.BLL
             return res;
         }
 
+        public object getHocSinhByGiaoVien(int id, string keyword)
+        {
+            var listHS = All.Where(hs => hs.MaGv == id).ToList();
+            return listHS;
+        }
+
         public object getAllHocSinh(int page, int size, string keyword)
         {
             var hs = All.Join(_rep.Context.GiaoVien, a => a.MaGv, b => b.MaGv, (a, b) => new { 
@@ -173,6 +179,19 @@ namespace QLLH.BLL
             newHS.DiaChi = hs.DiaChi;
             res = _rep.UpdateHocSinh(newHS);
             // res.Data = newHS;
+            return res;
+        }
+
+        public SingleRsp updateGiaoVienChuNhiemHocSinh(int MaGvOld, int MaGvNew)
+        {
+            var res = new SingleRsp();
+            var listHS = All.Where(hs => hs.MaGv == MaGvOld).ToList();
+            foreach(HocSinh hs in listHS)
+            {
+                hs.MaGv = MaGvNew;
+                _rep.UpdateHocSinh(hs);
+            }
+            res.Data = listHS;
             return res;
         }
 

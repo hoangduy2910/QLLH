@@ -11,6 +11,7 @@ namespace QLLH.Web.Controllers
     using DAL;
     using Common.Req;
     using Common.Rsp;
+    using QLLH.DAL.Models;
 
     [Route("api/[controller]")]
     [ApiController]
@@ -48,6 +49,15 @@ namespace QLLH.Web.Controllers
             return Ok(res);
         }
 
+        [HttpPost("get-by-teacher")]
+        public IActionResult getHocSinhByGiaoVien([FromBody] SimpleReq req)
+        {
+            var res = new SingleRsp();
+            var listHS = _svc.getHocSinhByGiaoVien(req.Id, req.Keyword);
+            res.Data = listHS;
+            return Ok(res);
+        }
+
         [HttpPost("get-all")]
         public IActionResult getAllHocSinh([FromBody] SearchReq req)
         {
@@ -77,6 +87,13 @@ namespace QLLH.Web.Controllers
         public IActionResult updateHocSinh([FromBody] HocSinhReq req)
         {
             var res = _svc.updateHocSinh(req);
+            return Ok(res);
+        }
+
+        [HttpPost("update-form-teacher")]
+        public IActionResult updateGiaoVienChuNhiemHocSinh([FromBody] UpdateGVCNHSReq req)
+        {
+            var res = _svc.updateGiaoVienChuNhiemHocSinh(req.MaGvOld, req.MaGvNew);
             return Ok(res);
         }
 

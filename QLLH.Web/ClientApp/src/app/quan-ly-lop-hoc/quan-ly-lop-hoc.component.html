@@ -1,50 +1,86 @@
-<h3>Danh sách lớp học</h3>
-<div class="container">
-    <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">STT</th>
-            <th scope="col">Mã lớp học</th>
-            <th scope="col">Tên lớp</th>
-            <th scope="col">Giáo viên chủ nhiệm</th>
-            <th scope="col">Sỉ số lớp</th>
-            <th scope="col">Hành động</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>L101</td>
-            <td>10A1</td>
-            <td>Nguyễn Văn A</td>
-            <td>40</td>
-            <td>
-              <button type="button" class="btn btn-success">Sửa</button>
-              <button type="button" class="btn btn-danger">Xóa</button>
-            </td>
-          </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>L102</td>
-            <td>10A2</td>
-            <td>Nguyễn Văn B</td>
-            <td>40</td>
-            <td>
-              <button type="button" class="btn btn-success">Sửa</button>
-              <button type="button" class="btn btn-danger">Xóa</button>
-            </td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td>L103</td>
-            <td>10A3</td>
-            <td>Nguyễn Văn C</td>
-            <td>40</td>
-            <td>
-              <button type="button" class="btn btn-success">Sửa</button>
-              <button type="button" class="btn btn-danger">Xóa</button>
-            </td>
-          </tr>
-        </tbody>
-    </table>
+<div class="body">
+  <div class="container">
+      <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Mã lớp học</th>
+              <th scope="col">Tên lớp</th>
+              <th scope="col">Mã giáo viên</th>
+              <th scope="col">Giáo viên chủ nhiệm</th>
+              <th scope="col">Hành động</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let l of listLop.data; index as i">
+              <td>{{ l.maLop }}</td>
+              <td>{{ l.tenLop }}</td>
+              <td>{{ l.maGv }}</td>
+              <td>{{ l.tenGv }}</td>
+              <td>
+                <a [routerLink]="['/chi-tiet-lop-hoc', l.maLop]" class="btn btn-primary">
+                  <i class="fa fa-info-circle" aria-hidden="true"></i>
+                </a>
+                <a class="btn btn-success" (click)="openModalEdit(i)">
+                  <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                </a>
+              </td>
+            </tr>
+          </tbody>
+      </table>
+  </div>
+
+  <!-- Pagination -->
+  <div class="pagination-bar">
+    <nav aria-label="Page navigation example">
+      <ul class="pagination">
+        <li class="page-item"><a class="page-link" href="javascript:void(0)" (click)="danhSachLopTruoc()">Trước</a></li>
+        <li class="page-item"><a class="page-link" href="javascript:void(0)">{{ listLop.page }}</a></li>
+        <li class="page-item"><a class="page-link" href="javascript:void(0)" (click)="danhSachLopSau()">Sau</a></li>
+      </ul>
+    </nav>
+  </div>
+  <!-- End Pagination -->
 </div>
+
+<!-- Modal Edit -->
+<div class="modal fade" id="modalEdit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Chỉ định giáo viên chủ nhiệm</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-2 label">Mã lớp</div>
+          <div class="col-4">
+            <input type="text" class="form-control" [(ngModel)]="lop.maLop" disabled />
+          </div>
+          <div class="col-2 label">Tên lớp</div>
+          <div class="col-4">
+            <input type="text" class="form-control" [(ngModel)]="lop.tenLop" disabled />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-2 label">Mã giáo viên</div>
+          <div class="col-4">
+            <input type="text" class="form-control" [(ngModel)]="lop.maGv" disabled />
+          </div>
+          <div class="col-2 label">Tên giáo viên</div>
+          <div class="col-4">
+            <select class="form-control" id="giaoVien" [(ngModel)]="lop.maGv">
+              <option class="option-item" title="Chủ nhiệm lớp: {{ gv.tenLop }}" *ngFor="let gv of listGiaoVien" [ngValue]="gv.maGv" [disabled]="gv.maLop !== 1">{{ gv.tenGv }}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+        <button type="submit" class="btn btn-success" (click)="chiDinhGiaoVienChuNhiem()">Chỉ định</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Modal -->

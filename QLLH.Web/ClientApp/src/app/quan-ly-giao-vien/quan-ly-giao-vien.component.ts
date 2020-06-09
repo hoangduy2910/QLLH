@@ -10,9 +10,19 @@ declare var $: any;
 
 export class QuanLyGiaoVienComponent {
   isSearch: boolean = false;
+  isSearchBySubject: boolean = false;
   isEdit: boolean = false;
   size: number = 5;
   listMonHoc: any;
+  listLop: any;
+  tenMH: any;
+
+  listRow: any = [
+    { row: 5 },
+    { row: 10 },
+    { row: 15 },
+    { row: 20 }
+  ];
 
   listGiaoVien: any = {
     data: [],
@@ -25,16 +35,29 @@ export class QuanLyGiaoVienComponent {
   giaoVien = {
     maGv: 0,
     tenGv: "",
-    maMh: 0,
+    maMh: null,
+    maLop: 1,
     ngaySinh: "",
     gioiTinh: "",
     diaChi: "",
-    soDt: ""
+    soDt: "",
+    maCv: 2
+  };
+
+  hocSinh = {
+    maHs: 0,
+    tenHs: "",
+    maGv: 0,
+    maLop: 0,
+    ngaySinh: "",
+    gioiTinh: "",
+    diaChi: "",
   };
 
   constructor(private http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
     this.danhSachGiaoVien(1);
     this.danhSachMonHoc();
+    this.danhSachLop();
   }
 
   danhSachGiaoVien(cPage) {
@@ -54,10 +77,39 @@ export class QuanLyGiaoVienComponent {
     }, error => console.error(error));
   }
 
+  danhSachMonHoc() {
+    var res: any;
+    this.http.post("https://localhost:44329/api/MonHoc/get-all", null).subscribe(result => {
+      res = result;
+      if (res.success) {
+        this.listMonHoc = res.data;
+      }
+      else {
+        alert(res.message);
+      }
+    }, error => console.error(error));
+  }
+
+  danhSachLop() {
+    var res: any;
+    this.http.post("https://localhost:44329/api/Lop/get-all-no-detail", null).subscribe(result => {
+      res = result;
+      if (res.success) {
+        this.listLop = res.data;
+      }
+      else {
+        alert(res.message);
+      }
+    }, error => console.error(error));
+  }
+
   danhSachGiaoVienTruoc() {
     if (this.listGiaoVien.page > 1) {
       var previousPage = this.listGiaoVien.page - 1;
-      if (!this.isSearch) {      
+      if (this.isSearchBySubject) {
+        this.timKiemGiaoVienTheoMonHoc(previousPage, this.tenMH);
+      }
+      else if (!this.isSearch) {      
         this.danhSachGiaoVien(previousPage);
       } else {
         this.timKiemGiaoVien(previousPage);
@@ -70,7 +122,10 @@ export class QuanLyGiaoVienComponent {
   danhSachGiaoVienSau() {
     if (this.listGiaoVien.page < this.listGiaoVien.totalPage) {
       var nextPage = this.listGiaoVien.page + 1;
-      if (!this.isSearch) {   
+      if (this.isSearchBySubject) {
+        this.timKiemGiaoVienTheoMonHoc(nextPage, this.tenMH);
+      }
+      else if (!this.isSearch) {   
         this.danhSachGiaoVien(nextPage);
       } else {
         this.timKiemGiaoVien(nextPage);
@@ -101,12 +156,20 @@ export class QuanLyGiaoVienComponent {
     }, error => console.error(error));
   }
 
-  danhSachMonHoc() {
+  timKiemGiaoVienTheoMonHoc(cPage, tenMH) {
+    this.tenMH = tenMH;
+    this.isSearchBySubject = true;
+    (<HTMLInputElement>document.getElementById("tenMonHoc")).textContent = tenMH;
     var res: any;
-    this.http.post("https://localhost:44329/api/MonHoc/get-all", null).subscribe(result => {
+    let x = {
+      keyword: tenMH,
+      page: cPage,
+      size: this.size
+    }
+    this.http.post("https://localhost:44329/api/GiaoVien/get-by-subject", x).subscribe(result => {
       res = result;
       if (res.success) {
-        this.listMonHoc = res.data;
+        this.listGiaoVien = res.data;
       }
       else {
         alert(res.message);
@@ -114,9 +177,16 @@ export class QuanLyGiaoVienComponent {
     }, error => console.error(error));
   }
 
+  chonSoDongHienThi(row) {
+    this.size = row;
+    this.danhSachGiaoVien(1);
+    this.isSearchBySubject = false;
+    (<HTMLInputElement>document.getElementById("tenMonHoc")).textContent = "Môn học";
+  }
+
   kiemTraThemGiaoVien() {
     var check = false;
-    if (this.giaoVien.maGv == 0 && this.giaoVien.tenGv != "" && this.giaoVien.maMh != 0 && this.giaoVien.ngaySinh != "" && this.giaoVien.diaChi != "" && this.giaoVien.soDt != "") {
+    if (this.giaoVien.maGv == 0 && this.giaoVien.tenGv != "" && this.giaoVien.maMh != 0 && this.giaoVien.maLop != 0 && this.giaoVien.ngaySinh != "" && this.giaoVien.gioiTinh != "" && this.giaoVien.diaChi != "" && this.giaoVien.soDt != "") {
       check = true;
     }
     return check;
@@ -132,10 +202,12 @@ export class QuanLyGiaoVienComponent {
         maGv: 0,
         tenGv: this.giaoVien.tenGv,
         maMh: this.giaoVien.maMh,
+        maLop: this.giaoVien.maLop,
         ngaySinh: this.giaoVien.ngaySinh,
         gioiTinh: $("#gioiTinh option:selected").text(),
         diaChi: this.giaoVien.diaChi,
-        soDt: this.giaoVien.soDt
+        soDt: this.giaoVien.soDt,
+        maCv: this.giaoVien.maCv
       };
       this.http.post("https://localhost:44329/api/GiaoVien/create", gv).subscribe(result => {
         res = result;
@@ -144,7 +216,7 @@ export class QuanLyGiaoVienComponent {
           alert("Thêm thành công giáo viên mới !");
           this.danhSachGiaoVien(1);
           this.clearModal();
-          $('#modalGiaoVien').modal('hide');
+          $('#modalAddEdit').modal('hide');
         }
         else {
           alert(res.message);
@@ -161,19 +233,22 @@ export class QuanLyGiaoVienComponent {
       maGv: this.giaoVien.maGv,
       tenGv: this.giaoVien.tenGv,
       maMh: this.giaoVien.maMh,
+      maLop: this.giaoVien.maLop,
       ngaySinh: this.giaoVien.ngaySinh,
       gioiTinh: $("#gioiTinh option:selected").text(),
       diaChi: this.giaoVien.diaChi,
-      soDt: this.giaoVien.soDt
+      soDt: this.giaoVien.soDt,
+      maCv: this.giaoVien.maCv
     };    
     this.http.post("https://localhost:44329/api/GiaoVien/update", gv).subscribe(result => {
       res = result;
       if (res.success) {
         this.giaoVien = res.data;
         alert("Sửa thành công giáo viên !");
+        (<HTMLInputElement>document.getElementById("tenMonHoc")).textContent = "Môn học";
         this.danhSachGiaoVien(1);
         this.clearModal();
-        $('#modalGiaoVien').modal('hide');
+        $('#modalAddEdit').modal('hide');
       }
       else {
         alert(res.message);
@@ -182,30 +257,27 @@ export class QuanLyGiaoVienComponent {
   }
 
   xoaGiaoVien(index) {
-    var r = confirm("Bạn có chắc là xóa giáo viên này không ?");
-    if (r == true) {
-      var gv = {
-        id: this.listGiaoVien.data[index].maGv,
-        keyword: ""
-      };
-      var res: any;
-      this.http.post("https://localhost:44329/api/GiaoVien/remove", gv).subscribe(result => {
-        res = result;
-        if (res.success) {
-          this.giaoVien = res.data;
-          alert("Xóa thành công giáo viên !");
-          this.clearModal();
-          this.danhSachGiaoVien(1);
-          $('#modalGiaoVien').modal('hide');
-        }
-        else {
-          alert(res.message);
-        }
-      }, error => console.error(error)); 
-    }
+    var gv = {
+      id: this.listGiaoVien.data[index].maGv,
+      keyword: ""
+    };
+    var res: any;
+    this.http.post("https://localhost:44329/api/GiaoVien/remove", gv).subscribe(result => {
+      res = result;
+      if (res.success) {
+        this.giaoVien = res.data;
+        alert("Xóa thành công giáo viên !");
+        this.clearModal();
+        this.danhSachGiaoVien(1);
+        $('#modalDelete').modal('hide');
+      }
+      else {
+        alert(res.message);
+      }
+    }, error => console.error(error)); 
   }
 
-  openModal(isEdit, index) { 
+  openModalAddEdit(isEdit, index) { 
     this.isEdit = isEdit;
     if (this.isEdit) {
       this.giaoVien = this.listGiaoVien.data[index];
@@ -213,18 +285,25 @@ export class QuanLyGiaoVienComponent {
     } else {
       this.clearModal();
     }
-    $('#modalGiaoVien').modal('show');   
+    $('#modalAddEdit').modal('show');   
+  }
+
+  openModalDelete(index) {
+    $('#modalDelete').modal('show');
+    (<HTMLInputElement>document.getElementById("deleteBtn")).onclick = () => this.xoaGiaoVien(index)​;​
   }
 
   clearModal() {
     this.giaoVien = {
       maGv: 0,
       tenGv: "",
-      maMh: 0,
+      maMh: null,
+      maLop: 1,
       ngaySinh: "",
       gioiTinh: "",
       diaChi: "",
-      soDt: ""
+      soDt: "",
+      maCv: 2
     };
   }
 }

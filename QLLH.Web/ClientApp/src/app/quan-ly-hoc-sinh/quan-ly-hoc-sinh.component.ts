@@ -16,6 +16,14 @@ export class QuanLyHocSinhComponent {
   listLop: any;
   listGiaoVien: any;
 
+  listRow: any = [
+    { row: 10 },
+    { row: 20 },
+    { row: 30 },
+    { row: 40 },
+    { row: 50 }
+  ];
+
   listHocSinh: any = {
     data: [],
     totalRecord: 0,
@@ -32,6 +40,18 @@ export class QuanLyHocSinhComponent {
     ngaySinh: "",
     gioiTinh: "",
     diaChi: "",
+  };
+
+  giaoVien = {
+    maGv: 0,
+    tenGv: "",
+    maMh: null,
+    maLop: 1,
+    ngaySinh: "",
+    gioiTinh: "",
+    diaChi: "",
+    soDt: "",
+    maCv: 2
   };
 
   constructor(private http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
@@ -159,6 +179,32 @@ export class QuanLyHocSinhComponent {
     }, error => console.error(error));
   }
 
+  chonSoDongHienThi(row) {
+    this.size = row;
+    this.danhSachHocSinh(1);
+    this.isSearchByClass = false;
+    (<HTMLInputElement>document.getElementById("tenLop")).textContent = "Lớp";
+  }
+
+  chonGiaoVienTheoLop(maLop) {
+    var res: any;
+    var x = {
+      id: maLop,
+      keyword: ""
+    };
+    this.http.post("https://localhost:44329/api/GiaoVien/get-form-teacher-by-class", x).subscribe(result => {
+      res = result;
+      if (res.success) {
+        this.giaoVien = res.data;
+        this.hocSinh.maGv = this.giaoVien.maGv;
+        (<HTMLInputElement>document.getElementById("tenGiaoVien")).value = this.giaoVien.tenGv;
+      }
+      else {
+        alert(res.message);
+      }
+    }, error => console.error(error));   
+  }
+
   kiemTraThemHocSinh() {
     var check = false;
     if (this.hocSinh.maHs == 0 && this.hocSinh.tenHs != "" && this.hocSinh.maLop != 0 && this.hocSinh.maGv != 0 && this.hocSinh.ngaySinh != "" && this.hocSinh.gioiTinh != "" && this.hocSinh.diaChi != "") {
@@ -189,7 +235,7 @@ export class QuanLyHocSinhComponent {
           alert("Thêm thành công học sinh mới !");
           this.danhSachHocSinh(1);
           this.clearModal();
-          $('#modalHocSinh').modal('hide');
+          $('#modalAddEdit').modal('hide');
         }
         else {
           alert(res.message);
@@ -218,7 +264,7 @@ export class QuanLyHocSinhComponent {
         alert("Sửa thành công học sinh !");
         this.danhSachHocSinh(1);
         this.clearModal();
-        $('#modalHocSinh').modal('hide');
+        $('#modalAddEdit').modal('hide');
       }
       else {
         alert(res.message);
@@ -227,30 +273,27 @@ export class QuanLyHocSinhComponent {
   }
 
   xoaHocSinh(index) {
-    var r = confirm("Bạn có chắc là xóa học sinh này không ?");
-    if (r == true) {
-      var hs = {
-        id: this.listHocSinh.data[index].maHs,
-        keyword: ""
-      };
-      var res: any;
-      this.http.post("https://localhost:44329/api/HocSinh/remove", hs).subscribe(result => {
-        res = result;
-        if (res.success) {
-          this.hocSinh = res.data;
-          alert("Xóa thành công học sinh !");
-          this.clearModal();
-          this.danhSachHocSinh(1);
-          $('#modalHocSinh').modal('hide');
-        }
-        else {
-          alert(res.message);
-        }
-      }, error => console.error(error)); 
-    }
+    var hs = {
+      id: this.listHocSinh.data[index].maHs,
+      keyword: ""
+    };
+    var res: any;
+    this.http.post("https://localhost:44329/api/HocSinh/remove", hs).subscribe(result => {
+      res = result;
+      if (res.success) {
+        this.hocSinh = res.data;
+        alert("Xóa thành công học sinh !");
+        this.clearModal();
+        this.danhSachHocSinh(1);
+        $('#modalDelete').modal('hide');
+      }
+      else {
+        alert(res.message);
+      }
+    }, error => console.error(error)); 
   }
 
-  openModal(isEdit, index) {
+  openModalAddEdit(isEdit, index) {
     this.isEdit = isEdit;
     if (this.isEdit) {
       this.hocSinh = this.listHocSinh.data[index];
@@ -258,7 +301,12 @@ export class QuanLyHocSinhComponent {
     } else {
       this.clearModal();
     }
-    $('#modalHocSinh').modal('show');  
+    $('#modalAddEdit').modal('show');  
+  }
+
+  openModalDelete(index) {
+    $('#modalDelete').modal('show');
+    (<HTMLInputElement>document.getElementById("deleteBtn")).onclick = () => this.xoaHocSinh(index)​;​
   }
 
   clearModal() {

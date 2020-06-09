@@ -1,71 +1,95 @@
-<h3>
-  <a href="javascript:window.location.href=window.location.href">Danh sách học sinh</a>
-</h3>
-<div class="container">
-  <nav class="navbar navbar-light bg-light">
-    <div class="navHocSinh">
-      <div class="themBtn">
-        <button type="button" class="btn btn-primary" (click)="openModal(fasle, null)">Thêm học sinh</button>
-      </div>
-      <div class="dropdownLopBtn">
-        <div class="btn-group dropright">
-          <button id="tenLop" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Lớp
-          </button>
-          <div class="dropdown-menu">
-            <a class="dropdown-item" *ngFor="let l of listLop" (click)="timKiemHocSinhTheoLop(1, l.tenLop)">{{ l.tenLop }}</a>
+<div class="body">
+  <div class="container">
+    <nav class="navbar navbar-light bg-light">
+      <div class="navHocSinh">
+        <div class="listHocSinhBtn">
+          <a class="btn btn-outline-dark" href="javascript:window.location.href=window.location.href">
+            <i class="fa fa-book" aria-hidden="true"></i> Danh sách
+          </a>
+        </div>
+        <div class="rowBtn">
+          <div class="btn-group dropright">
+            <button id="row" type="button" class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              {{ size }}
+            </button>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" *ngFor="let r of listRow" (click)="chonSoDongHienThi(r.row)">{{ r.row }}</a>
+            </div>
           </div>
         </div>
+        <div class="dropdownLopBtn">
+          <div class="btn-group dropright">
+            <button id="tenLop" type="button" class="btn btn-outline-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Lớp
+            </button>
+            <div class="dropdown-menu">
+              <div *ngFor="let l of listLop">
+                <a class="dropdown-item" *ngIf="l.maLop != 1" (click)="timKiemHocSinhTheoLop(1, l.tenLop)">{{ l.tenLop }}</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="themBtn">
+          <button type="button" class="btn btn-outline-primary" (click)="openModalAddEdit(fasle, null)">
+            <i class="fa fa-plus-square-o fa-lg" aria-hidden="true"></i> Thêm học sinh
+          </button>
+        </div>
       </div>
-    </div>
-    <form class="form-inline">
-      <input class="form-control mr-sm-2" type="search" id="tenHocSinh" placeholder="Nhập tên học sinh" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit" (click)="timKiemHocSinh(1)">Tìm kiếm</button>
-    </form>
-  </nav>
-</div>
-<div class="container">
-    <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">Mã học sinh</th>
-            <th scope="col">Tên học sinh</th>
-            <th scope="col">Lớp</th>
-            <th scope="col">GVCN</th>
-            <th scope="col">Giới tính</th>
-            <th scope="col">Hành động</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let hs of listHocSinh.data; index as i">
-            <td>{{ hs.maHs }}</td>
-            <td>{{ hs.tenHs }}</td>
-            <td>{{ hs.tenLop }}</td>
-            <td>{{ hs.tenGv }}</td>
-            <td>{{ hs.gioiTinh }}</td>
-            <td>
-              <button type="button" class="btn btn-success" (click)="openModal(true, i)">Sửa</button>
-              <button type="button" class="btn btn-danger" (click)="xoaHocSinh(i)">Xóa</button>
-            </td>
-          </tr>
-        </tbody>
-    </table>
+      <form class="form-inline">
+        <input style="border: 1px solid #28a745;" class="form-control mr-sm-2" type="search" id="tenHocSinh" placeholder="Nhập tên học sinh" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit" (click)="timKiemHocSinh(1)">
+          <i class="fa fa-search" aria-hidden="true"></i>
+        </button>
+      </form>
+    </nav>
+  </div>
+  <div class="container">
+      <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Mã học sinh</th>
+              <th scope="col">Tên học sinh</th>
+              <th scope="col">Lớp</th>
+              <th scope="col">Giáo viên chủ nhiệm</th>
+              <th scope="col">Giới tính</th>
+              <th scope="col">Hành động</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let hs of listHocSinh.data; index as i">
+              <td>{{ hs.maHs }}</td>
+              <td>{{ hs.tenHs }}</td>
+              <td>{{ hs.tenLop }}</td>
+              <td>{{ hs.tenGv }}</td>
+              <td>{{ hs.gioiTinh }}</td>
+              <td>
+                <button type="button" class="btn btn-success" (click)="openModalAddEdit(true, i)">
+                  <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                </button>
+                <button type="button" class="btn btn-danger" (click)="openModalDelete(i)">
+                  <i class="fa fa-trash-o" aria-hidden="true"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+      </table>
+  </div>
+
+  <!-- Pagination -->
+  <div class="pagination-bar">
+    <nav aria-label="Page navigation example">
+      <ul class="pagination">
+        <li class="page-item"><a class="page-link" href="javascript:void(0)" (click)="danhSachHocSinhTruoc()">Trước</a></li>
+        <li class="page-item"><a class="page-link" href="javascript:void(0)">{{ listHocSinh.page }}</a></li>
+        <li class="page-item"><a class="page-link" href="javascript:void(0)" (click)="danhSachHocSinhSau()">Sau</a></li>
+      </ul>
+    </nav>
+  </div>
+  <!-- End Pagination -->
 </div>
 
-<!-- Pagination -->
-<div class="pagination-bar">
-  <nav aria-label="Page navigation example">
-    <ul class="pagination">
-      <li class="page-item"><a class="page-link" href="javascript:void(0)" (click)="danhSachHocSinhTruoc()">Trước</a></li>
-      <li class="page-item"><a class="page-link" href="javascript:void(0)">{{ listHocSinh.page }}</a></li>
-      <li class="page-item"><a class="page-link" href="javascript:void(0)" (click)="danhSachHocSinhSau()">Sau</a></li>
-    </ul>
-  </nav>
-</div>
-<!-- End Pagination -->
-
-<!-- Modal -->
-<div class="modal fade" id="modalHocSinh" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- Modal Add and Edit-->
+<div class="modal fade" id="modalAddEdit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -89,15 +113,15 @@
         <div class="row">
           <div class="col-2 label">Tên lớp</div>
           <div class="col-4">
-            <select class="form-control" id="lop" [(ngModel)]="hocSinh.maLop">
-              <option *ngFor="let l of listLop" [ngValue]="l.maLop">{{ l.tenLop }}</option>
+            <select class="form-control" id="lop" [(ngModel)]="hocSinh.maLop" (change)="chonGiaoVienTheoLop(hocSinh.maLop)">
+              <option *ngFor="let l of listLop" [ngValue]="l.maLop" [ngStyle]="{'display': l.maLop != 1 ? 'block' : 'none'}">
+                {{ l.tenLop }}
+              </option>
             </select>
           </div>
           <div class="col-2 label">Tên giáo viên</div>
           <div class="col-4">
-            <select class="form-control" id="giaoVien" [(ngModel)]="hocSinh.maGv" searchable="Search here..">
-              <option *ngFor="let gv of listGiaoVien" [ngValue]="gv.maGv">{{ gv.tenGv }}</option>
-            </select>
+            <input type="text" id="tenGiaoVien" class="form-control" disabled />
           </div>
         </div>
         <div class="row">
@@ -124,6 +148,28 @@
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
         <button type="submit" class="btn btn-primary" (click)="themHocSinh()" *ngIf="!isEdit">Thêm</button>
         <button type="submit" class="btn btn-success" (click)="suaHocSinh()" *ngIf="isEdit">Sửa</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Modal -->
+
+<!-- Modal Delete -->
+<div class="modal fade" id="modalDelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Xóa học sinh</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Bạn có muốn xóa học sinh này không ?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+        <button id="deleteBtn" type="button" class="btn btn-danger">Xóa</button>
       </div>
     </div>
   </div>

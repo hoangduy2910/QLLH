@@ -1,0 +1,26 @@
+<div class="body">
+  <div class="container">
+      <table class="table">
+          <thead>
+            <tr>
+              <th>Tiết / Thứ</th>
+              <th *ngFor="let ng of listNgayHoc">{{ ng.tenNgay }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr id="listTietHoc-{{ t.maTiet }}" *ngFor="let t of listTietHoc">
+              <th>
+                <span>Tiết {{ t.maTiet }} - ({{ t.thoiGian }})</span>
+              </th>
+              <td id="Tiet-{{ t.maTiet }}-Ngay-1">...</td>
+              <td id="Tiet-{{ t.maTiet }}-Ngay-2">...</td>
+              <td id="Tiet-{{ t.maTiet }}-Ngay-3">...</td>
+              <td id="Tiet-{{ t.maTiet }}-Ngay-4">...</td>
+              <td id="Tiet-{{ t.maTiet }}-Ngay-5">...</td>
+              <td id="Tiet-{{ t.maTiet }}-Ngay-6">...</td>
+            </tr>
+          </tbody>
+      </table>
+  </div>
+</div>
+

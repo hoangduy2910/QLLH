@@ -34,8 +34,17 @@ namespace QLLH.Web.Controllers
         public IActionResult getAllLopNoDetail()
         {
             var res = new SingleRsp();
-            var l = _svc.All;
-            res.Data = l;
+            var listLop = _svc.getAllLopNoDetail();
+            res.Data = listLop;
+            return Ok(res);
+        }
+
+        [HttpPost("get-all")]
+        public IActionResult getAllLop(SearchReq req)
+        {
+            var res = new SingleRsp();
+            var listLop = _svc.getAllLop(req.page, req.size, req.keyword);
+            res.Data = listLop;
             return Ok(res);
         }
 

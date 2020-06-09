@@ -2,17 +2,105 @@
     margin-top: 50px;  
 }
 
-a {
-    color: black;
+.body {
+    margin-bottom: 50px;
+    border: 1px solid #e1e1ea;
+    border-radius: 10px;
+    box-shadow: 18px 20px 60px -9px rgba(0,0,0,0.75);
+}
+
+.btn-success {
+    color: white;
+    text-decoration: none;
+    margin-right: 10px;
+}
+
+.btn-danger {
+    color: white;
     text-decoration: none;
 }
 
-.card {
-    float: left;
-    margin: 10px;
-    border-radius: 10px;
+.btn-success:hover, .btn-danger:hover {
+    color: white;
 }
 
-.card-text {
+.pagination-bar {
+    display: flex;
+    justify-content: center;
+    font-size: 15px;
+}
+
+div.row {
+    margin-top: 10px;
+}
+
+div.row div.label {
+    padding-right: 0;
+    margin-top: 5px;
+}
+
+.tabset > input[type="radio"] {
+    position: absolute;
+    left: -200vw;
+}
+  
+.tabset .tab-panel {
+    display: none;
+}
+  
+.tabset > input:first-child:checked ~ .tab-panels > .tab-panel:first-child,
+.tabset > input:nth-child(3):checked ~ .tab-panels > .tab-panel:nth-child(2),
+.tabset > input:nth-child(5):checked ~ .tab-panels > .tab-panel:nth-child(3),
+.tabset > input:nth-child(7):checked ~ .tab-panels > .tab-panel:nth-child(4),
+.tabset > input:nth-child(9):checked ~ .tab-panels > .tab-panel:nth-child(5),
+.tabset > input:nth-child(11):checked ~ .tab-panels > .tab-panel:nth-child(6) {
+    display: block;
+}
+  
+.tabset > label {
+    position: relative;
+    display: inline-block;
+    padding: 15px 15px 25px;
+    border: 1px solid transparent;
+    border-bottom: 0;
+    cursor: pointer;
+    font-weight: 600;
     font-size: 20px;
+}
+
+.tabset > label:hover,
+.tabset > input:focus + label {
+    color: #06c;
+}
+  
+.tabset > label:hover::after,
+.tabset > input:focus + label::after,
+.tabset > input:checked + label::after {
+    background: #06c;
+}   
+  
+.tabset > input:checked + label {
+    border-color: #ccc;
+    border-bottom: 1px solid #fff;
+    margin-bottom: -1px;
+}
+  
+.tab-panel {
+    padding: 30px 0;
+    border-top: 1px solid #ccc;
+}
+  
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+}
+  
+body {
+    padding: 30px;
+}
+
+.tabset {
+    max-width: 65em;
+    margin-left: 20px;
 }

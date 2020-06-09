@@ -7,12 +7,14 @@ namespace QLLH.DAL.Models
     {
         public Lop()
         {
+            GiaoVien = new HashSet<GiaoVien>();
             HocSinh = new HashSet<HocSinh>();
         }
 
         public int MaLop { get; set; }
         public string TenLop { get; set; }
 
+        public virtual ICollection<GiaoVien> GiaoVien { get; set; }
         public virtual ICollection<HocSinh> HocSinh { get; set; }
     }
 }

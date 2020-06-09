@@ -39,6 +39,33 @@ namespace QLLH.Web.Controllers
             return Ok(res);
         }
 
+        [HttpPost("get-by-class")]
+        public IActionResult getGiaoVienByLop([FromBody] SearchReq req)
+        {
+            var res = new SingleRsp();
+            var gv = _svc.getGiaoVienByLop(req.page, req.size, req.keyword);
+            res.Data = gv;
+            return Ok(res);
+        }
+
+        [HttpPost("get-by-subject")]
+        public IActionResult getGiaoVienByMonHoc([FromBody] SearchReq req)
+        {
+            var res = new SingleRsp();
+            var gv = _svc.getGiaoVienByMonHoc(req.page, req.size, req.keyword);
+            res.Data = gv;
+            return Ok(res);
+        }
+
+        [HttpPost("get-form-teacher-by-class")]
+        public IActionResult getGiaoVienChuNhiemByLop([FromBody] SimpleReq req)
+        {
+            var res = new SingleRsp();
+            var gv = _svc.getGiaoVienChuNhiemByLop(req.Id);
+            res.Data = gv;
+            return Ok(res);
+        }
+
         [HttpPost("get-all")]
         public IActionResult getAllGiaoVien([FromBody] SearchReq req)
         {
@@ -68,6 +95,15 @@ namespace QLLH.Web.Controllers
         public IActionResult updateGiaoVien([FromBody] GiaoVienReq req)
         {
             var res = _svc.updateGiaoVien(req);
+            return Ok(res);
+        }
+
+        [HttpPost("update-form-teacher")]
+        public IActionResult updateGiaoVienChuNhiem([FromBody] GiaoVienChuNhiemReq req)
+        {
+            var res = new SingleRsp();
+            var listHS = _svc.updateGiaoVienChuNhiem(req.MaGvOld, req.MaGvNew, req.MaLop);
+            res.Data = listHS;
             return Ok(res);
         }
 

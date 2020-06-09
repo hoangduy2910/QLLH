@@ -2,6 +2,13 @@
     margin-top: 50px;  
 }
 
+.body {
+    margin-bottom: 50px;
+    border: 1px solid #e1e1ea;
+    border-radius: 10px;
+    box-shadow: 18px 20px 60px -9px rgba(0,0,0,0.75);
+}
+
 button.btn-success {
     margin-right: 10px;
 }
@@ -21,11 +28,21 @@ div.row div.label {
     margin-top: 5px;
 }
 
-div.themBtn {
+div.listHocSinhBtn {
     display: inline;
     margin-right: 10px;
 }
 
+div.rowBtn {
+    display: inline;
+    margin-right: 10px;
+}
+
+div.themBtn {
+    display: inline;
+}
+
 div.dropdownLopBtn {
     display: inline;
+    margin-right: 10px;
 }

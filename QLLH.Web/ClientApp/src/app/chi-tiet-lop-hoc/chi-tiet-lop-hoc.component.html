@@ -1,18 +1,273 @@
-<a [routerLink]="['/quan-ly-sinh-vien']">
-    <div class="card" style="width: 18rem;">
-      <div class="card-body">
-        <p class="card-text">
-          Danh sách sinh viên lớp ###
-        </p>
+<div class="body">
+  <div class="container">
+    <div class="tabset">
+      <!-- Tab 1 -->
+      <input type="radio" name="tabset" id="tab1" aria-controls="marzen" checked>
+      <label for="tab1">Giáo viên</label>
+      <!-- Tab 2 -->
+      <input type="radio" name="tabset" id="tab2" aria-controls="rauchbier">
+      <label for="tab2">Học sinh</label>
+      
+      <div class="tab-panels">
+        <section id="giaoVien" class="tab-panel">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Mã giáo viên</th>
+                <th scope="col">Tên giáo viên</th>
+                <th scope="col">Môn giảng dạy</th>
+                <th scope="col">Giới tính</th>        
+                <th scope="col">Số điện thoại</th>
+                <th scope="col">Hành động</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let gv of listGiaoVien.data; index as i">
+                <td>{{ gv.maGv }}</td>
+                <td>{{ gv.tenGv }}</td>
+                <td>{{ gv.tenMh }}</td>
+                <td>{{ gv.gioiTinh }}</td>
+                <td>{{ gv.soDt }}</td>
+                <td>
+                  <a class="btn btn-success" (click)="openModalAddEditGiaoVien(i)">
+                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                  </a>
+                  <a class="btn btn-danger" (click)="openModalDeleteGiaoVien(i)">
+                    <i class="fa fa-trash-o" aria-hidden="true"></i>
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <!-- Pagination -->
+          <div class="pagination-bar">
+            <nav aria-label="Page navigation example">
+              <ul class="pagination">
+                <li class="page-item"><a class="page-link" href="javascript:void(0)" (click)="danhSachGiaoVienTheoLopTruoc()">Trước</a></li>
+                <li class="page-item"><a class="page-link" href="javascript:void(0)">{{ listGiaoVien.page }}</a></li>
+                <li class="page-item"><a class="page-link" href="javascript:void(0)" (click)="danhSachGiaoVienTheoLopSau()">Sau</a></li>
+              </ul>
+            </nav>
+          </div>
+          <!-- End Pagination -->
+        </section>
+        <section id="hocSinh" class="tab-panel">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Mã học sinh</th>
+                <th scope="col">Tên học sinh</th>
+                <th scope="col">Lớp</th>
+                <th scope="col">Giới tính</th>        
+                <th scope="col">Hành động</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let hs of listHocSinh.data; index as i">
+                <td>{{ hs.maHs }}</td>
+                <td>{{ hs.tenHs }}</td>
+                <td>{{ hs.tenLop }}</td>
+                <td>{{ hs.gioiTinh }}</td>
+                <td>
+                  <a class="btn btn-success" (click)="openModalAddEditHocSinh(i)">
+                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                  </a>
+                  <a class="btn btn-danger" (click)="openModalDeleteHocSinh(i)">
+                    <i class="fa fa-trash-o" aria-hidden="true"></i>
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <!-- Pagination -->
+          <div class="pagination-bar">
+            <nav aria-label="Page navigation example">
+              <ul class="pagination">
+                <li class="page-item"><a class="page-link" href="javascript:void(0)" (click)="danhSachHocSinhTheoLopTruoc()">Trước</a></li>
+                <li class="page-item"><a class="page-link" href="javascript:void(0)">{{ listHocSinh.page }}</a></li>
+                <li class="page-item"><a class="page-link" href="javascript:void(0)" (click)="danhSachHocSinhTheoLopSau()">Sau</a></li>
+              </ul>
+            </nav>
+          </div>
+          <!-- End Pagination -->
+        </section>
       </div>
     </div>
-  </a>
-  <a [routerLink]="['/quan-ly-giao-vien']">
-    <div class="card" style="width: 18rem;">
-      <div class="card-body">
-        <p class="card-text">
-          Danh sách giáo viên lớp ###
-        </p>
+  </div>
+</div>
+
+<!-- Modal Add and Edit Giao Vien -->
+<div class="modal fade" id="modalAddEditGiaoVien" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Sửa giáo viên</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+            <div class="col-2 label">Mã giáo viên</div>
+            <div class="col-4">
+              <input type="text" class="form-control" [(ngModel)]="giaoVien.maGv" disabled />
+            </div>
+            <div class="col-2 label">Tên giáo viên</div>
+            <div class="col-4">
+              <input type="text" class="form-control" placeholder="Nhập tên giáo viên" [(ngModel)]="giaoVien.tenGv" />
+            </div>
+        </div>
+        <div class="row">
+          <div class="col-2 label">Môn giảng dạy</div>
+          <div class="col-4">
+            <select class="form-control" id="monHoc" [(ngModel)]="giaoVien.maMh">
+              <option class="option-item" *ngFor="let mh of listMonHoc" [ngValue]="mh.maMh">{{ mh.tenMh }}</option>
+            </select>
+          </div>
+          <div class="col-2 label">Ngày sinh</div>
+          <div class="col-4">
+            <input type="date" class="form-control" id="ngaySinh" [(ngModel)]="giaoVien.ngaySinh" />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-2 label">Giới tính</div>
+          <div class="col-4">
+            <select class="form-control" id="gioiTinh" [(ngModel)]="giaoVien.gioiTinh">
+              <option class="option-item">Nam</option>
+              <option class="option-item">Nữ</option>
+            </select>
+          </div>
+          <div class="col-2 label">Số điện thoại</div>
+          <div class="col-4">
+            <input type="text" class="form-control" placeholder="Nhập số điện thoại" [(ngModel)]="giaoVien.soDt" />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-2 label">Chủ nhiệm lớp</div>
+          <div class="col-4">
+            <select class="form-control" id="lop" [(ngModel)]="giaoVien.maLop">
+              <option *ngFor="let l of listLop" [ngValue]="l.maLop">{{ l.tenLop }}</option>
+            </select>
+          </div>
+          <div class="col-2 label">Địa chỉ</div>
+          <div class="col-4">
+            <input type="text" class="form-control" placeholder="Nhập địa chỉ" [(ngModel)]="giaoVien.diaChi" />
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+        <button type="submit" class="btn btn-success" (click)="suaGiaoVien()">Sửa</button>
       </div>
     </div>
-  </a>
+  </div>
+</div>
+<!-- End Modal -->
+
+<!-- Modal Delete Giao Vien -->
+<div class="modal fade" id="modalDeleteGiaoVien" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Xóa giáo viên</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Bạn có muốn xóa giáo viên này không ?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+        <button id="deleteBtnGiaoVien" type="button" class="btn btn-danger">Xóa</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Modal -->
+
+<!-- Modal Add and Edit Hoc Sinh -->
+<div class="modal fade" id="modalAddEditHocSinh" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Sửa học sinh</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+            <div class="col-2 label">Mã học sinh</div>
+            <div class="col-4">
+              <input type="text" class="form-control" [(ngModel)]="hocSinh.maHs" disabled />
+            </div>
+            <div class="col-2 label">Tên học sinh</div>
+            <div class="col-4">
+              <input type="text" class="form-control" placeholder="Nhập tên học sinh" [(ngModel)]="hocSinh.tenHs" />
+            </div>
+        </div>
+        <div class="row">
+          <div class="col-2 label">Tên lớp</div>
+          <div class="col-4">
+            <select class="form-control" id="lop" [(ngModel)]="hocSinh.maLop">
+              <option *ngFor="let l of listLop" [ngValue]="l.maLop">{{ l.tenLop }}</option>
+            </select>
+          </div>
+          <div class="col-2 label">Tên giáo viên</div>
+          <div class="col-4">
+            <select class="form-control" id="giaoVien" [(ngModel)]="hocSinh.maGv" searchable="Search here..">
+              <option *ngFor="let gv of listGiaoVien.data" [ngValue]="gv.maGv">{{ gv.tenGv }}</option>
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-2 label">Ngày sinh</div>
+          <div class="col-4">
+            <input type="date" class="form-control" [(ngModel)]="hocSinh.ngaySinh" />
+          </div>
+          <div class="col-2 label">Giới tính</div>
+          <div class="col-4">
+            <select class="form-control" id="gioiTinh" [(ngModel)]="hocSinh.gioiTinh">
+              <option>Nam</option>
+              <option>Nữ</option>
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-2 label">Địa chỉ</div>
+          <div class="col-10">
+            <input type="text" class="form-control" placeholder="Nhập địa chỉ" [(ngModel)]="hocSinh.diaChi" />
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+        <button type="submit" class="btn btn-success" (click)="suaHocSinh()">Sửa</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Modal -->
+
+<!-- Modal Delete Hoc Sinh -->
+<div class="modal fade" id="modalDeleteHocSinh" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Xóa học sinh</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Bạn có muốn xóa học sinh này không ?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+        <button id="deleteBtnHocSinh" type="button" class="btn btn-danger">Xóa</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Modal -->
