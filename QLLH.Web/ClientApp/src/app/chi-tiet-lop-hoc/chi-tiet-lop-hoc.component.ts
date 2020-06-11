@@ -10,12 +10,42 @@ declare var $: any;
 })
 export class ChiTietLopHocComponent {
   size: number = 5;
+  maLop = parseInt(this.route.snapshot.paramMap.get('id'));
   listMonHoc: any;
   listLop: any;
+  listGVTheoMH: any = [];
+
+  listRowGiaoVien: any = [
+    { row: 5 },
+    { row: 10 },
+    { row: 15 },
+  ];
+
+  listRowHocSinh: any = [
+    { row: 10 },
+    { row: 20 },
+    { row: 30 },
+  ];
 
   lop: any = {
     maLop: 0,
     tenLop: ""
+  };
+
+  giaoVienLop = {
+    maGvl: 0,
+    maGv: "",
+    maLop: this.maLop
+  };
+
+  hocSinh = {
+    maHs: 0,
+    tenHs: "",
+    maGv: 0,
+    maLop: 0,
+    ngaySinh: "",
+    gioiTinh: "",
+    diaChi: "",
   };
   
   listHocSinh: any = {
@@ -32,28 +62,6 @@ export class ChiTietLopHocComponent {
     totalPage: 0,
     page: 0,
     size: 0
-  };
-
-  giaoVien = {
-    maGv: 0,
-    tenGv: "",
-    maMh: null,
-    maLop: 16,
-    ngaySinh: "",
-    gioiTinh: "",
-    diaChi: "",
-    soDt: "",
-    maCv: 1
-  };
-
-  hocSinh = {
-    maHs: 0,
-    tenHs: "",
-    maGv: 0,
-    maLop: 0,
-    ngaySinh: "",
-    gioiTinh: "",
-    diaChi: "",
   };
   
   constructor(private route: ActivatedRoute, private http: HttpClient, @Inject('BASE_URL') baseUrl: string) { 
@@ -88,6 +96,16 @@ export class ChiTietLopHocComponent {
     }, error => console.error(error));
   }
 
+  chonSoDongHienThiGiaoVien(row) {
+    this.size = row;
+    this.danhSachGiaoVienTheoLop(1);
+  }
+
+  chonSoDongHienThiHocSinh(row) {
+    this.size = row;
+    this.danhSachHocSinhTheoLop(1);
+  }
+
   layLopTheoId() {
     var res: any;
     let x = {
@@ -114,7 +132,7 @@ export class ChiTietLopHocComponent {
       page: cPage,
       size: this.size
     }
-    this.http.post("https://localhost:44329/api/GiaoVien/get-by-class", x).subscribe(result => {
+    this.http.post("https://localhost:44329/api/GiaoVienLop/get-by-class", x).subscribe(result => {
       res = result;
       if (res.success) {
         this.listGiaoVien = res.data;
@@ -179,27 +197,38 @@ export class ChiTietLopHocComponent {
     }
   }
 
-  suaGiaoVien() {
+  chonGiaoVienTheoMonHoc() {
+    var maMh = (<HTMLInputElement>document.getElementById("monHoc")).value;
     var res: any;
-    var gv = {
-      maGv: this.giaoVien.maGv,
-      tenGv: this.giaoVien.tenGv,
-      maMh: this.giaoVien.maMh,
-      maLop: this.giaoVien.maLop,
-      ngaySinh: this.giaoVien.ngaySinh,
-      gioiTinh: $("#gioiTinh option:selected").text(),
-      diaChi: this.giaoVien.diaChi,
-      soDt: this.giaoVien.soDt,
-      maCv: this.giaoVien.maCv
-    };    
-    this.http.post("https://localhost:44329/api/GiaoVien/update", gv).subscribe(result => {
+    var x = {
+      id: parseInt(maMh),
+      keyword: ""
+    };
+    this.http.post("https://localhost:44329/api/GiaoVien/get-by-id-subject", x).subscribe(result => {
       res = result;
       if (res.success) {
-        this.giaoVien = res.data;
-        alert("Sửa thành công giáo viên !");
-        this.danhSachGiaoVienTheoLop(1);
+        this.listGVTheoMH = res.data;
+      }
+      else {
+        alert(res.message);
+      }
+    }, error => console.error(error)); 
+  }
+
+  themGiaoVien() {
+    var res: any;
+    var x = {
+      maGvl: 0,
+      maGv: this.giaoVienLop.maGv,
+      maLop: this.giaoVienLop.maLop
+    };
+    this.http.post("https://localhost:44329/api/GiaoVienLop/create", x).subscribe(result => {
+      res = result;
+      if (res.success) {
+        alert("Thêm thành công giáo viên vào lớp !");
         this.clearModalGiaoVien();
-        $('#modalAddEditGiaoVien').modal('hide');
+        this.danhSachGiaoVienTheoLop(1);
+        $('#modalAddGiaoVien').modal('hide');
       }
       else {
         alert(res.message);
@@ -208,17 +237,15 @@ export class ChiTietLopHocComponent {
   }
 
   xoaGiaoVien(index) {
-    var gv = {
-      id: this.listGiaoVien.data[index].maGv,
+    var gvl = {
+      id: this.listGiaoVien.data[index].maGvl,
       keyword: ""
     };
     var res: any;
-    this.http.post("https://localhost:44329/api/GiaoVien/remove", gv).subscribe(result => {
+    this.http.post("https://localhost:44329/api/GiaoVienLop/remove", gvl).subscribe(result => {
       res = result;
       if (res.success) {
-        this.giaoVien = res.data;
         alert("Xóa thành công giáo viên !");
-        this.clearModalGiaoVien();
         this.danhSachGiaoVienTheoLop(1);
         $('#modalDeleteGiaoVien').modal('hide');
       }
@@ -228,11 +255,9 @@ export class ChiTietLopHocComponent {
     }, error => console.error(error)); 
   }
 
-  openModalAddEditGiaoVien(index) { 
-    this.giaoVien = this.listGiaoVien.data[index];
-    this.giaoVien.ngaySinh = this.listGiaoVien.data[index].ngaySinh.split("T")[0];
-    $('#modalAddEditGiaoVien').modal('show');  
-  }
+  openModalAddGiaoVien() {
+    $('#modalAddGiaoVien').modal('show');
+  } 
 
   openModalDeleteGiaoVien(index) {
     $('#modalDeleteGiaoVien').modal('show');
@@ -240,86 +265,57 @@ export class ChiTietLopHocComponent {
   }
 
   clearModalGiaoVien() {
-    this.giaoVien = {
-      maGv: 0,
-      tenGv: "",
-      maMh: null,
-      maLop: 16,
-      ngaySinh: "",
-      gioiTinh: "",
-      diaChi: "",
-      soDt: "",
-      maCv: 1
+    this.giaoVienLop = {
+      maGvl: 0,
+      maGv: "",
+      maLop: this.maLop
     };
-  }
-
-  suaHocSinh() {
-    var res: any;
-    var hs = {
-      maHs: this.hocSinh.maHs,
-      tenHs: this.hocSinh.tenHs,
-      maGv: this.hocSinh.maGv,
-      maLop: this.hocSinh.maLop,
-      ngaySinh: this.hocSinh.ngaySinh,
-      gioiTinh: this.hocSinh.gioiTinh,
-      diaChi: this.hocSinh.diaChi,
-    };   
-    this.http.post("https://localhost:44329/api/HocSinh/update", hs).subscribe(result => {
-      res = result;
-      if (res.success) {
-        this.hocSinh = res.data;
-        alert("Sửa thành công học sinh !");
-        this.danhSachHocSinhTheoLop(1);
-        this.clearModalHocSinh();
-        $('#modalAddEditHocSinh').modal('hide');
-      }
-      else {
-        alert(res.message);
-      }
-    }, error => console.error(error)); 
   }
 
   xoaHocSinh(index) {
-    var hs = {
-      id: this.listHocSinh.data[index].maHs,
+    var res: any;
+    var maHs = this.listHocSinh.data[index].maHs;
+
+    var x = {
+      id: maHs,
       keyword: ""
     };
-    var res: any;
-    this.http.post("https://localhost:44329/api/HocSinh/remove", hs).subscribe(result => {
+    this.http.post("https://localhost:44329/api/HocSinh/get-by-id", x).subscribe(result => {
       res = result;
       if (res.success) {
         this.hocSinh = res.data;
-        alert("Xóa thành công học sinh !");
-        this.clearModalHocSinh();
-        this.danhSachHocSinhTheoLop(1);
-        $('#modalDeleteHocSinh').modal('hide');
+        var hs = {
+          maHs: this.hocSinh.maHs,
+          tenHs: this.hocSinh.tenHs,
+          maGv: this.hocSinh.maGv,
+          maLop: this.hocSinh.maLop,
+          ngaySinh: this.hocSinh.ngaySinh,
+          gioiTinh: this.hocSinh.gioiTinh,
+          diaChi: this.hocSinh.diaChi,
+        };
+        hs.maLop = 1;
+        hs.maGv = 1;
+        this.http.post("https://localhost:44329/api/HocSinh/update", hs).subscribe(result => {
+          res = result;
+          if (res.success) {
+            this.hocSinh = res.data;
+            alert("Xoá học sinh khỏi lớp thành công !!!");
+            $('#modalDeleteHocSinh').modal('hide');
+            this.danhSachHocSinhTheoLop(1);
+          }
+          else {
+            alert(res.message);
+        }
+    }, error => console.error(error)); 
       }
       else {
         alert(res.message);
       }
     }, error => console.error(error)); 
-  }
-
-  openModalAddEditHocSinh(index) {
-    this.hocSinh = this.listHocSinh.data[index];
-    this.hocSinh.ngaySinh = this.listHocSinh.data[index].ngaySinh.split("T")[0];
-    $('#modalAddEditHocSinh').modal('show');  
   }
 
   openModalDeleteHocSinh(index) {
     $('#modalDeleteHocSinh').modal('show');
     (<HTMLInputElement>document.getElementById("deleteBtnHocSinh")).onclick = () => this.xoaHocSinh(index)​;​
-  }
-
-  clearModalHocSinh() {
-    this.hocSinh = {
-      maHs: 0,
-      tenHs: "",
-      maGv: 0,
-      maLop: 0,
-      ngaySinh: "",
-      gioiTinh: "",
-      diaChi: "",
-    };
   }
 }

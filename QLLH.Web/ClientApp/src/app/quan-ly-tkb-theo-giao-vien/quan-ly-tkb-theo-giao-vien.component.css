@@ -1,0 +1,56 @@
+.container {
+    margin-top: 50px;  
+}
+
+.body {
+    margin-bottom: 50px;
+    border: 1px solid #e1e1ea;
+    border-radius: 10px;
+    box-shadow: 18px 20px 60px -9px rgba(0,0,0,0.75);
+}
+
+.btn-success {
+    color: white;
+    text-decoration: none;
+    margin-right: 10px;
+}
+
+.btn-danger {
+    color: white;
+    text-decoration: none;
+}
+
+.btn-success:hover, .btn-danger:hover {
+    color: white;
+}
+
+.pagination-bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 15px;
+}
+
+div.row {
+    margin-top: 10px;
+}
+
+div.row div.label {
+    padding-right: 0;
+    margin-top: 5px;
+}
+
+div.listGiaoVienBtn {
+    display: inline;
+    margin-right: 10px;
+}
+
+div.rowBtn {
+    display: inline;
+    margin-right: 10px;
+}
+
+div.dropdownLopBtn {
+    display: inline;
+    margin-right: 10px;
+}

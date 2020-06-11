@@ -21,10 +21,11 @@ namespace QLLH.BLL
         public object getThoiKhoaBieuTheoTietHocVaLopHoc(int MaTiet, int MaLop)
         {
             var listTKB = All.Join(_rep.Context.MonHoc, a => a.MaMh, b => b.MaMh, (a, b) => new { 
+                a.MaTkb,
                 a.MaNgay,
                 a.MaTiet,
-                a.MaGv,
                 a.MaMh,
+                a.MaGv,   
                 a.MaLop,
                 TenMh = b.TenMh
             }).Where(tkb => tkb.MaTiet == MaTiet && tkb.MaLop == MaLop).ToList();
@@ -33,7 +34,15 @@ namespace QLLH.BLL
 
         public object getThoiKhoaBieuTheoGiaoVien(int MaGv)
         {
-            var listTKB = All.Where(tkb => tkb.MaGv == MaGv).ToList();
+            var listTKB = All.Join(_rep.Context.Lop, a => a.MaLop, b => b.MaLop, (a, b) => new {
+                a.MaTkb,
+                a.MaNgay,
+                a.MaTiet,
+                a.MaMh,
+                a.MaGv,
+                a.MaLop,
+                TenLop = b.TenLop
+            }).Where(tkb => tkb.MaGv == MaGv).ToList();
             return listTKB;
         }
         public object getAllThoiKhoaBieu()

@@ -205,6 +205,25 @@ export class QuanLyHocSinhComponent {
     }, error => console.error(error));   
   }
 
+  chonGiaoVienTheoId(maGv) {
+    var res: any;
+    var gv: any;
+    var x = {
+      id: maGv,
+      keyword: ""
+    };
+    this.http.post("https://localhost:44329/api/GiaoVien/get-by-id", x).subscribe(result => {
+      res = result;
+      if (res.success) {
+        gv = res.data;
+        (<HTMLInputElement>document.getElementById("tenGiaoVien")).value = gv.tenGv;
+      }
+      else {
+        alert(res.message);
+      }
+    }, error => console.error(error));   
+  }
+
   kiemTraThemHocSinh() {
     var check = false;
     if (this.hocSinh.maHs == 0 && this.hocSinh.tenHs != "" && this.hocSinh.maLop != 0 && this.hocSinh.maGv != 0 && this.hocSinh.ngaySinh != "" && this.hocSinh.gioiTinh != "" && this.hocSinh.diaChi != "") {
@@ -298,6 +317,7 @@ export class QuanLyHocSinhComponent {
     if (this.isEdit) {
       this.hocSinh = this.listHocSinh.data[index];
       this.hocSinh.ngaySinh = this.listHocSinh.data[index].ngaySinh.split("T")[0];
+      this.chonGiaoVienTheoId(this.hocSinh.maGv);
     } else {
       this.clearModal();
     }

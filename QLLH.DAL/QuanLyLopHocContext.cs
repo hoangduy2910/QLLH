@@ -39,7 +39,7 @@ namespace QLLH.DAL.Models
             modelBuilder.Entity<ChucVu>(entity =>
             {
                 entity.HasKey(e => e.MaCv)
-                    .HasName("PK__ChucVu__27258E7661483E9D");
+                    .HasName("PK__ChucVu__27258E76BEB19B1F");
 
                 entity.Property(e => e.MaCv).HasColumnName("MaCV");
 
@@ -51,7 +51,7 @@ namespace QLLH.DAL.Models
             modelBuilder.Entity<GiaoVien>(entity =>
             {
                 entity.HasKey(e => e.MaGv)
-                    .HasName("PK__GiaoVien__2725AEF30AAC62F9");
+                    .HasName("PK__GiaoVien__2725AEF372E8C5D1");
 
                 entity.Property(e => e.MaGv).HasColumnName("MaGV");
 
@@ -91,25 +91,28 @@ namespace QLLH.DAL.Models
 
             modelBuilder.Entity<GiaoVienLop>(entity =>
             {
-                entity.HasNoKey();
+                entity.HasKey(e => e.MaGvl)
+                    .HasName("PK__GiaoVien__3CD374BBFF4145ED");
+
+                entity.Property(e => e.MaGvl).HasColumnName("MaGVL");
 
                 entity.Property(e => e.MaGv).HasColumnName("MaGV");
 
                 entity.HasOne(d => d.MaGvNavigation)
-                    .WithMany()
+                    .WithMany(p => p.GiaoVienLop)
                     .HasForeignKey(d => d.MaGv)
-                    .HasConstraintName("FK__GiaoVienLo__MaGV__286302EC");
+                    .HasConstraintName("FK__GiaoVienLo__MaGV__29572725");
 
                 entity.HasOne(d => d.MaLopNavigation)
-                    .WithMany()
+                    .WithMany(p => p.GiaoVienLop)
                     .HasForeignKey(d => d.MaLop)
-                    .HasConstraintName("FK__GiaoVienL__MaLop__29572725");
+                    .HasConstraintName("FK__GiaoVienL__MaLop__2A4B4B5E");
             });
 
             modelBuilder.Entity<HocSinh>(entity =>
             {
                 entity.HasKey(e => e.MaHs)
-                    .HasName("PK__HocSinh__2725A6EFDD765EFF");
+                    .HasName("PK__HocSinh__2725A6EF86B11D76");
 
                 entity.Property(e => e.MaHs).HasColumnName("MaHS");
 
@@ -139,7 +142,7 @@ namespace QLLH.DAL.Models
             modelBuilder.Entity<Lop>(entity =>
             {
                 entity.HasKey(e => e.MaLop)
-                    .HasName("PK__Lop__3B98D2733A677456");
+                    .HasName("PK__Lop__3B98D2731BC7F417");
 
                 entity.Property(e => e.TenLop).HasMaxLength(50);
             });
@@ -147,7 +150,7 @@ namespace QLLH.DAL.Models
             modelBuilder.Entity<MonHoc>(entity =>
             {
                 entity.HasKey(e => e.MaMh)
-                    .HasName("PK__MonHoc__2725DFD9DD800756");
+                    .HasName("PK__MonHoc__2725DFD9CED4BE72");
 
                 entity.Property(e => e.MaMh).HasColumnName("MaMH");
 
@@ -159,49 +162,52 @@ namespace QLLH.DAL.Models
             modelBuilder.Entity<NgayHoc>(entity =>
             {
                 entity.HasKey(e => e.MaNgay)
-                    .HasName("PK__NgayHoc__238109C4F2BA158A");
+                    .HasName("PK__NgayHoc__238109C4A5DDF7A7");
 
                 entity.Property(e => e.TenNgay).HasMaxLength(50);
             });
 
             modelBuilder.Entity<ThoiKhoaBieu>(entity =>
             {
-                entity.HasNoKey();
+                entity.HasKey(e => e.MaTkb)
+                    .HasName("PK__ThoiKhoa__3149D60EBCDE7100");
+
+                entity.Property(e => e.MaTkb).HasColumnName("MaTKB");
 
                 entity.Property(e => e.MaGv).HasColumnName("MaGV");
 
                 entity.Property(e => e.MaMh).HasColumnName("MaMH");
 
                 entity.HasOne(d => d.MaGvNavigation)
-                    .WithMany()
+                    .WithMany(p => p.ThoiKhoaBieu)
                     .HasForeignKey(d => d.MaGv)
-                    .HasConstraintName("FK__ThoiKhoaBi__MaGV__2F10007B");
+                    .HasConstraintName("FK__ThoiKhoaBi__MaGV__30F848ED");
 
                 entity.HasOne(d => d.MaLopNavigation)
-                    .WithMany()
+                    .WithMany(p => p.ThoiKhoaBieu)
                     .HasForeignKey(d => d.MaLop)
-                    .HasConstraintName("FK__ThoiKhoaB__MaLop__300424B4");
+                    .HasConstraintName("FK__ThoiKhoaB__MaLop__31EC6D26");
 
                 entity.HasOne(d => d.MaMhNavigation)
-                    .WithMany()
+                    .WithMany(p => p.ThoiKhoaBieu)
                     .HasForeignKey(d => d.MaMh)
-                    .HasConstraintName("FK__ThoiKhoaBi__MaMH__2E1BDC42");
+                    .HasConstraintName("FK__ThoiKhoaBi__MaMH__300424B4");
 
                 entity.HasOne(d => d.MaNgayNavigation)
-                    .WithMany()
+                    .WithMany(p => p.ThoiKhoaBieu)
                     .HasForeignKey(d => d.MaNgay)
-                    .HasConstraintName("FK__ThoiKhoaB__MaNga__2D27B809");
+                    .HasConstraintName("FK__ThoiKhoaB__MaNga__2F10007B");
 
                 entity.HasOne(d => d.MaTietNavigation)
-                    .WithMany()
+                    .WithMany(p => p.ThoiKhoaBieu)
                     .HasForeignKey(d => d.MaTiet)
-                    .HasConstraintName("FK__ThoiKhoaB__MaTie__2C3393D0");
+                    .HasConstraintName("FK__ThoiKhoaB__MaTie__2E1BDC42");
             });
 
             modelBuilder.Entity<TietHoc>(entity =>
             {
                 entity.HasKey(e => e.MaTiet)
-                    .HasName("PK__TietHoc__4CC209DB1C9FA1AF");
+                    .HasName("PK__TietHoc__4CC209DB24C6991C");
 
                 entity.Property(e => e.ThoiGian).HasMaxLength(50);
             });

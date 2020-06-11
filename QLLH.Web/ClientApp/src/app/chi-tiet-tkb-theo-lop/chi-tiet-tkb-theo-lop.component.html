@@ -1,26 +1,75 @@
 <div class="body">
   <div class="container">
-      <table class="table">
-          <thead>
-            <tr>
-              <th>Tiết / Thứ</th>
-              <th *ngFor="let ng of listNgayHoc">{{ ng.tenNgay }}</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr id="listTietHoc-{{ t.maTiet }}" *ngFor="let t of listTietHoc">
-              <th>
-                <span>Tiết {{ t.maTiet }} - ({{ t.thoiGian }})</span>
-              </th>
-              <td id="Tiet-{{ t.maTiet }}-Ngay-1">...</td>
-              <td id="Tiet-{{ t.maTiet }}-Ngay-2">...</td>
-              <td id="Tiet-{{ t.maTiet }}-Ngay-3">...</td>
-              <td id="Tiet-{{ t.maTiet }}-Ngay-4">...</td>
-              <td id="Tiet-{{ t.maTiet }}-Ngay-5">...</td>
-              <td id="Tiet-{{ t.maTiet }}-Ngay-6">...</td>
-            </tr>
-          </tbody>
-      </table>
+    <nav class="navbar navbar-light bg-light">
+      <div class="navThoiKhoaBieu">
+        <div class="thoiKhoaBieu">
+          <a class="btn btn-outline-dark" href="javascript:window.location.href=window.location.href">
+            <i class="fa fa-table fa-lg" aria-hidden="true"></i> Lớp {{ lopHoc.tenLop }}
+          </a>
+        </div>
+        <div class="capNhatBtnTKB">
+          <button type="button" class="btn btn-outline-success">
+            <i class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i> Cập nhật
+          </button>
+        </div>
+        <div class="lamMoiBtnTKB">
+          <button type="button" class="btn btn-outline-primary">
+            <i class="fa fa-plus-square-o fa-lg" aria-hidden="true"></i> Làm mới
+          </button>
+        </div>
+      </div>
+    </nav>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Tiết / Thứ</th>
+          <th *ngFor="let ng of listNgayHoc">{{ ng.tenNgay }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr id="listTietHoc-{{ t.maTiet }}" *ngFor="let t of listTietHoc">
+          <th>
+            <span>Tiết {{ t.maTiet }}<br />({{ t.thoiGian }})</span>
+          </th>
+          <td>
+            <select class="form-control">
+              <option></option>
+              <option *ngFor="let mh of listMonHoc" id="{{ mh.maMh }}-{{ t.maTiet }}-1">{{ mh.tenMh }}</option>
+            </select>
+          </td>
+          <td>
+            <select class="form-control">
+              <option></option>
+              <option *ngFor="let mh of listMonHoc" id="{{ mh.maMh }}-{{ t.maTiet }}-2">{{ mh.tenMh }}</option>
+            </select>
+          </td>
+          <td>
+            <select class="form-control">
+              <option></option>
+              <option *ngFor="let mh of listMonHoc" id="{{ mh.maMh }}-{{ t.maTiet }}-3">{{ mh.tenMh }}</option>
+            </select>
+          </td>
+          <td>
+            <select class="form-control">
+              <option></option>
+              <option *ngFor="let mh of listMonHoc" id="{{ mh.maMh }}-{{ t.maTiet }}-4">{{ mh.tenMh }}</option>
+            </select>
+          </td>
+          <td>
+            <select class="form-control">
+              <option></option>
+              <option *ngFor="let mh of listMonHoc" id="{{ mh.maMh }}-{{ t.maTiet }}-5">{{ mh.tenMh }}</option>
+            </select>
+          </td>
+          <td>
+            <select class="form-control">
+              <option></option>
+              <option *ngFor="let mh of listMonHoc" id="{{ mh.maMh }}-{{ t.maTiet }}-6">{{ mh.tenMh }}</option>
+            </select>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>
 

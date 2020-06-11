@@ -1,4 +1,5 @@
-﻿using System;
+﻿using QLLH.DAL.Models;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using QLLH.Common.DAL;
@@ -8,23 +9,22 @@ namespace QLLH.DAL
 {
     using Models;
     using QLLH.Common.Rsp;
-    public class GiaoVienRep : GenericRep<QuanLyLopHocContext, GiaoVien>
+    public class GiaoVienLopRep : GenericRep<QuanLyLopHocContext, GiaoVienLop>
     {
-        public override GiaoVien Read(int id)
+        public override GiaoVienLop Read(int id)
         {
             // return base.Read(id);
-            var res = All.FirstOrDefault(x => x.MaGv == id);
+            var res = All.FirstOrDefault(x => x.MaGvl == id);
             return res;
         }
 
         public int Remove(int id)
         {
-            var m = All.First(x => x.MaGv == id);
+            var m = All.First(x => x.MaGvl == id);
             m = Delete(m);
-            return m.MaGv;
+            return m.MaGvl;
         }
-
-        public SingleRsp CreateGiaoVien(GiaoVien gv)
+        public SingleRsp CreateGiaoVienLop(GiaoVienLop gvl)
         {
             var res = new SingleRsp();
             using (var context = new QuanLyLopHocContext())
@@ -33,30 +33,7 @@ namespace QLLH.DAL
                 {
                     try
                     {
-                        var newGV = context.GiaoVien.Add(gv);
-                        context.SaveChanges();
-                        tran.Commit();
-                    } 
-                    catch (Exception ex)
-                    {
-                        tran.Rollback();
-                        res.SetError(ex.StackTrace);
-                    }
-                }
-            }
-            return res;
-        }
-
-        public SingleRsp UpdateGiaoVien(GiaoVien gv)
-        {
-            var res = new SingleRsp();
-            using (var context = new QuanLyLopHocContext())
-            {
-                using (var tran = context.Database.BeginTransaction())
-                {
-                    try
-                    {
-                        var newGV = context.GiaoVien.Update(gv);
+                        var newGVL = context.GiaoVienLop.Add(gvl);
                         context.SaveChanges();
                         tran.Commit();
                     }
@@ -70,7 +47,7 @@ namespace QLLH.DAL
             return res;
         }
 
-        public SingleRsp RemoveGiaoVien(GiaoVien gv)
+        public SingleRsp UpdateGiaoVienLop(GiaoVienLop gvl)
         {
             var res = new SingleRsp();
             using (var context = new QuanLyLopHocContext())
@@ -79,7 +56,7 @@ namespace QLLH.DAL
                 {
                     try
                     {
-                        var newGV = context.GiaoVien.Remove(gv);
+                        var newGVL = context.GiaoVienLop.Update(gvl);
                         context.SaveChanges();
                         tran.Commit();
                     }
@@ -92,5 +69,29 @@ namespace QLLH.DAL
             }
             return res;
         }
+
+        public SingleRsp RemoveGiaoVienLop(GiaoVienLop gvl)
+        {
+            var res = new SingleRsp();
+            using (var context = new QuanLyLopHocContext())
+            {
+                using (var tran = context.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        var newGVL = context.GiaoVienLop.Remove(gvl);
+                        context.SaveChanges();
+                        tran.Commit();
+                    }
+                    catch (Exception ex)
+                    {
+                        tran.Rollback();
+                        res.SetError(ex.StackTrace);
+                    }
+                }
+            }
+            return res;
+        }
+
     }
 }

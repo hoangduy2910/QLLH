@@ -1,5 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { ActivatedRoute } from '@angular/router';
 declare var $: any;
 
 @Component({
@@ -8,18 +9,48 @@ declare var $: any;
   styleUrls: ['./chi-tiet-tkb-theo-lop.component.css']
 })
 export class ChiTietTkbTheoLopComponent {
+  lopHoc: any = [];
   listNgayHoc: any = [];
   listTietHoc: any = [];
-  listTKB: any;
+  listTKB: any = [];
+  listMonHoc: any = [];
 
-  constructor(private http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
+  constructor(private route: ActivatedRoute, private http: HttpClient, @Inject('BASE_URL') baseUrl: string) {   
+    this.layLopTheoID();
     this.danhSachNgayHoc();
     this.danhSachTietHoc();
-    this.danhSachThoiKhoaBieu();
+    this.danhSachMonHoc();
+    this.danhSachThoiKhoaBieu();  
   }
 
-  loaded() {
-    (<HTMLInputElement>document.getElementById("td1")).innerHTML = "123";
+  layLopTheoID() {
+    var res: any;
+    var x = {
+      id: parseInt(this.route.snapshot.paramMap.get('id')),
+      keyword: ""
+    };
+    this.http.post("https://localhost:44329/api/Lop/get-by-id", x).subscribe(result => {
+      res = result;
+      if (res.success) {
+        this.lopHoc = res.data;
+      }
+      else {
+        alert(res.message);
+      }
+    }, error => console.error(error));
+  }
+
+  danhSachMonHoc() {
+    var res: any;
+    this.http.post("https://localhost:44329/api/MonHoc/get-all", null).subscribe(result => {
+      res = result;
+      if (res.success) {
+        this.listMonHoc = res.data;
+      }
+      else {
+        alert(res.message);
+      }
+    }, error => console.error(error));
   }
 
   danhSachNgayHoc() {
@@ -51,7 +82,7 @@ export class ChiTietTkbTheoLopComponent {
   danhSachThoiKhoaBieu() {
     var res: any;
     var x = {
-      id: 2,
+      id: parseInt(this.route.snapshot.paramMap.get('id')),
       keyword: ""
     };
     this.http.post("https://localhost:44329/api/ThoiKhoaBieu/get-by-class", x).subscribe(result => {
@@ -69,18 +100,21 @@ export class ChiTietTkbTheoLopComponent {
   hienThiThoiKhoaBieu() {
     var res: any;
     var tkbTheoTiet: any;
+    var id: any;
     
     for (let i in this.listTietHoc) {
       var x = {
         maTiet: this.listTietHoc[i].maTiet,
-        maLop: 2
+        maLop: parseInt(this.route.snapshot.paramMap.get('id'))
       };
       this.http.post("https://localhost:44329/api/ThoiKhoaBieu/get-by-class-and-hour", x).subscribe(result => {
         res = result;
         if (res.success) {
           tkbTheoTiet = res.data;
           for (let i in tkbTheoTiet) {
-            (<HTMLInputElement>document.getElementById("Tiet-" + tkbTheoTiet[i].maTiet + "-Ngay-" + tkbTheoTiet[i].maNgay)).textContent = tkbTheoTiet[i].tenMh;
+            id = tkbTheoTiet[i].maMh + "-" + tkbTheoTiet[i].maTiet + "-" + tkbTheoTiet[i].maNgay;
+            $("#" + id).attr("selected", "selected");
+            $("#" + id).attr("value", tkbTheoTiet[i].maTkb);
           }
         }
         else {
@@ -88,6 +122,5 @@ export class ChiTietTkbTheoLopComponent {
         }
       }, error => console.error(error));
     }
-    
   }
 }

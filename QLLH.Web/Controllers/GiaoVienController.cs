@@ -57,6 +57,15 @@ namespace QLLH.Web.Controllers
             return Ok(res);
         }
 
+        [HttpPost("get-by-id-subject")]
+        public IActionResult getGiaoVienByMonHocID([FromBody] SimpleReq req)
+        {
+            var res = new SingleRsp();
+            var gv = _svc.getGiaoVienByMonHocID(req.Id);
+            res.Data = gv;
+            return Ok(res);
+        }
+
         [HttpPost("get-form-teacher-by-class")]
         public IActionResult getGiaoVienChuNhiemByLop([FromBody] SimpleReq req)
         {

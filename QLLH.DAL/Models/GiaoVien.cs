@@ -7,7 +7,9 @@ namespace QLLH.DAL.Models
     {
         public GiaoVien()
         {
+            GiaoVienLop = new HashSet<GiaoVienLop>();
             HocSinh = new HashSet<HocSinh>();
+            ThoiKhoaBieu = new HashSet<ThoiKhoaBieu>();
         }
 
         public int MaGv { get; set; }
@@ -23,6 +25,8 @@ namespace QLLH.DAL.Models
         public virtual ChucVu MaCvNavigation { get; set; }
         public virtual Lop MaLopNavigation { get; set; }
         public virtual MonHoc MaMhNavigation { get; set; }
+        public virtual ICollection<GiaoVienLop> GiaoVienLop { get; set; }
         public virtual ICollection<HocSinh> HocSinh { get; set; }
+        public virtual ICollection<ThoiKhoaBieu> ThoiKhoaBieu { get; set; }
     }
 }

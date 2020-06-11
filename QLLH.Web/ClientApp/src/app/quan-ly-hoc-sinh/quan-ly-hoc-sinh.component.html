@@ -114,7 +114,7 @@
           <div class="col-2 label">Tên lớp</div>
           <div class="col-4">
             <select class="form-control" id="lop" [(ngModel)]="hocSinh.maLop" (change)="chonGiaoVienTheoLop(hocSinh.maLop)">
-              <option *ngFor="let l of listLop" [ngValue]="l.maLop" [ngStyle]="{'display': l.maLop != 1 ? 'block' : 'none'}">
+              <option *ngFor="let l of listLop" [ngValue]="l.maLop">
                 {{ l.tenLop }}
               </option>
             </select>

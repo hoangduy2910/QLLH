@@ -10,7 +10,6 @@ namespace QLLH.BLL
     using DAL;
     using DAL.Models;
     using QLLH.Common.Req;
-
     public class GiaoVienSvc : GenericSvc<GiaoVienRep, GiaoVien>
     {
         public override SingleRsp Read(int id)
@@ -95,7 +94,7 @@ namespace QLLH.BLL
 
         public object getGiaoVienByLop(int page, int size, string keyword)
         {
-            var listGV = All.Join(_rep.Context.MonHoc, a => a.MaMh, b => b.MaMh, (a, b) => new {
+            var listGV = All.Join(_rep.Context.GiaoVienLop, a => a.MaGv, b => b.MaGv, (a, b) => new {
                 a.MaGv,
                 a.TenGv,
                 a.MaMh,
@@ -104,8 +103,7 @@ namespace QLLH.BLL
                 a.GioiTinh,
                 a.DiaChi,
                 a.SoDt,
-                a.MaCv,
-                TenMh = b.TenMh
+                a.MaCv
             }).Join(_rep.Context.Lop, a => a.MaLop, c => c.MaLop, (a, c) => new {
                 a.MaGv,
                 a.TenGv,
@@ -116,7 +114,6 @@ namespace QLLH.BLL
                 a.DiaChi,
                 a.SoDt,
                 a.MaCv,
-                a.TenMh,
                 TenLop = c.TenLop
             }).Where(gv => gv.TenLop == keyword);
 
@@ -181,6 +178,35 @@ namespace QLLH.BLL
             return res;
         }
 
+        public object getGiaoVienByMonHocID(int MaMh)
+        {
+            var listGV = All.Join(_rep.Context.MonHoc, a => a.MaMh, b => b.MaMh, (a, b) => new {
+                a.MaGv,
+                a.TenGv,
+                a.MaMh,
+                a.MaLop,
+                a.NgaySinh,
+                a.GioiTinh,
+                a.DiaChi,
+                a.SoDt,
+                a.MaCv,
+                TenMh = b.TenMh
+            }).Join(_rep.Context.Lop, a => a.MaLop, c => c.MaLop, (a, c) => new {
+                a.MaGv,
+                a.TenGv,
+                a.MaMh,
+                a.MaLop,
+                a.NgaySinh,
+                a.GioiTinh,
+                a.DiaChi,
+                a.SoDt,
+                a.MaCv,
+                a.TenMh,
+                TenLop = c.TenLop
+            }).Where(gv => gv.MaMh == MaMh);
+
+            return listGV;
+        }
         public object getGiaoVienChuNhiemByLop(int MaLop)
         {
             var gv = All.Where(gv => gv.MaLop == MaLop).FirstOrDefault();

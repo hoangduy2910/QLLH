@@ -52,8 +52,8 @@ import { ChiTietTkbTheoGiaoVienComponent } from './chi-tiet-tkb-theo-giao-vien/c
       { path: 'quan-ly-tkb-theo-lop', component: QuanLyTkbTheoLopComponent },
       { path: 'quan-ly-tkb-theo-giao-vien', component: QuanLyTkbTheoGiaoVienComponent },
       { path: 'chi-tiet-lop-hoc/:id', component: ChiTietLopHocComponent },
-      { path: 'chi-tiet-tkb-theo-lop', component: ChiTietTkbTheoLopComponent },
-      { path: 'chi-tiet-tkb-theo-giao-vien', component: ChiTietTkbTheoGiaoVienComponent }
+      { path: 'chi-tiet-tkb-theo-lop/:id', component: ChiTietTkbTheoLopComponent },
+      { path: 'chi-tiet-tkb-theo-giao-vien/:id', component: ChiTietTkbTheoGiaoVienComponent }
     ])
   ],
   providers: [],

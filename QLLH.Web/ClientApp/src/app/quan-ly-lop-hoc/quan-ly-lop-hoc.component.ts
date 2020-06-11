@@ -84,6 +84,26 @@ export class QuanLyLopHocComponent {
     }
   }
 
+  layIDGiaoVienLop(maGv, maLop) {
+    var res: any;
+    var maGvl: any;
+    var z = {
+      maGvl: 0,
+      maGv: maGv,
+      maLop: maLop
+    };
+    this.http.post("https://localhost:44329/api/GiaoVienLop/get-by-teacher-and-class", z).subscribe(result => {
+      res = result;
+      if (res.success) {
+        maGvl = res.data;
+      }
+      else {
+        alert(res.message);
+      }
+    }, error => console.error(error));
+    return maGvl;
+  }
+
   chiDinhGiaoVienChuNhiem() { 
     this.maGvNew = this.lop.maGv;
 
@@ -117,6 +137,15 @@ export class QuanLyLopHocComponent {
       else {
         alert(res.message);
       }
+    }, error => console.error(error));
+
+    var z = {
+      maGvl: this.layIDGiaoVienLop(this.maGvNew, this.lop.maLop),
+      maGv: this.maGvNew,
+      maLop: this.lop.maLop
+    };
+    this.http.post("https://localhost:44329/api/GiaoVienLop/update", z).subscribe(result => {
+      res = result;
     }, error => console.error(error));
 
     alert("Cập nhật thành công giáo viên chủ nhiệm !!!");

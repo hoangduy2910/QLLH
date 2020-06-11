@@ -9,25 +9,27 @@
     box-shadow: 18px 20px 60px -9px rgba(0,0,0,0.75);
 }
 
-.btn-success {
-    color: white;
-    text-decoration: none;
+section#giaoVien tbody tr:first-child {
+    height: 63px;
+}
+
+.navbar-light {
+    margin-bottom: 30px;
+}
+
+div.listBtn {
+    display: inline;
     margin-right: 10px;
 }
 
-.btn-danger {
-    color: white;
-    text-decoration: none;
+div.rowBtn {
+    display: inline;
+    margin-right: 10px;
 }
 
-.btn-success:hover, .btn-danger:hover {
-    color: white;
-}
-
-.pagination-bar {
-    display: flex;
-    justify-content: center;
-    font-size: 15px;
+div.themBtn {
+    display: inline;
+    text-align: center;
 }
 
 div.row {
@@ -37,6 +39,22 @@ div.row {
 div.row div.label {
     padding-right: 0;
     margin-top: 5px;
+}
+
+.btn-danger {
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+}
+
+.btn-danger:hover {
+    color: white;
+}
+
+.pagination-bar {
+    display: flex;
+    justify-content: center;
+    font-size: 15px;
 }
 
 .tabset > input[type="radio"] {

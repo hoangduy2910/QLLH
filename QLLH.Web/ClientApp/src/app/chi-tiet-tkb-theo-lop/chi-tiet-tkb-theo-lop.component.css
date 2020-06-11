@@ -1,8 +1,11 @@
 .container {
     margin-top: 50px;  
+    min-width: 1200px;
 }
 
 .body {
+    min-width: 1200px;
+    margin: 0 auto;
     margin-bottom: 50px;
     border: 1px solid #e1e1ea;
     border-radius: 10px;
@@ -14,5 +17,27 @@ tbody td, tr {
 }
 
 #listTietHoc-5 {
-    height: 100px;
+    height: 120px;
+}
+
+tbody th {
+    width: 15%;
+}
+
+.navbar-light {
+    margin-bottom: 30px;
+}
+
+.thoiKhoaBieu {
+    display: inline;
+}
+
+.capNhatBtnTKB {
+    display: inline;
+    margin-left: 10px;
+}
+
+.lamMoiBtnTKB {
+    display: inline;
+    margin-left: 10px;
 }

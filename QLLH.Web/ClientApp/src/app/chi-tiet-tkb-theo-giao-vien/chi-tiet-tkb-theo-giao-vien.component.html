@@ -1,46 +1,93 @@
-<h3>Thời khóa biểu</h3>
-<div class="container">
+<div class="body">
+  <div class="container">
+    <nav class="navbar navbar-light bg-light">
+      <div class="navThoiKhoaBieu">
+        <div class="thoiKhoaBieu">
+          <a class="btn btn-outline-dark" href="javascript:window.location.href=window.location.href">
+            <i class="fa fa-table fa-lg" aria-hidden="true"></i> {{ giaoVien.tenGv}}
+          </a>
+        </div>
+        <div class="capNhatBtnTKB">
+          <button type="button" class="btn btn-outline-success">
+            <i class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i> Cập nhật
+          </button>
+        </div>
+        <div class="lamMoiBtnTKB">
+          <button type="button" class="btn btn-outline-primary">
+            <i class="fa fa-plus-square-o fa-lg" aria-hidden="true"></i> Làm mới
+          </button>
+        </div>
+      </div>
+    </nav>
     <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">Tiết/Thứ</th>
-            <th scope="col">T2</th>
-            <th scope="col">T3</th>
-            <th scope="col">T4</th>
-            <th scope="col">T5</th>
-            <th scope="col">T6</th>
-            <th scope="col">T7</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row">1 (7 đến 7:45)</th>
-            <td>...</td>
-            <td>...</td>
-            <td>...</td>
-            <td>...</td>
-            <td>...</td>
-            <td>...</td>
-          </tr>
-          <tr>
-            <th scope="row">2 (7:45 đến 8:30)</th>
-            <td>...</td>
-            <td>...</td>
-            <td>...</td>
-            <td>...</td>
-            <td>...</td>
-            <td>...</td>
-          </tr>
-          <tr>
-            <th scope="row">3 (8:30 đến 9)</th>
-            <td>...</td>
-            <td>...</td>
-            <td>...</td>
-            <td>...</td>
-            <td>...</td>
-            <td>...</td>
-          </tr>
-        </tbody>
+      <thead>
+        <tr>
+          <th>Tiết / Thứ</th>
+          <th *ngFor="let ng of listNgayHoc">{{ ng.tenNgay }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr id="listTietHoc-{{ t.maTiet }}" *ngFor="let t of listTietHoc">
+          <th>
+            <span>Tiết {{ t.maTiet }}<br />({{ t.thoiGian }})</span>
+          </th>
+          <td>
+            <select class="form-control">
+              <option></option>
+              <option 
+                *ngFor="let l of listLopHoc" 
+                [ngStyle]="{'display': l.maLop != 1 ? 'block' : 'none'}"
+                id="{{ l.maLop }}-{{ t.maTiet }}-1">{{ l.tenLop }}</option>
+            </select>
+          </td>
+          <td>
+            <select class="form-control">
+              <option></option>
+              <option 
+                *ngFor="let l of listLopHoc" 
+                [ngStyle]="{'display': l.maLop != 1 ? 'block' : 'none'}"
+                id="{{ l.maLop }}-{{ t.maTiet }}-2">{{ l.tenLop }}</option>
+            </select>
+          </td>
+          <td>
+            <select class="form-control">
+              <option></option>
+              <option 
+                *ngFor="let l of listLopHoc" 
+                [ngStyle]="{'display': l.maLop != 1 ? 'block' : 'none'}"
+                id="{{ l.maLop }}-{{ t.maTiet }}-3">{{ l.tenLop }}</option>
+            </select>
+          </td>
+          <td>
+            <select class="form-control">
+              <option></option>
+              <option 
+                *ngFor="let l of listLopHoc" 
+                [ngStyle]="{'display': l.maLop != 1 ? 'block' : 'none'}"
+                id="{{ l.maLop }}-{{ t.maTiet }}-4">{{ l.tenLop }}</option>
+            </select>
+          </td>
+          <td>
+            <select class="form-control">
+              <option></option>
+              <option 
+                *ngFor="let l of listLopHoc" 
+                [ngStyle]="{'display': l.maLop != 1 ? 'block' : 'none'}"
+                id="{{ l.maLop }}-{{ t.maTiet }}-5">{{ l.tenLop }}</option>
+            </select>
+          </td>
+          <td>
+            <select class="form-control">
+              <option></option>
+              <option 
+                *ngFor="let l of listLopHoc" 
+                [ngStyle]="{'display': l.maLop != 1 ? 'block' : 'none'}"
+                id="{{ l.maLop }}-{{ t.maTiet }}-6">{{ l.tenLop }}</option>
+            </select>
+          </td>
+        </tr>
+      </tbody>
     </table>
+  </div>
 </div>
 

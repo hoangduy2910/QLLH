@@ -159,6 +159,7 @@ as
 insert into GiaoVien (TenGV, MaMH, MaLop, NgaySinh, GioiTinh, DiaChi, SoDT, MaCV)
 values (@TenGV, @MaMH, @MaLop, @NgaySinh, @GioiTinh, @DiaChi, @SoDT, @MaCV)
 go
+exec ThemGiaoVien N'Chưa chỉ định', null, null, null, null, null, null, null
 exec ThemGiaoVien N'Phan Thị Minh', 1, 2, '1965-01-20', N'Nam', N'Hồ Chí Minh', '0914684595', 2
 exec ThemGiaoVien N'Huỳnh Văn Nhứt', 2, 3, '1965-01-20', N'Nam', N'Hồ Chí Minh', '0914113578', 2
 exec ThemGiaoVien N'Trần Thanh An', 3, 4, '1965-01-20', N'Nữ', N'Hồ Chí Minh', '0914189898', 2
@@ -170,12 +171,12 @@ exec ThemGiaoVien N'Nguyễn Thị Chi', 8, 9, '1965-01-20', N'Nữ', N'Hồ Ch�
 exec ThemGiaoVien N'Trương Quang Chính', 9, 10, '1965-01-20', N'Nam', N'Hồ Chí Minh', '0986787750', 2
 exec ThemGiaoVien N'Đinh Thị Quỳnh Dao', 10, 11, '1965-01-20', N'Nữ', N'Hồ Chí Minh', '0986625682', 2
 exec ThemGiaoVien N'Nguyễn Thị Thuỳ Dương',	11, 12, '1976-02-12', N'Nữ', N'Hồ Chí Minh', '0912739924', 2	
-exec ThemGiaoVien N'Nguyễn Văn Hùng', 12, 1, '1965-01-09', N'Nam', N'Hồ Chí Minh', '0912739924', 2	
+exec ThemGiaoVien N'Nguyễn Văn Hùng', 12, 13, '1965-01-09', N'Nam', N'Hồ Chí Minh', '0912739924', 2	
 
-exec ThemGiaoVien N'Đoàn Thi Đương', 1, 13, '1976-02-12', N'Nữ', N'Hồ Chí Minh', '01694897447', 2
-exec ThemGiaoVien N'Hồ Thị Quỳnh Giang', 2, 14, '1976-02-12', N'Nữ', N'Hồ Chí Minh', '0935062406', 2
-exec ThemGiaoVien N'Mai Thị Thu Hà', 3, 15, '1976-02-12', N'Nữ', N'Hồ Chí Minh', '0984812427', 2
-exec ThemGiaoVien N'Nguyễn Thị Thu Hà',	4, 16, '1976-02-12', N'Nữ', N'Hồ Chí Minh', '0935800308', 2
+exec ThemGiaoVien N'Đoàn Thi Đương', 1, 14, '1976-02-12', N'Nữ', N'Hồ Chí Minh', '01694897447', 2
+exec ThemGiaoVien N'Hồ Thị Quỳnh Giang', 2, 15, '1976-02-12', N'Nữ', N'Hồ Chí Minh', '0935062406', 2
+exec ThemGiaoVien N'Mai Thị Thu Hà', 3, 16, '1976-02-12', N'Nữ', N'Hồ Chí Minh', '0984812427', 2
+exec ThemGiaoVien N'Nguyễn Thị Thu Hà',	4, 1, '1976-02-12', N'Nữ', N'Hồ Chí Minh', '0935800308', 2
 exec ThemGiaoVien N'Phạm Thanh Hải', 5, 1, '1976-02-12', N'Nam', N'Hồ Chí Minh', '0984390360', 2
 exec ThemGiaoVien N'Nguyễn Thị Bích Hạnh', 6, 1, '1976-02-12', N'Nữ', N'Hồ Chí Minh', '0944129625', 2
 exec ThemGiaoVien N'Nguyễn Thị Ái Hằng', 7, 1, '1976-02-12', N'Nữ', N'Hồ Chí Minh', '0975833679', 2
@@ -205,102 +206,104 @@ as
 insert into HocSinh (TenHS, MaGV, MaLop, NgaySinh, GioiTinh, DiaChi)
 values (@TenHS, @MaGV, @MaLop, @NgaySinh, @GioiTinh, @DiaChi)
 go
-exec ThemHocSinh N'Phạm Loan Anh', 1, 2, '2001-01-01', N'Nữ', N'Hồ Chí Minh'
-exec ThemHocSinh N'Nguyễn Thảo Duy', 1, 2, '2001-01-01', N'Nữ', N'Hồ Chí Minh'
-exec ThemHocSinh N'Phạm Hữu Đang', 1, 2, '2001-01-01', N'Nam', N'Hồ Chí Minh'
-exec ThemHocSinh N'Võ Trương Hải Đăng', 1, 2, '2001-01-01', N'Nam', N'Hồ Chí Minh'
-exec ThemHocSinh N'Mạc Đình Giãng', 1, 2, '2001-01-01', N'Nữ', N'Hồ Chí Minh'
+exec ThemHocSinh N'Phạm Loan Anh', 2, 2, '2001-01-01', N'Nữ', N'Hồ Chí Minh'
+exec ThemHocSinh N'Nguyễn Thảo Duy', 2, 2, '2001-01-01', N'Nữ', N'Hồ Chí Minh'
+exec ThemHocSinh N'Phạm Hữu Đang', 2, 2, '2001-01-01', N'Nam', N'Hồ Chí Minh'
+exec ThemHocSinh N'Võ Trương Hải Đăng', 2, 2, '2001-01-01', N'Nam', N'Hồ Chí Minh'
+exec ThemHocSinh N'Mạc Đình Giãng', 2, 2, '2001-01-01', N'Nữ', N'Hồ Chí Minh'
 
-exec ThemHocSinh N'Lê Khã Ái', 2, 3, '2001-02-02', N'Nữ', N'Hồ Chí Minh'
-exec ThemHocSinh N'Lê Thúy Ái', 2, 3, '2001-02-02', N'Nữ', N'Hồ Chí Minh'
-exec ThemHocSinh N'Nguyễn Trọng Ái', 2, 3, '2001-02-02', N'Nam', N'Hồ Chí Minh'
-exec ThemHocSinh N'Trần Phạm Thành An', 2, 3, '2001-02-02', N'Nam', N'Hồ Chí Minh'
-exec ThemHocSinh N'Đoàn Thị Kiều Anh', 2, 3, '2001-02-02', N'Nữ', N'Hồ Chí Minh'
+exec ThemHocSinh N'Lê Khã Ái', 3, 3, '2001-02-02', N'Nữ', N'Hồ Chí Minh'
+exec ThemHocSinh N'Lê Thúy Ái', 3, 3, '2001-02-02', N'Nữ', N'Hồ Chí Minh'
+exec ThemHocSinh N'Nguyễn Trọng Ái', 3, 3, '2001-02-02', N'Nam', N'Hồ Chí Minh'
+exec ThemHocSinh N'Trần Phạm Thành An', 3, 3, '2001-02-02', N'Nam', N'Hồ Chí Minh'
+exec ThemHocSinh N'Đoàn Thị Kiều Anh', 3, 3, '2001-02-02', N'Nữ', N'Hồ Chí Minh'
 
-exec ThemHocSinh N'Ngô Thị Kim Cương', 3, 4, '2001-03-03', N'Nữ', N'Hồ Chí Minh'
-exec ThemHocSinh N'Nguyễn Phương Dung', 3, 4, '2001-03-03', N'Nữ', N'Hồ Chí Minh'
-exec ThemHocSinh N'Nguyễn Trùng Dương', 3, 4, '2001-03-03', N'Nam', N'Hồ Chí Minh'
-exec ThemHocSinh N'Đặng Thị Kim Đan', 3, 4, '2001-03-03', N'Nữ', N'Hồ Chí Minh'
-exec ThemHocSinh N'Nguyễn Tấn Đạt	', 3, 4, '2001-03-03', N'Nam', N'Hồ Chí Minh'
+exec ThemHocSinh N'Ngô Thị Kim Cương', 4, 4, '2001-03-03', N'Nữ', N'Hồ Chí Minh'
+exec ThemHocSinh N'Nguyễn Phương Dung', 4, 4, '2001-03-03', N'Nữ', N'Hồ Chí Minh'
+exec ThemHocSinh N'Nguyễn Trùng Dương', 4, 4, '2001-03-03', N'Nam', N'Hồ Chí Minh'
+exec ThemHocSinh N'Đặng Thị Kim Đan', 4, 4, '2001-03-03', N'Nữ', N'Hồ Chí Minh'
+exec ThemHocSinh N'Nguyễn Tấn Đạt', 4, 4, '2001-03-03', N'Nam', N'Hồ Chí Minh'
 
-exec ThemHocSinh N'Dương Mỹ Duyên', 4, 5, '2001-01-01', N'Nữ', N'Hồ Chí Minh'
-exec ThemHocSinh N'Lê Thị Ý Dương', 4, 5, '2001-01-01', N'Nữ', N'Hồ Chí Minh'
-exec ThemHocSinh N'Mạc Bảo Đang', 4, 5, '2001-01-01', N'Nữ', N'Hồ Chí Minh'
-exec ThemHocSinh N'Nguyễn Ngọc Giàu', 4, 5, '2001-01-01', N'Nữ', N'Hồ Chí Minh'
-exec ThemHocSinh N'Mạc Khánh Hồ', 4, 5, '2001-01-01', N'Nữ', N'Hồ Chí Minh'
+exec ThemHocSinh N'Dương Mỹ Duyên', 5, 5, '2001-01-01', N'Nữ', N'Hồ Chí Minh'
+exec ThemHocSinh N'Lê Thị Ý Dương', 5, 5, '2001-01-01', N'Nữ', N'Hồ Chí Minh'
+exec ThemHocSinh N'Mạc Bảo Đang', 5, 5, '2001-01-01', N'Nữ', N'Hồ Chí Minh'
+exec ThemHocSinh N'Nguyễn Ngọc Giàu', 5, 5, '2001-01-01', N'Nữ', N'Hồ Chí Minh'
+exec ThemHocSinh N'Mạc Khánh Hồ', 5, 5, '2001-01-01', N'Nữ', N'Hồ Chí Minh'
 
-exec ThemHocSinh N'Nguyễn Thái Anh', 5, 6, '2001-01-02', N'Nam', N'Hồ Chí Minh'
-exec ThemHocSinh N'Nguyễn Thị Cẩm Duyên', 5, 6, '2001-01-02', N'Nữ', N'Hồ Chí Minh'
-exec ThemHocSinh N'Đặng Thùy Dương', 5, 6, '2001-01-02', N'Nũ', N'Hồ Chí Minh'
-exec ThemHocSinh N'Đỗ Minh Đấu', 5, 6, '2001-01-02', N'Nam', N'Hồ Chí Minh'
-exec ThemHocSinh N'Hồ Nhựt Ghi', 5, 6, '2001-01-02', N'Nam', N'Hồ Chí Minh'
+exec ThemHocSinh N'Nguyễn Thái Anh', 6, 6, '2001-01-02', N'Nam', N'Hồ Chí Minh'
+exec ThemHocSinh N'Nguyễn Thị Cẩm Duyên', 6, 6, '2001-01-02', N'Nữ', N'Hồ Chí Minh'
+exec ThemHocSinh N'Đặng Thùy Dương', 6, 6, '2001-01-02', N'Nũ', N'Hồ Chí Minh'
+exec ThemHocSinh N'Đỗ Minh Đấu', 6, 6, '2001-01-02', N'Nam', N'Hồ Chí Minh'
+exec ThemHocSinh N'Hồ Nhựt Ghi', 6, 6, '2001-01-02', N'Nam', N'Hồ Chí Minh'
 
-exec ThemHocSinh N'Phạm Vũ An', 6, 7, '2000-01-03', N'Nam', N'Hồ Chí Minh'
-exec ThemHocSinh N'Thạch Thị Bảo Chân', 6, 7, '2000-01-03', N'Nữ', N'Hồ Chí Minh'
-exec ThemHocSinh N'Lê Văn Chiêu', 6, 7, '2000-01-03', N'Nam', N'Hồ Chí Minh'
-exec ThemHocSinh N'Nguyễn Thị Phương Dung', 6, 7, '2000-01-03', N'Nữ', N'Hồ Chí Minh'
-exec ThemHocSinh N'Lưu Bùng Hụi', 6, 7, '2000-01-03', N'Nam', N'Hồ Chí Minh'
+exec ThemHocSinh N'Phạm Vũ An', 7, 7, '2000-01-03', N'Nam', N'Hồ Chí Minh'
+exec ThemHocSinh N'Thạch Thị Bảo Chân', 7, 7, '2000-01-03', N'Nữ', N'Hồ Chí Minh'
+exec ThemHocSinh N'Lê Văn Chiêu', 7, 7, '2000-01-03', N'Nam', N'Hồ Chí Minh'
+exec ThemHocSinh N'Nguyễn Thị Phương Dung', 7, 7, '2000-01-03', N'Nữ', N'Hồ Chí Minh'
+exec ThemHocSinh N'Lưu Bùng Hụi', 7, 7, '2000-01-03', N'Nam', N'Hồ Chí Minh'
 
-exec ThemHocSinh N'Trương Minh Công', 7, 8, '2000-01-01', N'Nam', N'Hồ Chí Minh'
-exec ThemHocSinh N'Quách Văn Đặng', 7, 8, '2000-01-01', N'Nam', N'Hồ Chí Minh'
-exec ThemHocSinh N'Nguyễn Nhật Hào', 7, 8, '2000-01-01', N'Nam', N'Hồ Chí Minh'
-exec ThemHocSinh N'Lê Như Huỳnh', 7, 8, '2000-01-01', N'Nữ', N'Hồ Chí Minh'
-exec ThemHocSinh N'Nguyễn Đỗ Nhật Huỳnh', 7, 8, '2000-01-01', N'Nam', N'Hồ Chí Minh'
+exec ThemHocSinh N'Trương Minh Công', 8, 8, '2000-01-01', N'Nam', N'Hồ Chí Minh'
+exec ThemHocSinh N'Quách Văn Đặng', 8, 8, '2000-01-01', N'Nam', N'Hồ Chí Minh'
+exec ThemHocSinh N'Nguyễn Nhật Hào', 8, 8, '2000-01-01', N'Nam', N'Hồ Chí Minh'
+exec ThemHocSinh N'Lê Như Huỳnh', 8, 8, '2000-01-01', N'Nữ', N'Hồ Chí Minh'
+exec ThemHocSinh N'Nguyễn Đỗ Nhật Huỳnh', 8, 8, '2000-01-01', N'Nam', N'Hồ Chí Minh'
 
-exec ThemHocSinh N'Phạm Văn Bắc', 8, 9, '2000-01-02', N'Nam', N'Hồ Chí Minh'
-exec ThemHocSinh N'Võ Thị Bé', 8, 9, '2000-01-02', N'Nữ', N'Hồ Chí Minh'
-exec ThemHocSinh N'Nguyễn Khánh Duy', 8, 9, '2000-01-02', N'Nam', N'Hồ Chí Minh'
-exec ThemHocSinh N'Phạm Hữu Đang', 8, 9, '2000-01-02', N'Nam', N'Hồ Chí Minh'
-exec ThemHocSinh N'Thái Thanh Điền', 8, 9, '2000-01-02', N'Nam', N'Hồ Chí Minh'
+exec ThemHocSinh N'Phạm Văn Bắc', 9, 9, '2000-01-02', N'Nam', N'Hồ Chí Minh'
+exec ThemHocSinh N'Võ Thị Bé', 9, 9, '2000-01-02', N'Nữ', N'Hồ Chí Minh'
+exec ThemHocSinh N'Nguyễn Khánh Duy', 9, 9, '2000-01-02', N'Nam', N'Hồ Chí Minh'
+exec ThemHocSinh N'Phạm Hữu Đang', 9, 9, '2000-01-02', N'Nam', N'Hồ Chí Minh'
+exec ThemHocSinh N'Thái Thanh Điền', 9, 9, '2000-01-02', N'Nam', N'Hồ Chí Minh'
 
-exec ThemHocSinh N'Lê Thị Huế Anh', 9, 10, '2000-01-03', N'Nữ', N'Hồ Chí Minh'
-exec ThemHocSinh N'Nguyễn Đức Anh', 9, 10, '2000-01-03', N'Nam', N'Hồ Chí Minh'
-exec ThemHocSinh N'Trịnh Kiều Diễm', 9, 10, '2000-01-03', N'Nữ', N'Hồ Chí Minh'
-exec ThemHocSinh N'Nguyễn Nhứt Dùng', 9, 10, '2000-01-03', N'Nam', N'Hồ Chí Minh'
-exec ThemHocSinh N'Trương Nhật Hào', 9, 10, '2000-01-03', N'Nam', N'Hồ Chí Minh'
+exec ThemHocSinh N'Lê Thị Huế Anh', 10, 10, '2000-01-03', N'Nữ', N'Hồ Chí Minh'
+exec ThemHocSinh N'Nguyễn Đức Anh', 10, 10, '2000-01-03', N'Nam', N'Hồ Chí Minh'
+exec ThemHocSinh N'Trịnh Kiều Diễm', 10, 10, '2000-01-03', N'Nữ', N'Hồ Chí Minh'
+exec ThemHocSinh N'Nguyễn Nhứt Dùng', 10, 10, '2000-01-03', N'Nam', N'Hồ Chí Minh'
+exec ThemHocSinh N'Trương Nhật Hào', 10, 10, '2000-01-03', N'Nam', N'Hồ Chí Minh'
 
-exec ThemHocSinh N'Phạm Loan Anh', 10, 11, '2000-01-01', N'Nữ', N'Hồ Chí Minh'
-exec ThemHocSinh N'Nguyễn Thảo Duy', 10, 11, '2000-01-01', N'Nữ', N'Hồ Chí Minh'
-exec ThemHocSinh N'Phạm Hữu Đang', 10, 11, '2000-01-01', N'Nam', N'Hồ Chí Minh'
-exec ThemHocSinh N'Võ Trương Hải Đăng', 10, 11, '2000-01-01', N'Nam', N'Hồ Chí Minh'
-exec ThemHocSinh N'Mạc Đình Giãng', 10, 11, '2000-01-01', N'Nữ', N'Hồ Chí Minh'
+exec ThemHocSinh N'Phạm Loan Anh', 11, 11, '2000-01-01', N'Nữ', N'Hồ Chí Minh'
+exec ThemHocSinh N'Nguyễn Thảo Duy', 11, 11, '2000-01-01', N'Nữ', N'Hồ Chí Minh'
+exec ThemHocSinh N'Phạm Hữu Đang', 11, 11, '2000-01-01', N'Nam', N'Hồ Chí Minh'
+exec ThemHocSinh N'Võ Trương Hải Đăng', 11, 11, '2000-01-01', N'Nam', N'Hồ Chí Minh'
+exec ThemHocSinh N'Mạc Đình Giãng', 11, 11, '2000-01-01', N'Nữ', N'Hồ Chí Minh'
 
-exec ThemHocSinh N'Lê Khã Ái', 11, 12, '1999-02-02', N'Nữ', N'Hồ Chí Minh'
-exec ThemHocSinh N'Lê Thúy Ái', 11, 12, '1999-02-02', N'Nữ', N'Hồ Chí Minh'
-exec ThemHocSinh N'Nguyễn Trọng Ái', 11, 12, '1999-02-02', N'Nam', N'Hồ Chí Minh'
-exec ThemHocSinh N'Trần Phạm Thành An', 11, 12, '1999-02-02', N'Nam', N'Hồ Chí Minh'
-exec ThemHocSinh N'Đoàn Thị Kiều Anh', 11, 12, '1999-02-02', N'Nữ', N'Hồ Chí Minh'
+exec ThemHocSinh N'Lê Khã Ái', 12, 12, '1999-02-02', N'Nữ', N'Hồ Chí Minh'
+exec ThemHocSinh N'Lê Thúy Ái', 12, 12, '1999-02-02', N'Nữ', N'Hồ Chí Minh'
+exec ThemHocSinh N'Nguyễn Trọng Ái', 12, 12, '1999-02-02', N'Nam', N'Hồ Chí Minh'
+exec ThemHocSinh N'Trần Phạm Thành An', 12, 12, '1999-02-02', N'Nam', N'Hồ Chí Minh'
+exec ThemHocSinh N'Đoàn Thị Kiều Anh', 12, 12, '1999-02-02', N'Nữ', N'Hồ Chí Minh'
 
-exec ThemHocSinh N'Ngô Thị Kim Cương', 12, 13, '1999-03-03', N'Nữ', N'Hồ Chí Minh'
-exec ThemHocSinh N'Nguyễn Phương Dung', 12, 13, '1999-03-03', N'Nữ', N'Hồ Chí Minh'
-exec ThemHocSinh N'Nguyễn Trùng Dương', 12, 13, '1999-03-03', N'Nam', N'Hồ Chí Minh'
-exec ThemHocSinh N'Đặng Thị Kim Đan', 12, 13, '1999-03-03', N'Nữ', N'Hồ Chí Minh'
-exec ThemHocSinh N'Nguyễn Tấn Đạt', 12, 13, '1999-03-03', N'Nam', N'Hồ Chí Minh'
+exec ThemHocSinh N'Ngô Thị Kim Cương', 13, 13, '1999-03-03', N'Nữ', N'Hồ Chí Minh'
+exec ThemHocSinh N'Nguyễn Phương Dung', 13, 13, '1999-03-03', N'Nữ', N'Hồ Chí Minh'
+exec ThemHocSinh N'Nguyễn Trùng Dương', 13, 13, '1999-03-03', N'Nam', N'Hồ Chí Minh'
+exec ThemHocSinh N'Đặng Thị Kim Đan', 13, 13, '1999-03-03', N'Nữ', N'Hồ Chí Minh'
+exec ThemHocSinh N'Nguyễn Tấn Đạt', 13, 13, '1999-03-03', N'Nam', N'Hồ Chí Minh'
 
-exec ThemHocSinh N'Dương Mỹ Duyên', 13, 14, '1999-01-01', N'Nữ', N'Hồ Chí Minh'
-exec ThemHocSinh N'Lê Thị Ý Dương', 13, 14, '1999-01-01', N'Nữ', N'Hồ Chí Minh'
-exec ThemHocSinh N'Mạc Bảo Đang', 13, 14, '1999-01-01', N'Nữ', N'Hồ Chí Minh'
-exec ThemHocSinh N'Nguyễn Ngọc Giàu', 13, 14, '1999-01-01', N'Nữ', N'Hồ Chí Minh'
-exec ThemHocSinh N'Mạc Khánh Hồ', 13, 14, '1999-01-01', N'Nữ', N'Hồ Chí Minh'
+exec ThemHocSinh N'Dương Mỹ Duyên', 14, 14, '1999-01-01', N'Nữ', N'Hồ Chí Minh'
+exec ThemHocSinh N'Lê Thị Ý Dương', 14, 14, '1999-01-01', N'Nữ', N'Hồ Chí Minh'
+exec ThemHocSinh N'Mạc Bảo Đang', 14, 14, '1999-01-01', N'Nữ', N'Hồ Chí Minh'
+exec ThemHocSinh N'Nguyễn Ngọc Giàu', 14, 14, '1999-01-01', N'Nữ', N'Hồ Chí Minh'
+exec ThemHocSinh N'Mạc Khánh Hồ', 14, 14, '1999-01-01', N'Nữ', N'Hồ Chí Minh'
 
-exec ThemHocSinh N'Nguyễn Thái Anh', 14, 15, '1999-01-02', N'Nam', N'Hồ Chí Minh'
-exec ThemHocSinh N'Nguyễn Thị Cẩm Duyên', 14, 15, '2001-01-02', N'Nữ', N'Hồ Chí Minh'
-exec ThemHocSinh N'Đặng Thùy Dương', 14, 15, '1999-01-02', N'Nũ', N'Hồ Chí Minh'
-exec ThemHocSinh N'Đỗ Minh Đấu', 14, 15, '1999-01-02', N'Nam', N'Hồ Chí Minh'
-exec ThemHocSinh N'Hồ Nhựt Ghi', 14, 15, '1999-01-02', N'Nam', N'Hồ Chí Minh'
+exec ThemHocSinh N'Nguyễn Thái Anh', 15, 15, '1999-01-02', N'Nam', N'Hồ Chí Minh'
+exec ThemHocSinh N'Nguyễn Thị Cẩm Duyên', 15, 15, '2001-01-02', N'Nữ', N'Hồ Chí Minh'
+exec ThemHocSinh N'Đặng Thùy Dương', 15, 15, '1999-01-02', N'Nũ', N'Hồ Chí Minh'
+exec ThemHocSinh N'Đỗ Minh Đấu', 15, 15, '1999-01-02', N'Nam', N'Hồ Chí Minh'
+exec ThemHocSinh N'Hồ Nhựt Ghi', 15, 15, '1999-01-02', N'Nam', N'Hồ Chí Minh'
 
-exec ThemHocSinh N'Phạm Vũ An', 15, 16, '1999-01-03', N'Nam', N'Hồ Chí Minh'
-exec ThemHocSinh N'Thạch Thị Bảo Chân', 15, 16, '1999-01-03', N'Nữ', N'Hồ Chí Minh'
-exec ThemHocSinh N'Lê Văn Chiêu', 15, 16, '1999-01-03', N'Nam', N'Hồ Chí Minh'
-exec ThemHocSinh N'Nguyễn Thị Phương Dung', 15, 16, '1999-01-03', N'Nữ', N'Hồ Chí Minh'
-exec ThemHocSinh N'Lưu Bùng Hụi', 15, 16, '1999-01-03', N'Nam', N'Hồ Chí Minh'
+exec ThemHocSinh N'Phạm Vũ An', 16, 16, '1999-01-03', N'Nam', N'Hồ Chí Minh'
+exec ThemHocSinh N'Thạch Thị Bảo Chân', 16, 16, '1999-01-03', N'Nữ', N'Hồ Chí Minh'
+exec ThemHocSinh N'Lê Văn Chiêu', 16, 16, '1999-01-03', N'Nam', N'Hồ Chí Minh'
+exec ThemHocSinh N'Nguyễn Thị Phương Dung', 16, 16, '1999-01-03', N'Nữ', N'Hồ Chí Minh'
+exec ThemHocSinh N'Lưu Bùng Hụi', 16, 16, '1999-01-03', N'Nam', N'Hồ Chí Minh'
 go
 
 
 --- Giao vien day lop ---
 create table GiaoVienLop (
+	MaGVL int identity(1,1),
 	MaGV int,
 	MaLop int,
+	primary key (MaGVL),
 	foreign key (MaGV) references GiaoVien(MaGV),
 	foreign key (MaLop) references Lop(MaLop)
 );
@@ -310,7 +313,6 @@ as
 insert into GiaoVienLop (MaGV, MaLop)
 values (@MaGV, @MaLop)
 go
-exec ThemGiaoVienLop 1, 2
 exec ThemGiaoVienLop 2, 2
 exec ThemGiaoVienLop 3, 2
 exec ThemGiaoVienLop 4, 2
@@ -322,16 +324,19 @@ exec ThemGiaoVienLop 9, 2
 exec ThemGiaoVienLop 10, 2
 exec ThemGiaoVienLop 11, 2
 exec ThemGiaoVienLop 12, 2
+exec ThemGiaoVienLop 13, 2
 go
 
 
 --- Thoi Khoa Bieu ---
 create table ThoiKhoaBieu (
+	MaTKB int identity(1,1),
 	MaNgay int,
 	MaTiet int,
 	MaMH int,
 	MaGV int,
 	MaLop int,
+	primary key (MaTKB),
 	foreign key (MaTiet) references TietHoc(MaTiet),
 	foreign key (MaNgay) references NgayHoc(MaNgay),
 	foreign key (MaMH) references MonHoc(MaMH),
@@ -348,48 +353,48 @@ go
 exec ThemThoiKhoaBieu ngay, tiet, 
 						mon, gv, lop 
 */
-exec ThemThoiKhoaBieu 1, 1, 1, 1, 2
-exec ThemThoiKhoaBieu 1, 2, 9, 9, 2
-exec ThemThoiKhoaBieu 1, 3, 8, 8, 2
-exec ThemThoiKhoaBieu 1, 4, 6, 6, 2
-exec ThemThoiKhoaBieu 1, 5, 2, 2, 2
-exec ThemThoiKhoaBieu 1, 6, 3, 3, 2
-exec ThemThoiKhoaBieu 1, 7, 3, 3, 2
-exec ThemThoiKhoaBieu 1, 8, 9, 9, 2
-exec ThemThoiKhoaBieu 1, 9, 9, 9, 2
+exec ThemThoiKhoaBieu 1, 1, 1, 2, 2
+exec ThemThoiKhoaBieu 1, 2, 9, 10, 2
+exec ThemThoiKhoaBieu 1, 3, 8, 9, 2
+exec ThemThoiKhoaBieu 1, 4, 6, 7, 2
+exec ThemThoiKhoaBieu 1, 5, 2, 3, 2
+exec ThemThoiKhoaBieu 1, 6, 3, 4, 2
+exec ThemThoiKhoaBieu 1, 7, 3, 4, 2
+exec ThemThoiKhoaBieu 1, 8, 9, 10, 2
+exec ThemThoiKhoaBieu 1, 9, 9, 10, 2
 
-exec ThemThoiKhoaBieu 2, 1, 12, 12, 2
-exec ThemThoiKhoaBieu 2, 2, 2, 2, 2
-exec ThemThoiKhoaBieu 2, 3, 3, 3, 2
-exec ThemThoiKhoaBieu 2, 4, 1, 1, 2
-exec ThemThoiKhoaBieu 2, 5, 1, 1, 2
+exec ThemThoiKhoaBieu 2, 1, 12, 13, 2
+exec ThemThoiKhoaBieu 2, 2, 2, 3, 2
+exec ThemThoiKhoaBieu 2, 3, 3, 4, 2
+exec ThemThoiKhoaBieu 2, 4, 1, 2, 2
+exec ThemThoiKhoaBieu 2, 5, 1, 2, 2
 
-exec ThemThoiKhoaBieu 3, 1, 12, 12, 2
-exec ThemThoiKhoaBieu 3, 2, 9, 9, 2
-exec ThemThoiKhoaBieu 3, 3, 9, 9, 2
-exec ThemThoiKhoaBieu 3, 4, 7, 7, 2
-exec ThemThoiKhoaBieu 3, 5, 4, 4, 2
-exec ThemThoiKhoaBieu 3, 6, 1, 1, 2
-exec ThemThoiKhoaBieu 3, 7, 1, 1, 2
+exec ThemThoiKhoaBieu 3, 1, 12, 13, 2
+exec ThemThoiKhoaBieu 3, 2, 9, 10, 2
+exec ThemThoiKhoaBieu 3, 3, 9, 10, 2
+exec ThemThoiKhoaBieu 3, 4, 7, 8, 2
+exec ThemThoiKhoaBieu 3, 5, 4, 5, 2
+exec ThemThoiKhoaBieu 3, 6, 1, 2, 2
+exec ThemThoiKhoaBieu 3, 7, 1, 2, 2
 
-exec ThemThoiKhoaBieu 4, 1, 7, 7, 2
-exec ThemThoiKhoaBieu 4, 2, 7, 7, 2
-exec ThemThoiKhoaBieu 4, 3, 5, 5, 2
-exec ThemThoiKhoaBieu 4, 4, 1, 1, 2
-exec ThemThoiKhoaBieu 4, 5, 1, 1, 2
+exec ThemThoiKhoaBieu 4, 1, 7, 8, 2
+exec ThemThoiKhoaBieu 4, 2, 7, 8, 2
+exec ThemThoiKhoaBieu 4, 3, 5, 6, 2
+exec ThemThoiKhoaBieu 4, 4, 1, 2, 2
+exec ThemThoiKhoaBieu 4, 5, 1, 2, 2
 
-exec ThemThoiKhoaBieu 5, 1, 6, 6, 2
-exec ThemThoiKhoaBieu 5, 2, 5, 5, 2
-exec ThemThoiKhoaBieu 5, 3, 2, 2, 2
-exec ThemThoiKhoaBieu 5, 4, 3, 3, 2
-exec ThemThoiKhoaBieu 5, 5, 3, 3, 2
-exec ThemThoiKhoaBieu 5, 6, 2, 2, 2
-exec ThemThoiKhoaBieu 5, 7, 2, 2, 2
-exec ThemThoiKhoaBieu 5, 8, 7, 7, 2
-exec ThemThoiKhoaBieu 5, 9, 7, 7, 2
+exec ThemThoiKhoaBieu 5, 1, 6, 7, 2
+exec ThemThoiKhoaBieu 5, 2, 5, 6, 2
+exec ThemThoiKhoaBieu 5, 3, 2, 3, 2
+exec ThemThoiKhoaBieu 5, 4, 3, 4, 2
+exec ThemThoiKhoaBieu 5, 5, 3, 4, 2
+exec ThemThoiKhoaBieu 5, 6, 2, 3, 2
+exec ThemThoiKhoaBieu 5, 7, 2, 3, 2
+exec ThemThoiKhoaBieu 5, 8, 7, 8, 2
+exec ThemThoiKhoaBieu 5, 9, 7, 8, 2
 
-exec ThemThoiKhoaBieu 6, 1, 10, 10, 2
-exec ThemThoiKhoaBieu 6, 2, 10, 10, 2
-exec ThemThoiKhoaBieu 6, 3, 11, 11, 2
-exec ThemThoiKhoaBieu 6, 4, 11, 11, 2
+exec ThemThoiKhoaBieu 6, 1, 10, 11, 2
+exec ThemThoiKhoaBieu 6, 2, 10, 11, 2
+exec ThemThoiKhoaBieu 6, 3, 11, 12, 2
+exec ThemThoiKhoaBieu 6, 4, 11, 12, 2
 go

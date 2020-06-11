@@ -5,6 +5,7 @@ namespace QLLH.DAL.Models
 {
     public partial class ThoiKhoaBieu
     {
+        public int MaTkb { get; set; }
         public int? MaNgay { get; set; }
         public int? MaTiet { get; set; }
         public int? MaMh { get; set; }

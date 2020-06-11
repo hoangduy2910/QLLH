@@ -1,1 +1,80 @@
-<p>quan-ly-tkb-theo-giao-vien works!</p>
+<div class="body">
+    <div class="container">
+      <nav class="navbar navbar-light bg-light">
+        <div class="navGiaoVien">
+          <div class="listGiaoVienBtn">
+            <a class="btn btn-outline-dark" href="javascript:window.location.href=window.location.href">
+              <i class="fa fa-book" aria-hidden="true"></i> Danh sách
+            </a>
+          </div>
+          <div class="rowBtn">
+            <div class="btn-group dropright">
+              <button id="row" type="button" class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {{ size }}
+              </button>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" *ngFor="let r of listRow" (click)="chonSoDongHienThi(r.row)">{{ r.row }}</a>
+              </div>
+            </div>
+          </div>
+          <div class="dropdownLopBtn">
+            <div class="btn-group dropright">
+              <button id="tenMonHoc" type="button" class="btn btn-outline-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Môn học
+              </button>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" *ngFor="let mh of listMonHoc" (click)="timKiemGiaoVienTheoMonHoc(1, mh.tenMh)">{{ mh.tenMh }}</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <form class="form-inline">
+          <input style="border: 1px solid #28a745;" class="form-control mr-sm-2" id="tenGiaoVien" type="search" placeholder="Nhập tên giáo viên" aria-label="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit" (click)="timKiemGiaoVien(1)">
+            <i class="fa fa-search" aria-hidden="true"></i>
+          </button>
+        </form>
+      </nav>
+    </div>
+    <div class="container">
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Mã giáo viên</th>
+                <th scope="col">Tên giáo viên</th>
+                <th scope="col">Môn giảng dạy</th>
+                <th scope="col">Chủ nhiệm lớp</th>
+                <th scope="col">Giới tính</th>        
+                <th scope="col">Số điện thoại</th>
+                <th scope="col">Hành động</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let gv of listGiaoVien.data; index as i">
+                <td>{{ gv.maGv }}</td>
+                <td>{{ gv.tenGv }}</td>
+                <td>{{ gv.tenMh }}</td>
+                <td>{{ gv.tenLop }}</td>
+                <td>{{ gv.gioiTinh }}</td>
+                <td>{{ gv.soDt }}</td>
+                <td>
+                  <a class="btn btn-success" [routerLink]="['/chi-tiet-tkb-theo-giao-vien', gv.maGv]">
+                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- Pagination -->
+    <div class="pagination-bar">
+      <nav class="pagination-nav" aria-label="Page navigation example">
+        <ul class="pagination">
+          <li class="page-item"><a class="page-link" href="javascript:void(0)" (click)="danhSachGiaoVienTruoc()">Trước</a></li>
+          <li class="page-item"><a class="page-link" href="javascript:void(0)">{{ listGiaoVien.page }}</a></li>
+          <li class="page-item"><a class="page-link" href="javascript:void(0)" (click)="danhSachGiaoVienSau()">Sau</a></li>
+        </ul>
+      </nav>
+    </div>
+    <!-- End Pagination -->
+</div>
