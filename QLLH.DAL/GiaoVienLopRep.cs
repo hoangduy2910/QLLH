@@ -92,6 +92,5 @@ namespace QLLH.DAL
             }
             return res;
         }
-
     }
 }

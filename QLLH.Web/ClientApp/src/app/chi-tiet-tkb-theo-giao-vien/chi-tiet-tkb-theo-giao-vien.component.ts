@@ -14,14 +14,23 @@ export class ChiTietTkbTheoGiaoVienComponent {
   listMonHoc: any = [];
   listLopHoc: any = [];
   listTKB: any = [];
-  giaoVien: any;
+  giaoVien = {
+    maGv: 0,
+    tenGv: "",
+    maMh: null,
+    maLop: 1,
+    ngaySinh: "",
+    gioiTinh: "",
+    diaChi: "",
+    soDt: "",
+    maCv: 2
+  };
 
   constructor(private route: ActivatedRoute, private http: HttpClient, @Inject('BASE_URL') baseUrl: string) {   
     this.layGiaoVienTheoID();
     this.danhSachNgayHoc();
     this.danhSachTietHoc();
     this.danhSachLopHoc();
-    this.danhSachThoiKhoaBieu();
   }
 
   layGiaoVienTheoID() {
@@ -60,6 +69,7 @@ export class ChiTietTkbTheoGiaoVienComponent {
       res = result;
       if (res.success) {
         this.listTietHoc = res.data;
+        this.danhSachThoiKhoaBieu();
       }
       else {
         alert(res.message);

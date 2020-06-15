@@ -1,40 +1,49 @@
 <div class="body">
-    <div class="container">
-        <table class="table">
-            <thead>
-              <tr>
-                <th scope="col">Mã lớp học</th>
-                <th scope="col">Tên lớp</th>
-                <th scope="col">Mã giáo viên</th>
-                <th scope="col">Giáo viên chủ nhiệm</th>
-                <th scope="col">Hành động</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let l of listLop.data; index as i">
-                <td>{{ l.maLop }}</td>
-                <td>{{ l.tenLop }}</td>
-                <td>{{ l.maGv }}</td>
-                <td>{{ l.tenGv }}</td>
-                <td>
-                  <a [routerLink]="['/chi-tiet-tkb-theo-lop', l.maLop]" class="btn btn-success">
-                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                  </a>
-                </td>
-              </tr>
-            </tbody>
-        </table>
+  <nav class="navbar navbar-light bg-light">
+    <div class="navTKB">
+      <div class="listTKBBtn">
+        <a class="btn btn-outline-dark" href="javascript:window.location.href=window.location.href">
+          <i class="fa fa-book" aria-hidden="true"></i> Thời khóa biểu lớp
+        </a>
+      </div>
     </div>
-  
-    <!-- Pagination -->
-    <div class="pagination-bar">
-      <nav aria-label="Page navigation example">
-        <ul class="pagination">
-          <li class="page-item"><a class="page-link" href="javascript:void(0)" (click)="danhSachLopTruoc()">Trước</a></li>
-          <li class="page-item"><a class="page-link" href="javascript:void(0)">{{ listLop.page }}</a></li>
-          <li class="page-item"><a class="page-link" href="javascript:void(0)" (click)="danhSachLopSau()">Sau</a></li>
-        </ul>
-      </nav>
-    </div>
+  </nav>
+  <div class="tableTKBTheoLop">
+      <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Mã lớp học</th>
+              <th scope="col">Tên lớp</th>
+              <th scope="col">Mã giáo viên</th>
+              <th scope="col">Giáo viên chủ nhiệm</th>
+              <th scope="col">Hành động</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let l of listLop.data; index as i">
+              <td>{{ l.maLop }}</td>
+              <td>{{ l.tenLop }}</td>
+              <td>{{ l.maGv }}</td>
+              <td>{{ l.tenGv }}</td>
+              <td>
+                <a [routerLink]="['/chi-tiet-tkb-theo-lop', l.maLop]" class="btn btn-success">
+                  <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                </a>
+              </td>
+            </tr>
+          </tbody>
+      </table>
+  </div>
+
+  <!-- Pagination -->
+  <div class="pagination-bar">
+    <nav aria-label="Page navigation example">
+      <ul class="pagination">
+        <li class="page-item"><a class="page-link" href="javascript:void(0)" (click)="danhSachLopTruoc()">Trước</a></li>
+        <li class="page-item"><a class="page-link" href="javascript:void(0)">{{ listLop.page }}</a></li>
+        <li class="page-item"><a class="page-link" href="javascript:void(0)" (click)="danhSachLopSau()">Sau</a></li>
+      </ul>
+    </nav>
+  </div>
     <!-- End Pagination -->
 </div>

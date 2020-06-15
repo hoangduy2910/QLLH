@@ -22,11 +22,20 @@ namespace QLLH.Web.Controllers
         }
 
         [HttpPost("get-by-class")]
-        public IActionResult getGiaoVienLopTheoLop([FromBody] SearchReq req)
+        public IActionResult getGiaoVienLopTheoLop([FromBody] SimpleReq req)
         {
             var res = new SingleRsp();
-            var listGV = _svc.getGiaoVienLopTheoLop(req.page, req.size, req.keyword);
+            var listGV = _svc.getGiaoVienLopTheoLop(req.Id);
             res.Data = listGV;
+            return Ok(res);
+        }
+
+        [HttpPost("get-by-subject-and-class")]
+        public IActionResult getGiaoVienLopTheoMonHocVaLop([FromBody] GiaoVienMonHocReq req)
+        {
+            var res = new SingleRsp();
+            var gv = _svc.getGiaoVienLopTheoMonHocVaLop(req);
+            res.Data = gv;
             return Ok(res);
         }
 

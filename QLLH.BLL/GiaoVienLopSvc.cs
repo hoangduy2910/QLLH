@@ -19,54 +19,46 @@ namespace QLLH.BLL
             res.Data = m;
             return res;
         }
-        public object getGiaoVienLopTheoLop(int page, int size, string keyword)
+        public object getGiaoVienLopTheoLop(int MaLop)
         {
-            var listGV = All.Join(_rep.Context.Lop, a => a.MaLop, b => b.MaLop, (a, b) => new {
+            var listGV = All.Join(_rep.Context.GiaoVien, a => a.MaGv, c => c.MaGv, (a, c) => new {
                 a.MaGvl,
                 a.MaGv,
-                b.TenLop
-            }).Join(_rep.Context.GiaoVien, a => a.MaGv, c => c.MaGv, (a, c) => new {
-                a.MaGvl,
-                a.MaGv,
+                a.MaLop,
                 c.TenGv,
                 c.MaMh,
-                c.MaLop,
                 c.NgaySinh,
                 c.GioiTinh,
                 c.DiaChi,
                 c.SoDt,
-                c.MaCv,
-                a.TenLop
+                c.MaCv
             }).Join(_rep.Context.MonHoc, a => a.MaMh, d => d.MaMh, (a, d) => new {
                 a.MaGvl,
                 a.MaGv,
+                a.MaLop,
                 a.TenGv,
                 a.MaMh,
-                a.MaLop,
                 a.NgaySinh,
                 a.GioiTinh,
                 a.DiaChi,
                 a.SoDt,
                 a.MaCv,
-                a.TenLop,
                 d.TenMh
-            }).Where(gv => gv.TenLop == keyword).ToList();
+            }).Where(gv => gv.MaLop == MaLop).ToList();
 
-            var offset = (page - 1) * size;
-            var totalRecord = listGV.Count();
-            var totalPage = (totalRecord % size) == 0 ? (int)(totalRecord / size) : (int)((totalRecord / size) + 1);
-            var data = listGV.Skip(offset).Take(size).ToList();
+            return listGV;
+        }
 
-            var res = new
-            {
-                Data = data,
-                totalRecord = totalRecord,
-                totalPage = totalPage,
-                page = page,
-                size = size
-            };
+        public object getGiaoVienLopTheoMonHocVaLop(GiaoVienMonHocReq req)
+        {
+            var gv = All.Join(_rep.Context.GiaoVien, a => a.MaGv, c => c.MaGv, (a, c) => new {
+                a.MaGvl,
+                a.MaGv,
+                a.MaLop,
+                c.MaMh,
+            }).Where(gv => gv.MaLop == req.MaLop && gv.MaMh == req.MaMh).FirstOrDefault();
 
-            return res;
+            return gv;
         }
 
         public object getGiaoVienLopTheoGiaoVienVaLop(GiaoVienLopReq req)

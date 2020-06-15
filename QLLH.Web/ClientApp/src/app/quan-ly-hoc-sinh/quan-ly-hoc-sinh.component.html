@@ -1,21 +1,11 @@
 <div class="body">
-  <div class="container">
+  <div>
     <nav class="navbar navbar-light bg-light">
       <div class="navHocSinh">
         <div class="listHocSinhBtn">
           <a class="btn btn-outline-dark" href="javascript:window.location.href=window.location.href">
             <i class="fa fa-book" aria-hidden="true"></i> Danh sách
           </a>
-        </div>
-        <div class="rowBtn">
-          <div class="btn-group dropright">
-            <button id="row" type="button" class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              {{ size }}
-            </button>
-            <div class="dropdown-menu">
-              <a class="dropdown-item" *ngFor="let r of listRow" (click)="chonSoDongHienThi(r.row)">{{ r.row }}</a>
-            </div>
-          </div>
         </div>
         <div class="dropdownLopBtn">
           <div class="btn-group dropright">
@@ -43,7 +33,7 @@
       </form>
     </nav>
   </div>
-  <div class="container">
+  <div class="tableHocSinh">
       <table class="table">
           <thead>
             <tr>
@@ -114,9 +104,10 @@
           <div class="col-2 label">Tên lớp</div>
           <div class="col-4">
             <select class="form-control" id="lop" [(ngModel)]="hocSinh.maLop" (change)="chonGiaoVienTheoLop(hocSinh.maLop)">
-              <option *ngFor="let l of listLop" [ngValue]="l.maLop">
-                {{ l.tenLop }}
-              </option>
+              <option 
+                *ngFor="let l of listLop" 
+                [ngValue]="l.maLop"
+                [ngStyle]="{'display': l.maLop != 1 ? 'block' : 'none'}">{{ l.tenLop }}</option>
             </select>
           </div>
           <div class="col-2 label">Tên giáo viên</div>

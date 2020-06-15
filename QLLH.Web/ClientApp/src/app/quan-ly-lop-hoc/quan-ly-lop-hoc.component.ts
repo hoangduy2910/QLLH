@@ -9,7 +9,7 @@ declare var $: any;
 })
 
 export class QuanLyLopHocComponent {
-  size: number = 5;
+  size: number = 10;
   listGiaoVien: any;
   listHocSinh: any;
   maGvOld: number;

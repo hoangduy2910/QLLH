@@ -1,12 +1,10 @@
-.container {
-    margin-top: 50px;  
+.tableHocSinh {
+    margin: 50px 20px 0 20px;
 }
 
 .body {
-    margin-bottom: 50px;
+    margin: 0 auto;
     border: 1px solid #e1e1ea;
-    border-radius: 10px;
-    box-shadow: 18px 20px 60px -9px rgba(0,0,0,0.75);
 }
 
 button.btn-success {

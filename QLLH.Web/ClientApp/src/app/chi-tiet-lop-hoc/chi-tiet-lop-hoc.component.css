@@ -1,35 +1,20 @@
-.container {
-    margin-top: 50px;  
+.tableLopHoc {
+    margin: 0 20px 0 20px;
 }
 
 .body {
-    margin-bottom: 50px;
+    margin: 0 auto;
     border: 1px solid #e1e1ea;
-    border-radius: 10px;
-    box-shadow: 18px 20px 60px -9px rgba(0,0,0,0.75);
 }
 
-section#giaoVien tbody tr:first-child {
-    height: 63px;
+.btn-success {
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
 }
 
-.navbar-light {
-    margin-bottom: 30px;
-}
-
-div.listBtn {
-    display: inline;
-    margin-right: 10px;
-}
-
-div.rowBtn {
-    display: inline;
-    margin-right: 10px;
-}
-
-div.themBtn {
-    display: inline;
-    text-align: center;
+.btn-success:hover {
+    color: white;
 }
 
 div.row {
@@ -78,12 +63,13 @@ div.row div.label {
 .tabset > label {
     position: relative;
     display: inline-block;
-    padding: 15px 15px 25px;
+    padding: 15px 15px 15px;
     border: 1px solid transparent;
     border-bottom: 0;
     cursor: pointer;
     font-weight: 600;
     font-size: 20px;
+    margin-top: 10px;
 }
 
 .tabset > label:hover,
@@ -104,7 +90,6 @@ div.row div.label {
 }
   
 .tab-panel {
-    padding: 30px 0;
     border-top: 1px solid #ccc;
 }
   
@@ -116,9 +101,4 @@ div.row div.label {
   
 body {
     padding: 30px;
-}
-
-.tabset {
-    max-width: 65em;
-    margin-left: 20px;
 }

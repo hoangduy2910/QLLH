@@ -1,5 +1,5 @@
 <div class="body">
-  <div class="container">
+  <div class="tableLopHoc">
     <div class="tabset">
       <!-- Tab 1 -->
       <input type="radio" name="tabset" id="tab1" aria-controls="marzen" checked>
@@ -10,88 +10,38 @@
       
       <div class="tab-panels">
         <section id="giaoVien" class="tab-panel">
-          <nav class="navbar navbar-light bg-light">
-            <div class="nav">
-              <div class="listBtn">
-                <a class="btn btn-outline-dark" href="javascript:window.location.href=window.location.href">
-                  <i class="fa fa-book" aria-hidden="true"></i> Danh sách
-                </a>
-              </div>
-              <div class="rowBtn">
-                <div class="btn-group dropright">
-                  <button id="row" type="button" class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    {{ size }}
-                  </button>
-                  <div class="dropdown-menu">
-                    <a class="dropdown-item" *ngFor="let r of listRowGiaoVien" (click)="chonSoDongHienThiGiaoVien(r.row)">{{ r.row }}</a>
-                  </div>
-                </div>
-              </div>
-              <div class="themBtn">
-                <button type="button" class="btn btn-outline-primary" (click)="openModalAddGiaoVien()">
-                  <i class="fa fa-plus-square-o fa-lg" aria-hidden="true"></i> Thêm giáo viên 
-                </button>
-              </div>
-            </div>
-          </nav>
           <table class="table">
             <thead>
               <tr>
-                <th scope="col">Mã giáo viên</th>
-                <th scope="col">Tên giáo viên</th>
-                <th scope="col">Môn giảng dạy</th>
-                <th scope="col">Giới tính</th>        
-                <th scope="col">Số điện thoại</th>
+                <th scope="col">Mã môn học</th>
+                <th scope="col">Môn học</th>
+                <th scope="col">Giáo viên bộ môn</th>
                 <th scope="col">Hành động</th>
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let gv of listGiaoVien.data; index as i">
-                <td>{{ gv.maGv }}</td>
-                <td>{{ gv.tenGv }}</td>
-                <td>{{ gv.tenMh }}</td>
-                <td>{{ gv.gioiTinh }}</td>
-                <td>{{ gv.soDt }}</td>
+              <tr *ngFor="let mh of listMonHoc" [ngStyle]="{'display': mh.maMh != 1 ? '' : 'none'}">
+                <td>{{ mh.maMh }}</td>
+                <td>{{ mh.tenMh }}</td>
                 <td>
-                  <a class="btn btn-danger" (click)="openModalDeleteGiaoVien(i)" dis [ngStyle]="{'display': gv.maLop == maLop ? 'none' : ''}">
-                    <i class="fa fa-trash-o" aria-hidden="true"></i>
+                  <select class="form-control" id="giaoVienBoMon{{ mh.maMh }}">
+                    <option></option>
+                    <option 
+                      *ngFor="let gv of listGiaoVien" 
+                      [ngStyle]="{'display': gv.maMh == mh.maMh ? 'block' : 'none'}"
+                      value="{{ gv.maGv }}">{{ gv.tenGv }}</option>
+                  </select>
+                </td>
+                <td>
+                  <a class="btn btn-success" (click)="openModalUpdateGiaoVien(mh.maMh)">
+                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                   </a>
                 </td>
               </tr>
             </tbody>
           </table>
-          <!-- Pagination -->
-          <div class="pagination-bar">
-            <nav aria-label="Page navigation example">
-              <ul class="pagination">
-                <li class="page-item"><a class="page-link" href="javascript:void(0)" (click)="danhSachGiaoVienTheoLopTruoc()">Trước</a></li>
-                <li class="page-item"><a class="page-link" href="javascript:void(0)">{{ listGiaoVien.page }}</a></li>
-                <li class="page-item"><a class="page-link" href="javascript:void(0)" (click)="danhSachGiaoVienTheoLopSau()">Sau</a></li>
-              </ul>
-            </nav>
-          </div>
-          <!-- End Pagination -->
         </section>
         <section id="hocSinh" class="tab-panel">
-          <nav class="navbar navbar-light bg-light">
-            <div class="nav">
-              <div class="listBtn">
-                <a class="btn btn-outline-dark" href="javascript:window.location.href=window.location.href">
-                  <i class="fa fa-book" aria-hidden="true"></i> Danh sách
-                </a>
-              </div>
-              <div class="rowBtn">
-                <div class="btn-group dropright">
-                  <button id="row" type="button" class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    {{ size }}
-                  </button>
-                  <div class="dropdown-menu">
-                    <a class="dropdown-item" *ngFor="let r of listRowHocSinh" (click)="chonSoDongHienThiHocSinh(r.row)">{{ r.row }}</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </nav>
           <table class="table">
             <thead>
               <tr>
@@ -133,58 +83,22 @@
   </div>
 </div>
 
-<!-- Modal Add Giao Vien -->
-<div class="modal fade" id="modalAddGiaoVien" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Thêm giáo viên bộ môn của lớp</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class="row">
-          <div class="col-2 label">Tên môn học</div>
-          <div class="col-4">
-            <select class="form-control" id="monHoc" (change)="chonGiaoVienTheoMonHoc()">
-              <option></option>
-              <option class="option-item" *ngFor="let mh of listMonHoc" value="{{ mh.maMh }}">{{ mh.tenMh }}</option>
-            </select>
-          </div>
-          <div class="col-2 label">Tên giáo viên</div>
-          <div class="col-4">
-            <select class="form-control" id="giaoVien" [(ngModel)]="giaoVienLop.maGv">
-              <option class="option-item" *ngFor="let gv of listGVTheoMH" [ngValue]="gv.maGv">{{ gv.tenGv }}</option>
-            </select>
-          </div>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-        <button id="deleteBtn" type="button" class="btn btn-primary" (click)="themGiaoVien()">Thêm</button>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- End Modal -->
-
-<!-- Modal Delete Giao Vien -->
-<div class="modal fade" id="modalDeleteGiaoVien" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- Modal Update Giao Vien Bo Mon -->
+<div class="modal fade" id="modalUpdateGiaoVien" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Xóa giáo viên</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Cập nhật giáo viên bộ môn</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        Bạn có muốn xóa giáo viên ra khỏi lớp này không ?
+        Bạn có muốn cập nhật giáo viên bộ môn của lớp này không ?
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-        <button id="deleteBtnGiaoVien" type="button" class="btn btn-danger">Xóa</button>
+        <button id="capNhatBtnGiaoVien" type="button" class="btn btn-success" style="margin-left: 0;">Cập nhật</button>
       </div>
     </div>
   </div>

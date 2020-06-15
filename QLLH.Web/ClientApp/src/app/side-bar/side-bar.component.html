@@ -1,0 +1,28 @@
+<nav id="sidebar">
+    <div class="img bg-wrap text-center py-4">
+    </div>
+    <ul class="list-unstyled components mb-5">
+        <li>
+            <a [routerLink]="['/quan-ly-giao-vien']"><i class="fa fa-user mr-3"></i>Quản lý giáo viên</a>
+        </li>
+        <li>
+            <a [routerLink]="['/quan-ly-hoc-sinh']"><i class="fa fa-users mr-3"></i>Quản lý học sinh</a>
+        </li>
+        <li>
+            <a [routerLink]="['/quan-ly-lop-hoc']"><i class="fa fa-university mr-3" aria-hidden="true"></i>Quản lý lớp học</a>
+        </li>
+        <li class="menuTKB">
+            <a><i class="fa fa-calendar mr-3" aria-hidden="true"></i>Quản lý thời khóa biểu</a>
+            <div class="subMenuTKB">
+                <ul>
+                    <li>
+                        <a [routerLink]="['/quan-ly-tkb-theo-lop']">Theo lớp</a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['/quan-ly-tkb-theo-giao-vien']">Theo giáo viên</a>
+                    </li>
+                </ul>
+            </div>
+        </li>
+    </ul>
+</nav>

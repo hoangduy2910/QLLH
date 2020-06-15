@@ -1,21 +1,11 @@
 <div class="body">
-    <div class="container">
+    <div>
       <nav class="navbar navbar-light bg-light">
         <div class="navGiaoVien">
           <div class="listGiaoVienBtn">
             <a class="btn btn-outline-dark" href="javascript:window.location.href=window.location.href">
-              <i class="fa fa-book" aria-hidden="true"></i> Danh sách
+              <i class="fa fa-book" aria-hidden="true"></i> Thời khóa biểu giáo viên
             </a>
-          </div>
-          <div class="rowBtn">
-            <div class="btn-group dropright">
-              <button id="row" type="button" class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                {{ size }}
-              </button>
-              <div class="dropdown-menu">
-                <a class="dropdown-item" *ngFor="let r of listRow" (click)="chonSoDongHienThi(r.row)">{{ r.row }}</a>
-              </div>
-            </div>
           </div>
           <div class="dropdownLopBtn">
             <div class="btn-group dropright">
@@ -23,7 +13,10 @@
                 Môn học
               </button>
               <div class="dropdown-menu">
-                <a class="dropdown-item" *ngFor="let mh of listMonHoc" (click)="timKiemGiaoVienTheoMonHoc(1, mh.tenMh)">{{ mh.tenMh }}</a>
+                <a class="dropdown-item" 
+                  *ngFor="let mh of listMonHoc" 
+                  (click)="timKiemGiaoVienTheoMonHoc(1, mh.tenMh)"
+                  [ngStyle]="{'display': mh.maMh != 1 ? 'block' : 'none'}">{{ mh.tenMh }}</a>
               </div>
             </div>
           </div>
@@ -36,7 +29,7 @@
         </form>
       </nav>
     </div>
-    <div class="container">
+    <div class="tableTKBTheoGiaoVien">
         <table class="table">
             <thead>
               <tr>
@@ -50,7 +43,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let gv of listGiaoVien.data; index as i">
+              <tr *ngFor="let gv of listGiaoVien.data; index as i" [ngStyle]="{'display': gv.maGv != 1 ? '' : 'none'}">
                 <td>{{ gv.maGv }}</td>
                 <td>{{ gv.tenGv }}</td>
                 <td>{{ gv.tenMh }}</td>

@@ -32,3 +32,4 @@ C:\Users\TiDK\Desktop\QLLopHoc\QLLH.Common\obj\Debug\netcoreapp3.1\QLLH.Common.A
 C:\Users\TiDK\Desktop\QLLopHoc\QLLH.Common\obj\Debug\netcoreapp3.1\QLLH.Common.dll
 C:\Users\TiDK\Desktop\QLLopHoc\QLLH.Common\obj\Debug\netcoreapp3.1\QLLH.Common.pdb
 C:\Users\TiDK\Desktop\QLLopHoc\QLLH.Common\obj\Debug\netcoreapp3.1\QLLH.Common.genruntimeconfig.cache
+C:\Users\TiDK\Desktop\QLLH\QLLH.Common\obj\Debug\netcoreapp3.1\QLLH.Common.csprojAssemblyReference.cache

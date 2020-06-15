@@ -8,7 +8,7 @@ declare var $: any;
   styleUrls: ['./quan-ly-tkb-theo-lop.component.css']
 })
 export class QuanLyTkbTheoLopComponent {
-  size: number = 5;
+  size: number = 10;
 
   listLop: any = {
     data: [],

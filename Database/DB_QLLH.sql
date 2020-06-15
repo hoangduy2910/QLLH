@@ -3,25 +3,6 @@ go
 use QuanLyLopHoc;
 go
 
---- Quan tri ---
-create table QuanTri (
-	MaQT int identity(1,1) primary key,
-	TenQT nvarchar(50),
-	NgaySinh date,
-	GioiTinh nvarchar(5),
-	DiaChi nvarchar(100),
-	SoDT nvarchar(20),
-);
-
-create proc ThemQuanTri @TenQuanTri nvarchar(50), @NgaySinh date, @GioiTinh nvarchar(5), @DiaChi nvarchar(100), @SoDT nvarchar(20)
-as
-insert into QuanTri (TenQuanTri, NgaySinh, GioiTinh, DiaChi, SoDT)
-values (@TenQuanTri, @NgaySinh, @GioiTinh, @DiaChi, @SoDT)
-
-exec ThemQuanTri N'Phạm Thanh Hải', '22/04/1978', N'Nam', N'Hồ Chí Minh', '0976575475'
-exec ThemQuanTri N'Nguyễn Thị Minh Hiếu', '20/08/1967', N'Nam', N'Hồ Chí Minh', '0907856599'
-
-
 --- Chuc vu ---
 create table ChucVu (
 	MaCV int identity(1,1),
@@ -123,6 +104,7 @@ as
 insert into MonHoc(TenMH)
 values (@TenMH)
 go
+exec ThemMonHoc N''
 exec ThemMonHoc N'Toán học'
 exec ThemMonHoc N'Vật lý'
 exec ThemMonHoc N'Hóa học'
@@ -160,31 +142,31 @@ insert into GiaoVien (TenGV, MaMH, MaLop, NgaySinh, GioiTinh, DiaChi, SoDT, MaCV
 values (@TenGV, @MaMH, @MaLop, @NgaySinh, @GioiTinh, @DiaChi, @SoDT, @MaCV)
 go
 exec ThemGiaoVien N'Chưa chỉ định', null, null, null, null, null, null, null
-exec ThemGiaoVien N'Phan Thị Minh', 1, 2, '1965-01-20', N'Nam', N'Hồ Chí Minh', '0914684595', 2
-exec ThemGiaoVien N'Huỳnh Văn Nhứt', 2, 3, '1965-01-20', N'Nam', N'Hồ Chí Minh', '0914113578', 2
-exec ThemGiaoVien N'Trần Thanh An', 3, 4, '1965-01-20', N'Nữ', N'Hồ Chí Minh', '0914189898', 2
-exec ThemGiaoVien N'Trần Thị Thanh Hảo', 4, 5, '1965-01-20', N'Nữ', N'Hồ Chí Minh', '0914560298', 2
-exec ThemGiaoVien N'Ngô Thị Thu An', 5, 6, '1965-01-20', N'Nữ', N'Hồ Chí Minh', '0944929638', 2
-exec ThemGiaoVien N'Nguyễn Vĩnh Bảo', 6, 7, '1965-01-20', N'Nam', N'Hồ Chí Minh', '0983052703', 2
-exec ThemGiaoVien N'Lê Thị Bích', 7, 8, '1965-01-20', N'Nữ', N'Hồ Chí Minh', '0917550153', 2
-exec ThemGiaoVien N'Nguyễn Thị Chi', 8, 9, '1965-01-20', N'Nữ', N'Hồ Chí Minh', '0919316165', 2
-exec ThemGiaoVien N'Trương Quang Chính', 9, 10, '1965-01-20', N'Nam', N'Hồ Chí Minh', '0986787750', 2
-exec ThemGiaoVien N'Đinh Thị Quỳnh Dao', 10, 11, '1965-01-20', N'Nữ', N'Hồ Chí Minh', '0986625682', 2
-exec ThemGiaoVien N'Nguyễn Thị Thuỳ Dương',	11, 12, '1976-02-12', N'Nữ', N'Hồ Chí Minh', '0912739924', 2	
-exec ThemGiaoVien N'Nguyễn Văn Hùng', 12, 13, '1965-01-09', N'Nam', N'Hồ Chí Minh', '0912739924', 2	
+exec ThemGiaoVien N'Phan Thị Minh', 2, 2, '1965-01-20', N'Nam', N'Hồ Chí Minh', '0914684595', 2
+exec ThemGiaoVien N'Huỳnh Văn Nhứt', 3, 3, '1965-01-20', N'Nam', N'Hồ Chí Minh', '0914113578', 2
+exec ThemGiaoVien N'Trần Thanh An', 4, 4, '1965-01-20', N'Nữ', N'Hồ Chí Minh', '0914189898', 2
+exec ThemGiaoVien N'Trần Thị Thanh Hảo', 5, 5, '1965-01-20', N'Nữ', N'Hồ Chí Minh', '0914560298', 2
+exec ThemGiaoVien N'Ngô Thị Thu An', 6, 6, '1965-01-20', N'Nữ', N'Hồ Chí Minh', '0944929638', 2
+exec ThemGiaoVien N'Nguyễn Vĩnh Bảo', 7, 7, '1965-01-20', N'Nam', N'Hồ Chí Minh', '0983052703', 2
+exec ThemGiaoVien N'Lê Thị Bích', 8, 8, '1965-01-20', N'Nữ', N'Hồ Chí Minh', '0917550153', 2
+exec ThemGiaoVien N'Nguyễn Thị Chi', 9, 9, '1965-01-20', N'Nữ', N'Hồ Chí Minh', '0919316165', 2
+exec ThemGiaoVien N'Trương Quang Chính', 10, 10, '1965-01-20', N'Nam', N'Hồ Chí Minh', '0986787750', 2
+exec ThemGiaoVien N'Đinh Thị Quỳnh Dao', 11, 11, '1965-01-20', N'Nữ', N'Hồ Chí Minh', '0986625682', 2
+exec ThemGiaoVien N'Nguyễn Thị Thuỳ Dương',	12, 12, '1976-02-12', N'Nữ', N'Hồ Chí Minh', '0912739924', 2	
+exec ThemGiaoVien N'Nguyễn Văn Hùng', 13, 13, '1965-01-09', N'Nam', N'Hồ Chí Minh', '0912739924', 2	
 
-exec ThemGiaoVien N'Đoàn Thi Đương', 1, 14, '1976-02-12', N'Nữ', N'Hồ Chí Minh', '01694897447', 2
-exec ThemGiaoVien N'Hồ Thị Quỳnh Giang', 2, 15, '1976-02-12', N'Nữ', N'Hồ Chí Minh', '0935062406', 2
-exec ThemGiaoVien N'Mai Thị Thu Hà', 3, 16, '1976-02-12', N'Nữ', N'Hồ Chí Minh', '0984812427', 2
-exec ThemGiaoVien N'Nguyễn Thị Thu Hà',	4, 1, '1976-02-12', N'Nữ', N'Hồ Chí Minh', '0935800308', 2
-exec ThemGiaoVien N'Phạm Thanh Hải', 5, 1, '1976-02-12', N'Nam', N'Hồ Chí Minh', '0984390360', 2
-exec ThemGiaoVien N'Nguyễn Thị Bích Hạnh', 6, 1, '1976-02-12', N'Nữ', N'Hồ Chí Minh', '0944129625', 2
-exec ThemGiaoVien N'Nguyễn Thị Ái Hằng', 7, 1, '1976-02-12', N'Nữ', N'Hồ Chí Minh', '0975833679', 2
-exec ThemGiaoVien N'Võ Thị Minh Hiền', 8, 1, '1976-02-12', N'Nữ', N'Hồ Chí Minh', '01225120523', 2
-exec ThemGiaoVien N'Nguyễn Thuỳ Nữ Hiệp', 9, 1, '1976-02-12', N'Nữ', N'Hồ Chí Minh', '0905171005', 2
-exec ThemGiaoVien N'Nguyễn Thị Minh Hiếu', 10, 1, '1976-02-12', N'Nam', N'Hồ Chí Minh', '0907856599', 2
-exec ThemGiaoVien N'Đoàn Nhân Hoàng', 11, 1, '1976-02-12', N'Nam', N'Hồ Chí Minh', '0935076113', 2
-exec ThemGiaoVien N'Hoàng Công Huy', 12, 1, '1976-03-12', N'Nam', N'Hồ Chí Minh', '0912739924', 2	
+exec ThemGiaoVien N'Đoàn Thi Đương', 2, 14, '1976-02-12', N'Nữ', N'Hồ Chí Minh', '01694897447', 2
+exec ThemGiaoVien N'Hồ Thị Quỳnh Giang', 3, 15, '1976-02-12', N'Nữ', N'Hồ Chí Minh', '0935062406', 2
+exec ThemGiaoVien N'Mai Thị Thu Hà', 4, 16, '1976-02-12', N'Nữ', N'Hồ Chí Minh', '0984812427', 2
+exec ThemGiaoVien N'Nguyễn Thị Thu Hà',	5, 1, '1976-02-12', N'Nữ', N'Hồ Chí Minh', '0935800308', 2
+exec ThemGiaoVien N'Phạm Thanh Hải', 6, 1, '1976-02-12', N'Nam', N'Hồ Chí Minh', '0984390360', 2
+exec ThemGiaoVien N'Nguyễn Thị Bích Hạnh', 7, 1, '1976-02-12', N'Nữ', N'Hồ Chí Minh', '0944129625', 2
+exec ThemGiaoVien N'Nguyễn Thị Ái Hằng', 8, 1, '1976-02-12', N'Nữ', N'Hồ Chí Minh', '0975833679', 2
+exec ThemGiaoVien N'Võ Thị Minh Hiền', 9, 1, '1976-02-12', N'Nữ', N'Hồ Chí Minh', '01225120523', 2
+exec ThemGiaoVien N'Nguyễn Thuỳ Nữ Hiệp', 10, 1, '1976-02-12', N'Nữ', N'Hồ Chí Minh', '0905171005', 2
+exec ThemGiaoVien N'Nguyễn Thị Minh Hiếu', 11, 1, '1976-02-12', N'Nam', N'Hồ Chí Minh', '0907856599', 2
+exec ThemGiaoVien N'Đoàn Nhân Hoàng', 12, 1, '1976-02-12', N'Nam', N'Hồ Chí Minh', '0935076113', 2
+exec ThemGiaoVien N'Hoàng Công Huy', 13, 1, '1976-03-12', N'Nam', N'Hồ Chí Minh', '0912739924', 2	
 go
 
 --- Hoc sinh ---
@@ -313,6 +295,23 @@ as
 insert into GiaoVienLop (MaGV, MaLop)
 values (@MaGV, @MaLop)
 go
+exec ThemGiaoVienLop 1, 2
+exec ThemGiaoVienLop 1, 3
+exec ThemGiaoVienLop 1, 4
+exec ThemGiaoVienLop 1, 5
+exec ThemGiaoVienLop 1, 6
+exec ThemGiaoVienLop 1, 7
+exec ThemGiaoVienLop 1, 8
+exec ThemGiaoVienLop 1, 9
+exec ThemGiaoVienLop 1, 10
+exec ThemGiaoVienLop 1, 11
+exec ThemGiaoVienLop 1, 12
+exec ThemGiaoVienLop 1, 13
+exec ThemGiaoVienLop 1, 14
+exec ThemGiaoVienLop 1, 15
+exec ThemGiaoVienLop 1, 16
+
+exec ThemGiaoVienLop 1, 2
 exec ThemGiaoVienLop 2, 2
 exec ThemGiaoVienLop 3, 2
 exec ThemGiaoVienLop 4, 2
@@ -353,48 +352,95 @@ go
 exec ThemThoiKhoaBieu ngay, tiet, 
 						mon, gv, lop 
 */
-exec ThemThoiKhoaBieu 1, 1, 1, 2, 2
-exec ThemThoiKhoaBieu 1, 2, 9, 10, 2
-exec ThemThoiKhoaBieu 1, 3, 8, 9, 2
-exec ThemThoiKhoaBieu 1, 4, 6, 7, 2
-exec ThemThoiKhoaBieu 1, 5, 2, 3, 2
-exec ThemThoiKhoaBieu 1, 6, 3, 4, 2
-exec ThemThoiKhoaBieu 1, 7, 3, 4, 2
-exec ThemThoiKhoaBieu 1, 8, 9, 10, 2
-exec ThemThoiKhoaBieu 1, 9, 9, 10, 2
 
-exec ThemThoiKhoaBieu 2, 1, 12, 13, 2
-exec ThemThoiKhoaBieu 2, 2, 2, 3, 2
-exec ThemThoiKhoaBieu 2, 3, 3, 4, 2
-exec ThemThoiKhoaBieu 2, 4, 1, 2, 2
-exec ThemThoiKhoaBieu 2, 5, 1, 2, 2
+/* Khoi tao TKB 10A1 */
+exec ThemThoiKhoaBieu 1, 1, 2, 2, 2
+exec ThemThoiKhoaBieu 1, 2, 10, 10, 2
+exec ThemThoiKhoaBieu 1, 3, 9, 9, 2
+exec ThemThoiKhoaBieu 1, 4, 7, 7, 2
+exec ThemThoiKhoaBieu 1, 5, 3, 3, 2
+exec ThemThoiKhoaBieu 1, 6, 4, 4, 2
+exec ThemThoiKhoaBieu 1, 7, 4, 4, 2
+exec ThemThoiKhoaBieu 1, 8, 10, 10, 2
+exec ThemThoiKhoaBieu 1, 9, 10, 10, 2
+exec ThemThoiKhoaBieu 1, 10, 1, 1, 2
 
-exec ThemThoiKhoaBieu 3, 1, 12, 13, 2
-exec ThemThoiKhoaBieu 3, 2, 9, 10, 2
-exec ThemThoiKhoaBieu 3, 3, 9, 10, 2
-exec ThemThoiKhoaBieu 3, 4, 7, 8, 2
-exec ThemThoiKhoaBieu 3, 5, 4, 5, 2
-exec ThemThoiKhoaBieu 3, 6, 1, 2, 2
-exec ThemThoiKhoaBieu 3, 7, 1, 2, 2
+exec ThemThoiKhoaBieu 2, 1, 13, 13, 2
+exec ThemThoiKhoaBieu 2, 2, 3, 3, 2
+exec ThemThoiKhoaBieu 2, 3, 4, 4, 2
+exec ThemThoiKhoaBieu 2, 4, 2, 2, 2
+exec ThemThoiKhoaBieu 2, 5, 2, 2, 2
+exec ThemThoiKhoaBieu 2, 6, 1, 1, 2
+exec ThemThoiKhoaBieu 2, 7, 1, 1, 2
+exec ThemThoiKhoaBieu 2, 8, 1, 1, 2
+exec ThemThoiKhoaBieu 2, 9, 1, 1, 2
+exec ThemThoiKhoaBieu 2, 10, 1, 1, 2
 
-exec ThemThoiKhoaBieu 4, 1, 7, 8, 2
-exec ThemThoiKhoaBieu 4, 2, 7, 8, 2
-exec ThemThoiKhoaBieu 4, 3, 5, 6, 2
-exec ThemThoiKhoaBieu 4, 4, 1, 2, 2
-exec ThemThoiKhoaBieu 4, 5, 1, 2, 2
+exec ThemThoiKhoaBieu 3, 1, 13, 13, 2
+exec ThemThoiKhoaBieu 3, 2, 10, 10, 2
+exec ThemThoiKhoaBieu 3, 3, 10, 10, 2
+exec ThemThoiKhoaBieu 3, 4, 8, 8, 2
+exec ThemThoiKhoaBieu 3, 5, 5, 5, 2
+exec ThemThoiKhoaBieu 3, 6, 2, 2, 2
+exec ThemThoiKhoaBieu 3, 7, 2, 2, 2
+exec ThemThoiKhoaBieu 3, 8, 1, 1, 2
+exec ThemThoiKhoaBieu 3, 9, 1, 1, 2
+exec ThemThoiKhoaBieu 3, 10, 1, 1, 2
 
-exec ThemThoiKhoaBieu 5, 1, 6, 7, 2
-exec ThemThoiKhoaBieu 5, 2, 5, 6, 2
-exec ThemThoiKhoaBieu 5, 3, 2, 3, 2
-exec ThemThoiKhoaBieu 5, 4, 3, 4, 2
-exec ThemThoiKhoaBieu 5, 5, 3, 4, 2
-exec ThemThoiKhoaBieu 5, 6, 2, 3, 2
-exec ThemThoiKhoaBieu 5, 7, 2, 3, 2
-exec ThemThoiKhoaBieu 5, 8, 7, 8, 2
-exec ThemThoiKhoaBieu 5, 9, 7, 8, 2
+exec ThemThoiKhoaBieu 4, 1, 8, 8, 2
+exec ThemThoiKhoaBieu 4, 2, 8, 8, 2
+exec ThemThoiKhoaBieu 4, 3, 6, 6, 2
+exec ThemThoiKhoaBieu 4, 4, 2, 2, 2
+exec ThemThoiKhoaBieu 4, 5, 2, 2, 2
+exec ThemThoiKhoaBieu 4, 6, 1, 1, 2
+exec ThemThoiKhoaBieu 4, 7, 1, 1, 2
+exec ThemThoiKhoaBieu 4, 8, 1, 1, 2
+exec ThemThoiKhoaBieu 4, 9, 1, 1, 2
+exec ThemThoiKhoaBieu 4, 10, 1, 1, 2
 
-exec ThemThoiKhoaBieu 6, 1, 10, 11, 2
-exec ThemThoiKhoaBieu 6, 2, 10, 11, 2
-exec ThemThoiKhoaBieu 6, 3, 11, 12, 2
-exec ThemThoiKhoaBieu 6, 4, 11, 12, 2
+exec ThemThoiKhoaBieu 5, 1, 7, 7, 2
+exec ThemThoiKhoaBieu 5, 2, 6, 6, 2
+exec ThemThoiKhoaBieu 5, 3, 3, 3, 2
+exec ThemThoiKhoaBieu 5, 4, 4, 4, 2
+exec ThemThoiKhoaBieu 5, 5, 4, 4, 2
+exec ThemThoiKhoaBieu 5, 6, 3, 3, 2
+exec ThemThoiKhoaBieu 5, 7, 3, 3, 2
+exec ThemThoiKhoaBieu 5, 8, 8, 8, 2
+exec ThemThoiKhoaBieu 5, 9, 8, 8, 2
+exec ThemThoiKhoaBieu 5, 10, 1, 1, 2
+
+exec ThemThoiKhoaBieu 6, 1, 11, 11, 2
+exec ThemThoiKhoaBieu 6, 2, 11, 11, 2
+exec ThemThoiKhoaBieu 6, 3, 12, 12, 2
+exec ThemThoiKhoaBieu 6, 4, 12, 12, 2
+exec ThemThoiKhoaBieu 6, 5, 1, 1, 2
+exec ThemThoiKhoaBieu 6, 6, 1, 1, 2
+exec ThemThoiKhoaBieu 6, 7, 1, 1, 2
+exec ThemThoiKhoaBieu 6, 8, 1, 1, 2
+exec ThemThoiKhoaBieu 6, 9, 1, 1, 2
+exec ThemThoiKhoaBieu 6, 10, 1, 1, 2
 go
+/* End */
+
+/* Khoi tao TKB 10A2 -> 12A5 */
+declare @k int = 3;
+declare @i int = 1;
+declare @j int = 1;
+
+while @k <= 16
+begin
+	while @i <= 6
+	begin
+		while @j <= 10
+		begin
+			exec ThemThoiKhoaBieu @i, @j, 1, 1, @k
+			set @j = @j + 1;
+		end
+		set @j = 1;
+		set @i = @i + 1;
+	end
+	set @i = 1;
+	set @k = @k + 1;
+end
+go
+/* End */

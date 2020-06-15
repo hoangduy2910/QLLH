@@ -45,10 +45,59 @@ namespace QLLH.BLL
             }).Where(tkb => tkb.MaGv == MaGv).ToList();
             return listTKB;
         }
+
+        public object getThoiKhoaBieuTheoTietNgayLop(TietNgayLopReq req)
+        {
+            var tKB = All.Where(
+                tkb => tkb.MaTiet == req.MaTiet &&
+                tkb.MaNgay == req.MaNgay &&
+                tkb.MaLop == req.MaLop
+            ).FirstOrDefault();
+            return tKB;
+        }
+
         public object getAllThoiKhoaBieu()
         {
             var listTKB = All;
             return listTKB;
+        }
+
+        public SingleRsp createThoiKhoaBieu(ThoiKhoaBieuReq tkb)
+        {
+            var res = new SingleRsp();
+            ThoiKhoaBieu newTKB = new ThoiKhoaBieu();
+            newTKB.MaTkb = tkb.MaTkb;
+            newTKB.MaNgay = tkb.MaNgay;
+            newTKB.MaTiet = tkb.MaTiet;
+            newTKB.MaMh = tkb.MaMh;
+            newTKB.MaGv = tkb.MaGv;
+            newTKB.MaLop = tkb.MaLop;
+
+            res = _rep.CreateThoiKhoaBieu(newTKB);
+            return res;
+        }
+
+        public SingleRsp updateThoiKhoaBieu(ThoiKhoaBieuReq tkb)
+        {
+            var res = new SingleRsp();
+            ThoiKhoaBieu newTKB = new ThoiKhoaBieu();
+            newTKB.MaTkb = tkb.MaTkb;
+            newTKB.MaNgay = tkb.MaNgay;
+            newTKB.MaTiet = tkb.MaTiet;
+            newTKB.MaMh = tkb.MaMh;
+            newTKB.MaGv = tkb.MaGv;
+            newTKB.MaLop = tkb.MaLop;
+
+            res = _rep.UpdateThoiKhoaBieu(newTKB);
+            return res;
+        }
+
+        public SingleRsp removeThoiKhoaBieu(int id)
+        {
+            var res = new SingleRsp();
+            var tkb = All.FirstOrDefault(tkb => tkb.MaTkb == id);
+            res = _rep.RemoveThoiKhoaBieu(tkb);
+            return res;
         }
     }
 }

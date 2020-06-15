@@ -12,17 +12,10 @@ export class QuanLyGiaoVienComponent {
   isSearch: boolean = false;
   isSearchBySubject: boolean = false;
   isEdit: boolean = false;
-  size: number = 5;
+  size: number = 10;
   listMonHoc: any;
   listLop: any;
   tenMH: any;
-
-  listRow: any = [
-    { row: 5 },
-    { row: 10 },
-    { row: 15 },
-    { row: 20 }
-  ];
 
   listGiaoVien: any = {
     data: [],
@@ -175,13 +168,6 @@ export class QuanLyGiaoVienComponent {
         alert(res.message);
       }
     }, error => console.error(error));
-  }
-
-  chonSoDongHienThi(row) {
-    this.size = row;
-    this.danhSachGiaoVien(1);
-    this.isSearchBySubject = false;
-    (<HTMLInputElement>document.getElementById("tenMonHoc")).textContent = "Môn học";
   }
 
   kiemTraThemGiaoVien() {
