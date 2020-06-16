@@ -48,7 +48,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let gv of listGiaoVien.data; index as i">
+          <tr *ngFor="let gv of listGiaoVien.data; index as i" [ngStyle]="{'display': gv.maGv != 1 ? '' : 'none'}">
             <td>{{ gv.maGv }}</td>
             <td>{{ gv.tenGv }}</td>
             <td>{{ gv.tenMh }}</td>

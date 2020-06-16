@@ -41,6 +41,7 @@ import { ChiTietTkbTheoGiaoVienComponent } from './chi-tiet-tkb-theo-giao-vien/c
     FontAwesomeModule,
     RouterModule.forRoot([
       { path: '', component: QuanLyGiaoVienComponent },
+      { path: 'quan-ly-giao-vien', component: QuanLyGiaoVienComponent },
       { path: 'quan-ly-hoc-sinh', component: QuanLyHocSinhComponent },
       { path: 'quan-ly-lop-hoc', component: QuanLyLopHocComponent },
       { path: 'quan-ly-tkb-theo-giao-vien', component: QuanLyTkbTheoGiaoVienComponent },

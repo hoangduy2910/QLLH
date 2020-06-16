@@ -13,6 +13,8 @@
           <table class="table">
             <thead>
               <tr>
+                <th scope="col">Mã lớp</th>
+                <th scope="col">Tên lớp</th>
                 <th scope="col">Mã môn học</th>
                 <th scope="col">Môn học</th>
                 <th scope="col">Giáo viên bộ môn</th>
@@ -21,6 +23,8 @@
             </thead>
             <tbody>
               <tr *ngFor="let mh of listMonHoc" [ngStyle]="{'display': mh.maMh != 1 ? '' : 'none'}">
+                <td>{{ lop.maLop }}</td>
+                <td>{{ lop.tenLop }}</td>
                 <td>{{ mh.maMh }}</td>
                 <td>{{ mh.tenMh }}</td>
                 <td>

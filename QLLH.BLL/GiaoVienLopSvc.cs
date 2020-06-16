@@ -49,6 +49,18 @@ namespace QLLH.BLL
             return listGV;
         }
 
+        public object getGiaoVienLopTheoGiaoVien(int MaGv)
+        {
+            var listGV = All.Join(_rep.Context.Lop, a => a.MaLop, c => c.MaLop, (a, c) => new {
+                a.MaGvl,
+                a.MaGv,
+                a.MaLop,
+                c.TenLop
+            }).Where(gv => gv.MaGv == MaGv).ToList();
+
+            return listGV;
+        }
+
         public object getGiaoVienLopTheoMonHocVaLop(GiaoVienMonHocReq req)
         {
             var gv = All.Join(_rep.Context.GiaoVien, a => a.MaGv, c => c.MaGv, (a, c) => new {

@@ -208,27 +208,27 @@ export class ChiTietTkbTheoLopComponent {
           maMh: that.maMh
         };
         that.http.post("https://localhost:44329/api/GiaoVienLop/get-by-subject-and-class", y).subscribe(result => {
-            res = result;
-            if (res.success) {
-              that.giaoVien = res.data;
-              
-              tkbNew = {
-                maTkb: that.tkbOld.maTkb,
-                maNgay: that.tkbOld.maNgay,
-                maTiet: that.tkbOld.maTiet,
-                maMh: that.giaoVien.maMh,
-                maGv: that.giaoVien.maGv,
-                maLop: that.maLop
-              };
-              that.http.post("https://localhost:44329/api/ThoiKhoaBieu/update", tkbNew).subscribe(result => {
-                res = result;
-                if (res.success) {
-                  tkbNew = res.data;
-                  that.hienThiThoiKhoaBieu();
-                }
-              }, error => console.error(error)); 
-            }
-          });
+          res = result;
+          if (res.success) {
+            that.giaoVien = res.data;
+            
+            tkbNew = {
+              maTkb: that.tkbOld.maTkb,
+              maNgay: that.tkbOld.maNgay,
+              maTiet: that.tkbOld.maTiet,
+              maMh: that.giaoVien.maMh,
+              maGv: that.giaoVien.maGv,
+              maLop: that.maLop
+            };
+            that.http.post("https://localhost:44329/api/ThoiKhoaBieu/update", tkbNew).subscribe(result => {
+              res = result;
+              if (res.success) {
+                tkbNew = res.data;
+                that.hienThiThoiKhoaBieu();
+              }
+            }, error => console.error(error)); 
+          }
+        });
       });
     }
     alert("Cập nhật thời khóa biểu thành công !");

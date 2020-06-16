@@ -30,6 +30,15 @@ namespace QLLH.Web.Controllers
             return Ok(res);
         }
 
+        [HttpPost("get-by-teacher")]
+        public IActionResult getGiaoVienLopTheoGiaoVien([FromBody] SimpleReq req)
+        {
+            var res = new SingleRsp();
+            var listGV = _svc.getGiaoVienLopTheoGiaoVien(req.Id);
+            res.Data = listGV;
+            return Ok(res);
+        }
+
         [HttpPost("get-by-subject-and-class")]
         public IActionResult getGiaoVienLopTheoMonHocVaLop([FromBody] GiaoVienMonHocReq req)
         {

@@ -348,82 +348,15 @@ as
 insert into ThoiKhoaBieu (MaNgay, MaTiet, MaMH, MaGV, MaLop)
 values (@MaNgay, @MaTiet, @MaMH, @MaGV, @MaLop)
 go
-/*
-exec ThemThoiKhoaBieu ngay, tiet, 
-						mon, gv, lop 
-*/
-
-/* Khoi tao TKB 10A1 */
-exec ThemThoiKhoaBieu 1, 1, 2, 2, 2
-exec ThemThoiKhoaBieu 1, 2, 10, 10, 2
-exec ThemThoiKhoaBieu 1, 3, 9, 9, 2
-exec ThemThoiKhoaBieu 1, 4, 7, 7, 2
-exec ThemThoiKhoaBieu 1, 5, 3, 3, 2
-exec ThemThoiKhoaBieu 1, 6, 4, 4, 2
-exec ThemThoiKhoaBieu 1, 7, 4, 4, 2
-exec ThemThoiKhoaBieu 1, 8, 10, 10, 2
-exec ThemThoiKhoaBieu 1, 9, 10, 10, 2
-exec ThemThoiKhoaBieu 1, 10, 1, 1, 2
-
-exec ThemThoiKhoaBieu 2, 1, 13, 13, 2
-exec ThemThoiKhoaBieu 2, 2, 3, 3, 2
-exec ThemThoiKhoaBieu 2, 3, 4, 4, 2
-exec ThemThoiKhoaBieu 2, 4, 2, 2, 2
-exec ThemThoiKhoaBieu 2, 5, 2, 2, 2
-exec ThemThoiKhoaBieu 2, 6, 1, 1, 2
-exec ThemThoiKhoaBieu 2, 7, 1, 1, 2
-exec ThemThoiKhoaBieu 2, 8, 1, 1, 2
-exec ThemThoiKhoaBieu 2, 9, 1, 1, 2
-exec ThemThoiKhoaBieu 2, 10, 1, 1, 2
-
-exec ThemThoiKhoaBieu 3, 1, 13, 13, 2
-exec ThemThoiKhoaBieu 3, 2, 10, 10, 2
-exec ThemThoiKhoaBieu 3, 3, 10, 10, 2
-exec ThemThoiKhoaBieu 3, 4, 8, 8, 2
-exec ThemThoiKhoaBieu 3, 5, 5, 5, 2
-exec ThemThoiKhoaBieu 3, 6, 2, 2, 2
-exec ThemThoiKhoaBieu 3, 7, 2, 2, 2
-exec ThemThoiKhoaBieu 3, 8, 1, 1, 2
-exec ThemThoiKhoaBieu 3, 9, 1, 1, 2
-exec ThemThoiKhoaBieu 3, 10, 1, 1, 2
-
-exec ThemThoiKhoaBieu 4, 1, 8, 8, 2
-exec ThemThoiKhoaBieu 4, 2, 8, 8, 2
-exec ThemThoiKhoaBieu 4, 3, 6, 6, 2
-exec ThemThoiKhoaBieu 4, 4, 2, 2, 2
-exec ThemThoiKhoaBieu 4, 5, 2, 2, 2
-exec ThemThoiKhoaBieu 4, 6, 1, 1, 2
-exec ThemThoiKhoaBieu 4, 7, 1, 1, 2
-exec ThemThoiKhoaBieu 4, 8, 1, 1, 2
-exec ThemThoiKhoaBieu 4, 9, 1, 1, 2
-exec ThemThoiKhoaBieu 4, 10, 1, 1, 2
-
-exec ThemThoiKhoaBieu 5, 1, 7, 7, 2
-exec ThemThoiKhoaBieu 5, 2, 6, 6, 2
-exec ThemThoiKhoaBieu 5, 3, 3, 3, 2
-exec ThemThoiKhoaBieu 5, 4, 4, 4, 2
-exec ThemThoiKhoaBieu 5, 5, 4, 4, 2
-exec ThemThoiKhoaBieu 5, 6, 3, 3, 2
-exec ThemThoiKhoaBieu 5, 7, 3, 3, 2
-exec ThemThoiKhoaBieu 5, 8, 8, 8, 2
-exec ThemThoiKhoaBieu 5, 9, 8, 8, 2
-exec ThemThoiKhoaBieu 5, 10, 1, 1, 2
-
-exec ThemThoiKhoaBieu 6, 1, 11, 11, 2
-exec ThemThoiKhoaBieu 6, 2, 11, 11, 2
-exec ThemThoiKhoaBieu 6, 3, 12, 12, 2
-exec ThemThoiKhoaBieu 6, 4, 12, 12, 2
-exec ThemThoiKhoaBieu 6, 5, 1, 1, 2
-exec ThemThoiKhoaBieu 6, 6, 1, 1, 2
-exec ThemThoiKhoaBieu 6, 7, 1, 1, 2
-exec ThemThoiKhoaBieu 6, 8, 1, 1, 2
-exec ThemThoiKhoaBieu 6, 9, 1, 1, 2
-exec ThemThoiKhoaBieu 6, 10, 1, 1, 2
+create proc CapNhatThoiKhoaBieu @MaTKB int, @MaNgay int, @MaTiet int, @MaMH int, @MaGV int, @MaLop int
+as
+update ThoiKhoaBieu
+set MaNgay = @MaNgay, MaTiet = @MaTiet, MaMH = @MaMH, MaGV = @MaGV, MaLop = @MaLop
+where MaTKB = @MaTKB
 go
-/* End */
 
-/* Khoi tao TKB 10A2 -> 12A5 */
-declare @k int = 3;
+/* Khoi tao TKB 10A1 -> 12A5 */
+declare @k int = 1;
 declare @i int = 1;
 declare @j int = 1;
 
@@ -442,5 +375,74 @@ begin
 	set @i = 1;
 	set @k = @k + 1;
 end
+go
+/* End */
+
+/* Cap nhat TKB 10A1 */
+exec CapNhatThoiKhoaBieu 61, 1, 1, 2, 2, 2
+exec CapNhatThoiKhoaBieu 62, 1, 2, 10, 10, 2
+exec CapNhatThoiKhoaBieu 63, 1, 3, 9, 9, 2
+exec CapNhatThoiKhoaBieu 64, 1, 4, 7, 7, 2
+exec CapNhatThoiKhoaBieu 65, 1, 5, 3, 3, 2
+exec CapNhatThoiKhoaBieu 66, 1, 6, 4, 4, 2
+exec CapNhatThoiKhoaBieu 67, 1, 7, 4, 4, 2
+exec CapNhatThoiKhoaBieu 68, 1, 8, 10, 10, 2
+exec CapNhatThoiKhoaBieu 69, 1, 9, 10, 10, 2
+exec CapNhatThoiKhoaBieu 70, 1, 10, 1, 1, 2
+
+exec CapNhatThoiKhoaBieu 71, 2, 1, 13, 13, 2
+exec CapNhatThoiKhoaBieu 72, 2, 2, 3, 3, 2
+exec CapNhatThoiKhoaBieu 73, 2, 3, 4, 4, 2
+exec CapNhatThoiKhoaBieu 74, 2, 4, 2, 2, 2
+exec CapNhatThoiKhoaBieu 75, 2, 5, 2, 2, 2
+exec CapNhatThoiKhoaBieu 76, 2, 6, 1, 1, 2
+exec CapNhatThoiKhoaBieu 77, 2, 7, 1, 1, 2
+exec CapNhatThoiKhoaBieu 78, 2, 8, 1, 1, 2
+exec CapNhatThoiKhoaBieu 79, 2, 9, 1, 1, 2
+exec CapNhatThoiKhoaBieu 80, 2, 10, 1, 1, 2
+
+exec CapNhatThoiKhoaBieu 81, 3, 1, 13, 13, 2
+exec CapNhatThoiKhoaBieu 82, 3, 2, 10, 10, 2
+exec CapNhatThoiKhoaBieu 83, 3, 3, 10, 10, 2
+exec CapNhatThoiKhoaBieu 84, 3, 4, 8, 8, 2
+exec CapNhatThoiKhoaBieu 85, 3, 5, 5, 5, 2
+exec CapNhatThoiKhoaBieu 86, 3, 6, 2, 2, 2
+exec CapNhatThoiKhoaBieu 87, 3, 7, 2, 2, 2
+exec CapNhatThoiKhoaBieu 88, 3, 8, 1, 1, 2
+exec CapNhatThoiKhoaBieu 89, 3, 9, 1, 1, 2
+exec CapNhatThoiKhoaBieu 90, 3, 10, 1, 1, 2
+
+exec CapNhatThoiKhoaBieu 91, 4, 1, 8, 8, 2
+exec CapNhatThoiKhoaBieu 92, 4, 2, 8, 8, 2
+exec CapNhatThoiKhoaBieu 93, 4, 3, 6, 6, 2
+exec CapNhatThoiKhoaBieu 94, 4, 4, 2, 2, 2
+exec CapNhatThoiKhoaBieu 95, 4, 5, 2, 2, 2
+exec CapNhatThoiKhoaBieu 96, 4, 6, 1, 1, 2
+exec CapNhatThoiKhoaBieu 97, 4, 7, 1, 1, 2
+exec CapNhatThoiKhoaBieu 98, 4, 8, 1, 1, 2
+exec CapNhatThoiKhoaBieu 99, 4, 9, 1, 1, 2
+exec CapNhatThoiKhoaBieu 100, 4, 10, 1, 1, 2
+
+exec CapNhatThoiKhoaBieu 101, 5, 1, 7, 7, 2
+exec CapNhatThoiKhoaBieu 102, 5, 2, 6, 6, 2
+exec CapNhatThoiKhoaBieu 103, 5, 3, 3, 3, 2
+exec CapNhatThoiKhoaBieu 104, 5, 4, 4, 4, 2
+exec CapNhatThoiKhoaBieu 105, 5, 5, 4, 4, 2
+exec CapNhatThoiKhoaBieu 106, 5, 6, 3, 3, 2
+exec CapNhatThoiKhoaBieu 107, 5, 7, 3, 3, 2
+exec CapNhatThoiKhoaBieu 108, 5, 8, 8, 8, 2
+exec CapNhatThoiKhoaBieu 109, 5, 9, 8, 8, 2
+exec CapNhatThoiKhoaBieu 110, 5, 10, 1, 1, 2
+
+exec CapNhatThoiKhoaBieu 111, 6, 1, 11, 11, 2
+exec CapNhatThoiKhoaBieu 112, 6, 2, 11, 11, 2
+exec CapNhatThoiKhoaBieu 113, 6, 3, 12, 12, 2
+exec CapNhatThoiKhoaBieu 114, 6, 4, 12, 12, 2
+exec CapNhatThoiKhoaBieu 115, 6, 5, 1, 1, 2
+exec CapNhatThoiKhoaBieu 116, 6, 6, 1, 1, 2
+exec CapNhatThoiKhoaBieu 117, 6, 7, 1, 1, 2
+exec CapNhatThoiKhoaBieu 118, 6, 8, 1, 1, 2
+exec CapNhatThoiKhoaBieu 119, 6, 9, 1, 1, 2
+exec CapNhatThoiKhoaBieu 120, 6, 10, 1, 1, 2
 go
 /* End */

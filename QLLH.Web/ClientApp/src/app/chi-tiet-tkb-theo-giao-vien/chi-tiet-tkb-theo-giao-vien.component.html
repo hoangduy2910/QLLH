@@ -8,13 +8,13 @@
           </a>
         </div>
         <div class="capNhatBtnTKB">
-          <button type="button" class="btn btn-outline-success">
+          <button type="button" class="btn btn-outline-success" (click)="capNhatDanhSachThoiKhoaBieu()">
             <i class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i> Cập nhật
           </button>
         </div>
         <div class="lamMoiBtnTKB">
-          <button type="button" class="btn btn-outline-primary">
-            <i class="fa fa-plus-square-o fa-lg" aria-hidden="true"></i> Làm mới
+          <button type="button" class="btn btn-outline-primary" (click)="lamMoiThoiKhoaBieu()">
+            <i class="fa fa-plus-square-o fa-lg" aria-hidden="true" ></i> Làm mới
           </button>
         </div>
       </div>
@@ -35,55 +35,49 @@
           </th>
           <td>
             <select class="form-control">
-              <option></option>
               <option 
-                *ngFor="let l of listLopHoc" 
-                [ngStyle]="{'display': l.maLop != 1 ? 'block' : 'none'}"
+                *ngFor="let l of listLopHoc"
+                [ngStyle]="{'display': danhSachMaLopTheoGV.includes(l.maLop) ? '' : 'none'}"
                 id="{{ l.maLop }}-{{ t.maTiet }}-1">{{ l.tenLop }}</option>
             </select>
           </td>
           <td>
             <select class="form-control">
-              <option></option>
               <option 
-                *ngFor="let l of listLopHoc" 
-                [ngStyle]="{'display': l.maLop != 1 ? 'block' : 'none'}"
+                *ngFor="let l of listLopHoc"
+                [ngStyle]="{'display': danhSachMaLopTheoGV.includes(l.maLop) ? '' : 'none'}"
                 id="{{ l.maLop }}-{{ t.maTiet }}-2">{{ l.tenLop }}</option>
             </select>
           </td>
           <td>
             <select class="form-control">
-              <option></option>
               <option 
-                *ngFor="let l of listLopHoc" 
-                [ngStyle]="{'display': l.maLop != 1 ? 'block' : 'none'}"
+                *ngFor="let l of listLopHoc"
+                [ngStyle]="{'display': danhSachMaLopTheoGV.includes(l.maLop) ? '' : 'none'}"
                 id="{{ l.maLop }}-{{ t.maTiet }}-3">{{ l.tenLop }}</option>
             </select>
           </td>
           <td>
             <select class="form-control">
-              <option></option>
               <option 
-                *ngFor="let l of listLopHoc" 
-                [ngStyle]="{'display': l.maLop != 1 ? 'block' : 'none'}"
+                *ngFor="let l of listLopHoc"
+                [ngStyle]="{'display': danhSachMaLopTheoGV.includes(l.maLop) ? '' : 'none'}"
                 id="{{ l.maLop }}-{{ t.maTiet }}-4">{{ l.tenLop }}</option>
             </select>
           </td>
           <td>
             <select class="form-control">
-              <option></option>
               <option 
-                *ngFor="let l of listLopHoc" 
-                [ngStyle]="{'display': l.maLop != 1 ? 'block' : 'none'}"
+                *ngFor="let l of listLopHoc"
+                [ngStyle]="{'display': danhSachMaLopTheoGV.includes(l.maLop) ? '' : 'none'}"
                 id="{{ l.maLop }}-{{ t.maTiet }}-5">{{ l.tenLop }}</option>
             </select>
           </td>
           <td>
             <select class="form-control">
-              <option></option>
               <option 
-                *ngFor="let l of listLopHoc" 
-                [ngStyle]="{'display': l.maLop != 1 ? 'block' : 'none'}"
+                *ngFor="let l of listLopHoc"
+                [ngStyle]="{'display': danhSachMaLopTheoGV.includes(l.maLop) ? '' : 'none'}"
                 id="{{ l.maLop }}-{{ t.maTiet }}-6">{{ l.tenLop }}</option>
             </select>
           </td>
