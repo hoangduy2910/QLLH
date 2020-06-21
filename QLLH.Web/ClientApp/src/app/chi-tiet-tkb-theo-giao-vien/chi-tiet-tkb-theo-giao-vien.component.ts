@@ -35,8 +35,7 @@ export class ChiTietTkbTheoGiaoVienComponent {
     ngaySinh: "",
     gioiTinh: "",
     diaChi: "",
-    soDt: "",
-    maCv: 2
+    soDt: ""
   };
 
   constructor(private route: ActivatedRoute, private http: HttpClient, @Inject('BASE_URL') baseUrl: string) {   
@@ -117,9 +116,6 @@ export class ChiTietTkbTheoGiaoVienComponent {
         for (let i in this.listLopHocTheoGV) {
           this.danhSachMaLopTheoGV[i] = this.listLopHocTheoGV[i].maLop;
         }
-        if (this.danhSachMaLopTheoGV.includes(4)) {
-          console.log("123");
-        }
       }
       else {
         alert(res.message);
@@ -156,7 +152,6 @@ export class ChiTietTkbTheoGiaoVienComponent {
   capNhatDanhSachThoiKhoaBieu() {
     var res: any;
     var x: any, y: any;
-    var check: any;
     var that = this;
     var tietHoc: any;
     var tkbNew: any;
@@ -179,6 +174,8 @@ export class ChiTietTkbTheoGiaoVienComponent {
         if (res.success) {
           that.tkbOld = res.data;  
 
+          console.log(that.tkbOld);
+
           tkbNew = {
             maTkb: that.tkbOld.maTkb,
             maNgay: that.tkbOld.maNgay,
@@ -197,15 +194,11 @@ export class ChiTietTkbTheoGiaoVienComponent {
         }
       });
     });
+    $('#modalCapNhatTKB').modal("hide");
     alert("Cập nhật thời khóa biểu thành công !");
   }
 
-  lamMoiThoiKhoaBieu() {
-    for(let i = 1; i <= this.listTietHoc.length; i++) {
-      var listTietHoc = "#listTietHoc-" + i + " > td > select";
-      $(listTietHoc).each(function() {
-        $(this[0]).attr("selected", "selected");
-      })
-    }
+  openModalCapNhatTKB() {
+    $('#modalCapNhatTKB').modal("show");
   }
 }

@@ -18,20 +18,6 @@ namespace QLLH.BLL
             return listTKB;
         }
 
-        public object getThoiKhoaBieuTheoTietHocVaLopHoc(int MaTiet, int MaLop)
-        {
-            var listTKB = All.Join(_rep.Context.MonHoc, a => a.MaMh, b => b.MaMh, (a, b) => new { 
-                a.MaTkb,
-                a.MaNgay,
-                a.MaTiet,
-                a.MaMh,
-                a.MaGv,   
-                a.MaLop,
-                TenMh = b.TenMh
-            }).Where(tkb => tkb.MaTiet == MaTiet && tkb.MaLop == MaLop).ToList();
-            return listTKB;
-        }
-
         public object getThoiKhoaBieuTheoGiaoVien(int MaGv)
         {
             var listTKB = All.Join(_rep.Context.Lop, a => a.MaLop, b => b.MaLop, (a, b) => new {
@@ -46,6 +32,20 @@ namespace QLLH.BLL
             return listTKB;
         }
 
+        public object getThoiKhoaBieuTheoTietHocVaLopHoc(int MaTiet, int MaLop)
+        {
+            var listTKB = All.Join(_rep.Context.MonHoc, a => a.MaMh, b => b.MaMh, (a, b) => new { 
+                a.MaTkb,
+                a.MaNgay,
+                a.MaTiet,
+                a.MaMh,
+                a.MaGv,   
+                a.MaLop,
+                TenMh = b.TenMh
+            }).Where(tkb => tkb.MaTiet == MaTiet && tkb.MaLop == MaLop).ToList();
+            return listTKB;
+        }
+
         public object getThoiKhoaBieuTheoTietNgayLop(TietNgayLopReq req)
         {
             var tKB = All.Where(
@@ -56,25 +56,16 @@ namespace QLLH.BLL
             return tKB;
         }
 
+        public object getThoiKhoaBieuTheoGiaoVienLop(GiaoVienLopReq req)
+        {
+            var tKB = All.Where(tkb => tkb.MaLop == req.MaLop && tkb.MaGv == req.MaGv).ToList();
+            return tKB;
+        }
+
         public object getAllThoiKhoaBieu()
         {
             var listTKB = All;
             return listTKB;
-        }
-
-        public SingleRsp createThoiKhoaBieu(ThoiKhoaBieuReq tkb)
-        {
-            var res = new SingleRsp();
-            ThoiKhoaBieu newTKB = new ThoiKhoaBieu();
-            newTKB.MaTkb = tkb.MaTkb;
-            newTKB.MaNgay = tkb.MaNgay;
-            newTKB.MaTiet = tkb.MaTiet;
-            newTKB.MaMh = tkb.MaMh;
-            newTKB.MaGv = tkb.MaGv;
-            newTKB.MaLop = tkb.MaLop;
-
-            res = _rep.CreateThoiKhoaBieu(newTKB);
-            return res;
         }
 
         public SingleRsp updateThoiKhoaBieu(ThoiKhoaBieuReq tkb)
@@ -89,14 +80,6 @@ namespace QLLH.BLL
             newTKB.MaLop = tkb.MaLop;
 
             res = _rep.UpdateThoiKhoaBieu(newTKB);
-            return res;
-        }
-
-        public SingleRsp removeThoiKhoaBieu(int id)
-        {
-            var res = new SingleRsp();
-            var tkb = All.FirstOrDefault(tkb => tkb.MaTkb == id);
-            res = _rep.RemoveThoiKhoaBieu(tkb);
             return res;
         }
     }

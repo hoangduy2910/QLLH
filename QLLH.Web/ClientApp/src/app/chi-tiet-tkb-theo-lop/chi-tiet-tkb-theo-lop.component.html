@@ -8,7 +8,7 @@
           </a>
         </div>
         <div class="capNhatBtnTKB">
-          <button type="button" class="btn btn-outline-success" (click)="capNhatDanhSachThoiKhoaBieu()">
+          <button type="button" class="btn btn-outline-success" (click)="openModalCapNhatTKB()">
             <i class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i> Cập nhật
           </button>
         </div>
@@ -68,7 +68,8 @@
     </table>
   </div>
 </div>
-<!-- Modal -->
+
+<!-- Modal Cap Nhat Giao Vien Bo Mon -->
 <div class="modal fade" id="modalCapNhatGVBM" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
@@ -84,4 +85,24 @@
     </div>
   </div>
 </div>
+<!-- End Modal -->
+
+<!-- Modal Cap Nhat Thoi Khoa Bieu -->
+<div class="modal fade" id="modalCapNhatTKB" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Cập nhật thời khóa biểu</h5>
+      </div>
+      <div class="modal-body" style="text-align: center;">
+        Bạn có muốn cập nhật thời khóa biểu của lớp này ko ?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" (click)="capNhatDanhSachThoiKhoaBieu()">Cập nhật</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Modal -->
+
 

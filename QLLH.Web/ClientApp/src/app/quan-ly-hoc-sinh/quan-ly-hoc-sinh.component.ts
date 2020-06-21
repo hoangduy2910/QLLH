@@ -16,14 +16,6 @@ export class QuanLyHocSinhComponent {
   listLop: any;
   listGiaoVien: any;
 
-  listRow: any = [
-    { row: 10 },
-    { row: 20 },
-    { row: 30 },
-    { row: 40 },
-    { row: 50 }
-  ];
-
   listHocSinh: any = {
     data: [],
     totalRecord: 0,
@@ -50,8 +42,7 @@ export class QuanLyHocSinhComponent {
     ngaySinh: "",
     gioiTinh: "",
     diaChi: "",
-    soDt: "",
-    maCv: 2
+    soDt: ""
   };
 
   constructor(private http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
@@ -141,20 +132,39 @@ export class QuanLyHocSinhComponent {
     this.isSearch = true;
     var name = (<HTMLInputElement>document.getElementById("tenHocSinh")).value;
     var res: any;
-    let x = {
-      keyword: name,
-      page: cPage,
-      size: this.size
+    
+    if (!this.isSearchByClass) {
+      let x = {
+        keyword: name,
+        page: cPage,
+        size: this.size
+      }
+      this.http.post("https://localhost:44329/api/HocSinh/get-by-name", x).subscribe(result => {
+        res = result;
+        if (res.success) {
+          this.listHocSinh = res.data;
+        }
+        else {
+          alert(res.message);
+        }
+      }, error => console.error(error));
     }
-    this.http.post("https://localhost:44329/api/HocSinh/get-by-name", x).subscribe(result => {
-      res = result;
-      if (res.success) {
-        this.listHocSinh = res.data;
+    else {
+      let x = {
+        keyword: name + "-" + this.tenLop,
+        page: cPage,
+        size: this.size
       }
-      else {
-        alert(res.message);
-      }
-    }, error => console.error(error));
+      this.http.post("https://localhost:44329/api/HocSinh/get-by-name-and-class", x).subscribe(result => {
+        res = result;
+        if (res.success) {
+          this.listHocSinh = res.data;
+        }
+        else {
+          alert(res.message);
+        }
+      }, error => console.error(error));
+    }
   }
 
   timKiemHocSinhTheoLop(cPage, tenLop) 
@@ -177,13 +187,6 @@ export class QuanLyHocSinhComponent {
         alert(res.message);
       }
     }, error => console.error(error));
-  }
-
-  chonSoDongHienThi(row) {
-    this.size = row;
-    this.danhSachHocSinh(1);
-    this.isSearchByClass = false;
-    (<HTMLInputElement>document.getElementById("tenLop")).textContent = "Lớp";
   }
 
   chonGiaoVienTheoLop(maLop) {

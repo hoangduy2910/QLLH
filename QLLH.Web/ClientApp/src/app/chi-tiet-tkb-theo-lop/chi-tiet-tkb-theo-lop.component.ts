@@ -22,16 +22,11 @@ export class ChiTietTkbTheoLopComponent {
     maLop: 0
   };
 
-  giaoVien = {
+  giaoVienLop = {
+    maGvl: 0,
     maGv: 0,
-    tenGv: "",
-    maMh: null,
-    maLop: 1,
-    ngaySinh: "",
-    gioiTinh: "",
-    diaChi: "",
-    soDt: "",
-    maCv: 2
+    maLop: 0,
+    maMh: 0,
   };
 
   lopHoc: any = [];
@@ -160,7 +155,7 @@ export class ChiTietTkbTheoLopComponent {
       res = result;
       if (res.success) {
         gvBM = res.data;
-        if (gvBM.length >= 13) {
+        if (gvBM.length >= 12) {
           this.checkGVBM = true;
         }
         if (!this.checkGVBM)
@@ -207,19 +202,34 @@ export class ChiTietTkbTheoLopComponent {
           maLop: that.maLop,
           maMh: that.maMh
         };
+        
+        var maTiet = that.maTiet;
+        var maNgay = that.maNgay;
         that.http.post("https://localhost:44329/api/GiaoVienLop/get-by-subject-and-class", y).subscribe(result => {
           res = result;
           if (res.success) {
-            that.giaoVien = res.data;
+            that.giaoVienLop = res.data;
+
+            if (that.giaoVienLop) {
+              tkbNew = {
+                maTkb: that.tkbOld.maTkb,
+                maNgay: that.tkbOld.maNgay,
+                maTiet: that.tkbOld.maTiet,
+                maMh: that.giaoVienLop.maMh,
+                maGv: that.giaoVienLop.maGv,
+                maLop: that.maLop
+              };
+            } else {
+              tkbNew = {
+                maTkb: that.tkbOld.maTkb,
+                maNgay: that.tkbOld.maNgay,
+                maTiet: that.tkbOld.maTiet,
+                maMh: 1,
+                maGv: 1,
+                maLop: that.maLop
+              };
+            }
             
-            tkbNew = {
-              maTkb: that.tkbOld.maTkb,
-              maNgay: that.tkbOld.maNgay,
-              maTiet: that.tkbOld.maTiet,
-              maMh: that.giaoVien.maMh,
-              maGv: that.giaoVien.maGv,
-              maLop: that.maLop
-            };
             that.http.post("https://localhost:44329/api/ThoiKhoaBieu/update", tkbNew).subscribe(result => {
               res = result;
               if (res.success) {
@@ -231,6 +241,7 @@ export class ChiTietTkbTheoLopComponent {
         });
       });
     }
+    $('#modalCapNhatTKB').modal("hide");
     alert("Cập nhật thời khóa biểu thành công !");
   }
 
@@ -241,5 +252,9 @@ export class ChiTietTkbTheoLopComponent {
         $(this[0]).attr("selected", "selected");
       })
     }
+  }
+
+  openModalCapNhatTKB() {
+    $('#modalCapNhatTKB').modal("show");
   }
 }

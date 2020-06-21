@@ -33,24 +33,12 @@ export class QuanLyGiaoVienComponent {
     ngaySinh: "",
     gioiTinh: "",
     diaChi: "",
-    soDt: "",
-    maCv: 2
-  };
-
-  hocSinh = {
-    maHs: 0,
-    tenHs: "",
-    maGv: 0,
-    maLop: 0,
-    ngaySinh: "",
-    gioiTinh: "",
-    diaChi: "",
+    soDt: ""
   };
 
   constructor(private http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
     this.danhSachGiaoVien(1);
     this.danhSachMonHoc();
-    this.danhSachLop();
   }
 
   danhSachGiaoVien(cPage) {
@@ -192,17 +180,16 @@ export class QuanLyGiaoVienComponent {
         ngaySinh: this.giaoVien.ngaySinh,
         gioiTinh: $("#gioiTinh option:selected").text(),
         diaChi: this.giaoVien.diaChi,
-        soDt: this.giaoVien.soDt,
-        maCv: this.giaoVien.maCv
+        soDt: this.giaoVien.soDt
       };
       this.http.post("https://localhost:44329/api/GiaoVien/create", gv).subscribe(result => {
         res = result;
         if (res.success) {
           this.giaoVien = res.data;
+          $('#modalAddEdit').modal('hide');
+          this.clearModal();
           alert("Thêm thành công giáo viên mới !");
           this.danhSachGiaoVien(1);
-          this.clearModal();
-          $('#modalAddEdit').modal('hide');
         }
         else {
           alert(res.message);
@@ -223,18 +210,17 @@ export class QuanLyGiaoVienComponent {
       ngaySinh: this.giaoVien.ngaySinh,
       gioiTinh: $("#gioiTinh option:selected").text(),
       diaChi: this.giaoVien.diaChi,
-      soDt: this.giaoVien.soDt,
-      maCv: this.giaoVien.maCv
+      soDt: this.giaoVien.soDt
     };    
     this.http.post("https://localhost:44329/api/GiaoVien/update", gv).subscribe(result => {
       res = result;
       if (res.success) {
         this.giaoVien = res.data;
+        $('#modalAddEdit').modal('hide');
+        this.clearModal();
         alert("Sửa thành công giáo viên !");
         (<HTMLInputElement>document.getElementById("tenMonHoc")).textContent = "Môn học";
         this.danhSachGiaoVien(1);
-        this.clearModal();
-        $('#modalAddEdit').modal('hide');
       }
       else {
         alert(res.message);
@@ -252,10 +238,11 @@ export class QuanLyGiaoVienComponent {
       res = result;
       if (res.success) {
         this.giaoVien = res.data;
-        alert("Xóa thành công giáo viên !");
-        this.clearModal();
-        this.danhSachGiaoVien(1);
         $('#modalDelete').modal('hide');
+        this.clearModal();
+        alert("Xóa thành công giáo viên !");
+        (<HTMLInputElement>document.getElementById("tenMonHoc")).textContent = "Môn học";
+        this.danhSachGiaoVien(1);   
       }
       else {
         alert(res.message);
@@ -288,8 +275,7 @@ export class QuanLyGiaoVienComponent {
       ngaySinh: "",
       gioiTinh: "",
       diaChi: "",
-      soDt: "",
-      maCv: 2
+      soDt: ""
     };
   }
 }

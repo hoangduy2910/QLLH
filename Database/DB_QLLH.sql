@@ -3,22 +3,6 @@ go
 use QuanLyLopHoc;
 go
 
---- Chuc vu ---
-create table ChucVu (
-	MaCV int identity(1,1),
-	TenCV nvarchar(50),
-	primary key (MaCV)
-);
-go
-create proc ThemChucVu @TenCV nvarchar(50)
-as
-insert into ChucVu (TenCV)
-values (@TenCV)
-go
-exec ThemChucVu N'Quản trị'
-exec ThemChucVu N'Giáo viên'
-go
-
 --- Tiet hoc ---
 create table TietHoc (
 	MaTiet int identity(1,1),
@@ -74,7 +58,7 @@ as
 insert into Lop	(TenLop)
 values (@TenLop)
 go
-exec ThemLop N'Chưa chỉ định'
+exec ThemLop N''
 exec ThemLop '10A1'
 exec ThemLop '10A2'
 exec ThemLop '10A3'
@@ -129,44 +113,42 @@ create table GiaoVien (
 	GioiTinh nvarchar(5),
 	DiaChi nvarchar(100),
 	SoDT nvarchar(20),
-	MaCV int,
 	primary key (MaGV),
 	foreign key (MaMH) references MonHoc(MaMH),
-	foreign key (MaLop) references Lop(MaLop),
-	foreign key (MaCV) references ChucVu(MaCV),
+	foreign key (MaLop) references Lop(MaLop)
 );
 go
-create proc ThemGiaoVien @TenGV nvarchar(50), @MaMH int,  @MaLop int, @NgaySinh date, @GioiTinh nvarchar(5), @DiaChi nvarchar(100), @SoDT nvarchar(20), @MaCV int
+create proc ThemGiaoVien @TenGV nvarchar(50) = null, @MaMH int = null,  @MaLop int = null, @NgaySinh date = null, @GioiTinh nvarchar(5) = null, @DiaChi nvarchar(100) = null, @SoDT nvarchar(20) = null
 as
-insert into GiaoVien (TenGV, MaMH, MaLop, NgaySinh, GioiTinh, DiaChi, SoDT, MaCV)
-values (@TenGV, @MaMH, @MaLop, @NgaySinh, @GioiTinh, @DiaChi, @SoDT, @MaCV)
+insert into GiaoVien (TenGV, MaMH, MaLop, NgaySinh, GioiTinh, DiaChi, SoDT)
+values (@TenGV, @MaMH, @MaLop, @NgaySinh, @GioiTinh, @DiaChi, @SoDT)
 go
-exec ThemGiaoVien N'Chưa chỉ định', null, null, null, null, null, null, null
-exec ThemGiaoVien N'Phan Thị Minh', 2, 2, '1965-01-20', N'Nam', N'Hồ Chí Minh', '0914684595', 2
-exec ThemGiaoVien N'Huỳnh Văn Nhứt', 3, 3, '1965-01-20', N'Nam', N'Hồ Chí Minh', '0914113578', 2
-exec ThemGiaoVien N'Trần Thanh An', 4, 4, '1965-01-20', N'Nữ', N'Hồ Chí Minh', '0914189898', 2
-exec ThemGiaoVien N'Trần Thị Thanh Hảo', 5, 5, '1965-01-20', N'Nữ', N'Hồ Chí Minh', '0914560298', 2
-exec ThemGiaoVien N'Ngô Thị Thu An', 6, 6, '1965-01-20', N'Nữ', N'Hồ Chí Minh', '0944929638', 2
-exec ThemGiaoVien N'Nguyễn Vĩnh Bảo', 7, 7, '1965-01-20', N'Nam', N'Hồ Chí Minh', '0983052703', 2
-exec ThemGiaoVien N'Lê Thị Bích', 8, 8, '1965-01-20', N'Nữ', N'Hồ Chí Minh', '0917550153', 2
-exec ThemGiaoVien N'Nguyễn Thị Chi', 9, 9, '1965-01-20', N'Nữ', N'Hồ Chí Minh', '0919316165', 2
-exec ThemGiaoVien N'Trương Quang Chính', 10, 10, '1965-01-20', N'Nam', N'Hồ Chí Minh', '0986787750', 2
-exec ThemGiaoVien N'Đinh Thị Quỳnh Dao', 11, 11, '1965-01-20', N'Nữ', N'Hồ Chí Minh', '0986625682', 2
-exec ThemGiaoVien N'Nguyễn Thị Thuỳ Dương',	12, 12, '1976-02-12', N'Nữ', N'Hồ Chí Minh', '0912739924', 2	
-exec ThemGiaoVien N'Nguyễn Văn Hùng', 13, 13, '1965-01-09', N'Nam', N'Hồ Chí Minh', '0912739924', 2	
+exec ThemGiaoVien N'Chưa chỉ định', null, null, null, null, null, null
+exec ThemGiaoVien N'Phan Thị Minh', 2, 2, '1965-01-20', N'Nam', N'Hồ Chí Minh', '0914684595'
+exec ThemGiaoVien N'Huỳnh Văn Nhứt', 3, 3, '1965-01-20', N'Nam', N'Hồ Chí Minh', '0914113578'
+exec ThemGiaoVien N'Trần Thanh An', 4, 4, '1965-01-20', N'Nữ', N'Hồ Chí Minh', '0914189898'
+exec ThemGiaoVien N'Trần Thị Thanh Hảo', 5, 5, '1965-01-20', N'Nữ', N'Hồ Chí Minh', '0914560298'
+exec ThemGiaoVien N'Ngô Thị Thu An', 6, 6, '1965-01-20', N'Nữ', N'Hồ Chí Minh', '0944929638'
+exec ThemGiaoVien N'Nguyễn Vĩnh Bảo', 7, 7, '1965-01-20', N'Nam', N'Hồ Chí Minh', '0983052703'
+exec ThemGiaoVien N'Lê Thị Bích', 8, 8, '1965-01-20', N'Nữ', N'Hồ Chí Minh', '0917550153'
+exec ThemGiaoVien N'Nguyễn Thị Chi', 9, 9, '1965-01-20', N'Nữ', N'Hồ Chí Minh', '0919316165'
+exec ThemGiaoVien N'Trương Quang Chính', 10, 10, '1965-01-20', N'Nam', N'Hồ Chí Minh', '0986787750'
+exec ThemGiaoVien N'Đinh Thị Quỳnh Dao', 11, 11, '1965-01-20', N'Nữ', N'Hồ Chí Minh', '0986625682'
+exec ThemGiaoVien N'Nguyễn Thị Thuỳ Dương',	12, 12, '1976-02-12', N'Nữ', N'Hồ Chí Minh', '0912739924'	
+exec ThemGiaoVien N'Nguyễn Văn Hùng', 13, 13, '1965-01-09', N'Nam', N'Hồ Chí Minh', '0912739924'
 
-exec ThemGiaoVien N'Đoàn Thi Đương', 2, 14, '1976-02-12', N'Nữ', N'Hồ Chí Minh', '01694897447', 2
-exec ThemGiaoVien N'Hồ Thị Quỳnh Giang', 3, 15, '1976-02-12', N'Nữ', N'Hồ Chí Minh', '0935062406', 2
-exec ThemGiaoVien N'Mai Thị Thu Hà', 4, 16, '1976-02-12', N'Nữ', N'Hồ Chí Minh', '0984812427', 2
-exec ThemGiaoVien N'Nguyễn Thị Thu Hà',	5, 1, '1976-02-12', N'Nữ', N'Hồ Chí Minh', '0935800308', 2
-exec ThemGiaoVien N'Phạm Thanh Hải', 6, 1, '1976-02-12', N'Nam', N'Hồ Chí Minh', '0984390360', 2
-exec ThemGiaoVien N'Nguyễn Thị Bích Hạnh', 7, 1, '1976-02-12', N'Nữ', N'Hồ Chí Minh', '0944129625', 2
-exec ThemGiaoVien N'Nguyễn Thị Ái Hằng', 8, 1, '1976-02-12', N'Nữ', N'Hồ Chí Minh', '0975833679', 2
-exec ThemGiaoVien N'Võ Thị Minh Hiền', 9, 1, '1976-02-12', N'Nữ', N'Hồ Chí Minh', '01225120523', 2
-exec ThemGiaoVien N'Nguyễn Thuỳ Nữ Hiệp', 10, 1, '1976-02-12', N'Nữ', N'Hồ Chí Minh', '0905171005', 2
-exec ThemGiaoVien N'Nguyễn Thị Minh Hiếu', 11, 1, '1976-02-12', N'Nam', N'Hồ Chí Minh', '0907856599', 2
-exec ThemGiaoVien N'Đoàn Nhân Hoàng', 12, 1, '1976-02-12', N'Nam', N'Hồ Chí Minh', '0935076113', 2
-exec ThemGiaoVien N'Hoàng Công Huy', 13, 1, '1976-03-12', N'Nam', N'Hồ Chí Minh', '0912739924', 2	
+exec ThemGiaoVien N'Đoàn Thi Đương', 2, 14, '1976-02-12', N'Nữ', N'Hồ Chí Minh', '01694897447'
+exec ThemGiaoVien N'Hồ Thị Quỳnh Giang', 3, 15, '1976-02-12', N'Nữ', N'Hồ Chí Minh', '0935062406'
+exec ThemGiaoVien N'Mai Thị Thu Hà', 4, 16, '1976-02-12', N'Nữ', N'Hồ Chí Minh', '0984812427'
+exec ThemGiaoVien N'Nguyễn Thị Thu Hà',	5, 1, '1976-02-12', N'Nữ', N'Hồ Chí Minh', '0935800308'
+exec ThemGiaoVien N'Phạm Thanh Hải', 6, 1, '1976-02-12', N'Nam', N'Hồ Chí Minh', '0984390360'
+exec ThemGiaoVien N'Nguyễn Thị Bích Hạnh', 7, 1, '1976-02-12', N'Nữ', N'Hồ Chí Minh', '0944129625'
+exec ThemGiaoVien N'Nguyễn Thị Ái Hằng', 8, 1, '1976-02-12', N'Nữ', N'Hồ Chí Minh', '0975833679'
+exec ThemGiaoVien N'Võ Thị Minh Hiền', 9, 1, '1976-02-12', N'Nữ', N'Hồ Chí Minh', '01225120523'
+exec ThemGiaoVien N'Nguyễn Thuỳ Nữ Hiệp', 10, 1, '1976-02-12', N'Nữ', N'Hồ Chí Minh', '0905171005'
+exec ThemGiaoVien N'Nguyễn Thị Minh Hiếu', 11, 1, '1976-02-12', N'Nam', N'Hồ Chí Minh', '0907856599'
+exec ThemGiaoVien N'Đoàn Nhân Hoàng', 12, 1, '1976-02-12', N'Nam', N'Hồ Chí Minh', '0935076113'
+exec ThemGiaoVien N'Hoàng Công Huy', 13, 1, '1976-03-12', N'Nam', N'Hồ Chí Minh', '0912739924'
 go
 
 --- Hoc sinh ---
@@ -310,8 +292,7 @@ exec ThemGiaoVienLop 1, 13
 exec ThemGiaoVienLop 1, 14
 exec ThemGiaoVienLop 1, 15
 exec ThemGiaoVienLop 1, 16
-
-exec ThemGiaoVienLop 1, 2
+go
 exec ThemGiaoVienLop 2, 2
 exec ThemGiaoVienLop 3, 2
 exec ThemGiaoVienLop 4, 2

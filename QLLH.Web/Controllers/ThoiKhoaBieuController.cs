@@ -48,6 +48,15 @@ namespace QLLH.Web.Controllers
             return Ok(res);
         }
 
+        [HttpPost("get-by-teacher-and-class")]
+        public IActionResult getThoiKhoaBieuTheoGiaoVienLop([FromBody] GiaoVienLopReq req)
+        {
+            var res = new SingleRsp();
+            var tkb = _svc.getThoiKhoaBieuTheoGiaoVienLop(req);
+            res.Data = tkb;
+            return Ok(res);
+        }
+
         [HttpPost("get-by-hour-date-class")]
         public IActionResult getThoiKhoaBieuTheoTietNgayLop([FromBody] TietNgayLopReq req)
         {
@@ -57,24 +66,10 @@ namespace QLLH.Web.Controllers
             return Ok(res);
         }
 
-        [HttpPost("create")]
-        public IActionResult createThoiKhoaBieu([FromBody] ThoiKhoaBieuReq req)
-        {
-            var res = _svc.createThoiKhoaBieu(req);
-            return Ok(res);
-        }
-
         [HttpPost("update")]
         public IActionResult updateThoiKhoaBieu([FromBody] ThoiKhoaBieuReq req)
         {
             var res = _svc.updateThoiKhoaBieu(req);
-            return Ok(res);
-        }
-
-        [HttpPost("remove")]
-        public IActionResult removeThoiKhoaBieu([FromBody] SimpleReq req)
-        {
-            var res = _svc.removeThoiKhoaBieu(req.Id);
             return Ok(res);
         }
 

@@ -31,7 +31,6 @@ namespace QLLH.BLL
                 a.GioiTinh,
                 a.DiaChi,
                 a.SoDt,
-                a.MaCv,
                 TenMh = b.TenMh
             }).Join(_rep.Context.Lop, a => a.MaLop, c => c.MaLop, (a, c) => new {
                 a.MaGv,
@@ -42,7 +41,6 @@ namespace QLLH.BLL
                 a.GioiTinh,
                 a.DiaChi,
                 a.SoDt,
-                a.MaCv,
                 a.TenMh,
                 TenLop = c.TenLop
             }).FirstOrDefault();
@@ -60,7 +58,6 @@ namespace QLLH.BLL
                 a.GioiTinh,
                 a.DiaChi,
                 a.SoDt,
-                a.MaCv,
                 TenMh = b.TenMh
             }).Join(_rep.Context.Lop, a => a.MaLop, c => c.MaLop, (a, c) => new {
                 a.MaGv,
@@ -71,7 +68,6 @@ namespace QLLH.BLL
                 a.GioiTinh,
                 a.DiaChi,
                 a.SoDt,
-                a.MaCv,
                 a.TenMh,
                 TenLop = c.TenLop
             }).ToList();
@@ -103,7 +99,6 @@ namespace QLLH.BLL
                 a.GioiTinh,
                 a.DiaChi,
                 a.SoDt,
-                a.MaCv
             }).Join(_rep.Context.Lop, a => a.MaLop, c => c.MaLop, (a, c) => new {
                 a.MaGv,
                 a.TenGv,
@@ -113,7 +108,6 @@ namespace QLLH.BLL
                 a.GioiTinh,
                 a.DiaChi,
                 a.SoDt,
-                a.MaCv,
                 TenLop = c.TenLop
             }).Where(gv => gv.TenLop == keyword);
 
@@ -145,7 +139,6 @@ namespace QLLH.BLL
                 a.GioiTinh,
                 a.DiaChi,
                 a.SoDt,
-                a.MaCv,
                 TenMh = b.TenMh
             }).Join(_rep.Context.Lop, a => a.MaLop, c => c.MaLop, (a, c) => new {
                 a.MaGv,
@@ -156,7 +149,6 @@ namespace QLLH.BLL
                 a.GioiTinh,
                 a.DiaChi,
                 a.SoDt,
-                a.MaCv,
                 a.TenMh,
                 TenLop = c.TenLop
             }).Where(gv => gv.TenMh == keyword);
@@ -189,7 +181,6 @@ namespace QLLH.BLL
                 a.GioiTinh,
                 a.DiaChi,
                 a.SoDt,
-                a.MaCv,
                 TenMh = b.TenMh
             }).Join(_rep.Context.Lop, a => a.MaLop, c => c.MaLop, (a, c) => new {
                 a.MaGv,
@@ -200,7 +191,6 @@ namespace QLLH.BLL
                 a.GioiTinh,
                 a.DiaChi,
                 a.SoDt,
-                a.MaCv,
                 a.TenMh,
                 TenLop = c.TenLop
             }).Where(gv => gv.MaMh == MaMh);
@@ -224,7 +214,6 @@ namespace QLLH.BLL
                 a.GioiTinh,
                 a.DiaChi,
                 a.SoDt,
-                a.MaCv,
                 TenMh = b.TenMh
             }).Join(_rep.Context.Lop, a => a.MaLop, c => c.MaLop, (a, c) => new {
                 a.MaGv,
@@ -235,7 +224,6 @@ namespace QLLH.BLL
                 a.GioiTinh,
                 a.DiaChi,
                 a.SoDt,
-                a.MaCv,
                 a.TenMh,
                 TenLop = c.TenLop
             }).ToList();
@@ -268,7 +256,6 @@ namespace QLLH.BLL
                 a.GioiTinh,
                 a.DiaChi,
                 a.SoDt,
-                a.MaCv,
                 TenLop = c.TenLop
             }).ToList();
 
@@ -287,7 +274,6 @@ namespace QLLH.BLL
             newGV.GioiTinh = gv.GioiTinh;
             newGV.DiaChi = gv.DiaChi;
             newGV.SoDt = gv.SoDt;
-            newGV.MaCv = gv.MaCv;
 
             res = _rep.CreateGiaoVien(newGV);
             //res.Data = newGV;
@@ -306,7 +292,6 @@ namespace QLLH.BLL
             newGV.GioiTinh = gv.GioiTinh;
             newGV.DiaChi = gv.DiaChi;
             newGV.SoDt = gv.SoDt;
-            newGV.MaCv = gv.MaCv;
 
             res = _rep.UpdateGiaoVien(newGV);
             //res.Data = newGV;

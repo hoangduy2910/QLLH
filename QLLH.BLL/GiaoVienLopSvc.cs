@@ -30,8 +30,7 @@ namespace QLLH.BLL
                 c.NgaySinh,
                 c.GioiTinh,
                 c.DiaChi,
-                c.SoDt,
-                c.MaCv
+                c.SoDt
             }).Join(_rep.Context.MonHoc, a => a.MaMh, d => d.MaMh, (a, d) => new {
                 a.MaGvl,
                 a.MaGv,
@@ -42,7 +41,6 @@ namespace QLLH.BLL
                 a.GioiTinh,
                 a.DiaChi,
                 a.SoDt,
-                a.MaCv,
                 d.TenMh
             }).Where(gv => gv.MaLop == MaLop).ToList();
 

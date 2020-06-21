@@ -131,14 +131,8 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-2 label">Chủ nhiệm lớp</div>
-          <div class="col-4">
-            <select class="form-control" id="lop" [(ngModel)]="giaoVien.maLop" disabled>
-              <option *ngFor="let l of listLop" [ngValue]="l.maLop">{{ l.tenLop }}</option>
-            </select>
-          </div>
           <div class="col-2 label">Địa chỉ</div>
-          <div class="col-4">
+          <div class="col-10">
             <input type="text" class="form-control" placeholder="Nhập địa chỉ" [(ngModel)]="giaoVien.diaChi" />
           </div>
         </div>

@@ -14,6 +14,5 @@ namespace QLLH.Common.Req
         public string GioiTinh { get; set; }
         public string DiaChi { get; set; }
         public string SoDt { get; set; }
-        public int? MaCv { get; set; }
     }
 }

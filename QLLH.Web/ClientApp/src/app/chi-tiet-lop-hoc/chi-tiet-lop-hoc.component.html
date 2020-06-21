@@ -29,7 +29,7 @@
                 <td>{{ mh.tenMh }}</td>
                 <td>
                   <select class="form-control" id="giaoVienBoMon{{ mh.maMh }}">
-                    <option></option>
+                    <option value="1"></option>
                     <option 
                       *ngFor="let gv of listGiaoVien" 
                       [ngStyle]="{'display': gv.maMh == mh.maMh ? 'block' : 'none'}"
@@ -63,9 +63,12 @@
                 <td>{{ hs.tenLop }}</td>
                 <td>{{ hs.gioiTinh }}</td>
                 <td>
-                  <a class="btn btn-danger" (click)="openModalDeleteHocSinh(i)">
+                  <button type="button" class="btn btn-success" (click)="openModalEditHocSinh(i)">
+                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                  </button>
+                  <button type="button" class="btn btn-danger" (click)="openModalDeleteHocSinh(i)">
                     <i class="fa fa-trash-o" aria-hidden="true"></i>
-                  </a>
+                  </button>
                 </td>
               </tr>
             </tbody>
@@ -120,11 +123,76 @@
         </button>
       </div>
       <div class="modal-body">
-        Bạn có muốn xóa học sinh ra khỏi lớp này không ?
+        Bạn có muốn xóa học sinh này không ?
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
         <button id="deleteBtnHocSinh" type="button" class="btn btn-danger">Xóa</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Modal -->
+
+<!-- Modal Edit Hoc Sinh -->
+<div class="modal fade" id="modalEditHocSinh" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Sửa học sinh</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+            <div class="col-2 label">Mã học sinh</div>
+            <div class="col-4">
+              <input type="text" class="form-control" [(ngModel)]="hocSinh.maHs" disabled />
+            </div>
+            <div class="col-2 label">Tên học sinh</div>
+            <div class="col-4">
+              <input type="text" class="form-control" placeholder="Nhập tên học sinh" [(ngModel)]="hocSinh.tenHs" />
+            </div>
+        </div>
+        <div class="row">
+          <div class="col-2 label">Tên lớp</div>
+          <div class="col-4">
+            <select class="form-control" id="lop" [(ngModel)]="hocSinh.maLop" (change)="chonGiaoVienTheoLop(hocSinh.maLop)">
+              <option 
+                *ngFor="let l of listLop" 
+                [ngValue]="l.maLop"
+                [ngStyle]="{'display': l.maLop != 1 ? 'block' : 'none'}">{{ l.tenLop }}</option>
+            </select>
+          </div>
+          <div class="col-2 label">Tên giáo viên</div>
+          <div class="col-4">
+            <input type="text" id="tenGiaoVien" class="form-control" disabled />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-2 label">Ngày sinh</div>
+          <div class="col-4">
+            <input type="date" class="form-control" [(ngModel)]="hocSinh.ngaySinh" />
+          </div>
+          <div class="col-2 label">Giới tính</div>
+          <div class="col-4">
+            <select class="form-control" id="gioiTinh" [(ngModel)]="hocSinh.gioiTinh">
+              <option>Nam</option>
+              <option>Nữ</option>
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-2 label">Địa chỉ</div>
+          <div class="col-10">
+            <input type="text" class="form-control" placeholder="Nhập địa chỉ" [(ngModel)]="hocSinh.diaChi" />
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+        <button type="submit" class="btn btn-success" (click)="suaHocSinh()">Sửa</button>
       </div>
     </div>
   </div>

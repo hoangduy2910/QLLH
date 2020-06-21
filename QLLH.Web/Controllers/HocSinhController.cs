@@ -58,6 +58,15 @@ namespace QLLH.Web.Controllers
             return Ok(res);
         }
 
+        [HttpPost("get-by-name-and-class")]
+        public IActionResult getHocSinhByNameAndClass([FromBody] SearchReq req)
+        {
+            var res = new SingleRsp();
+            var listHS = _svc.getHocSinhByNameAndClass(req.page, req.size, req.keyword);
+            res.Data = listHS;
+            return Ok(res);
+        }
+
         [HttpPost("get-all")]
         public IActionResult getAllHocSinh([FromBody] SearchReq req)
         {
