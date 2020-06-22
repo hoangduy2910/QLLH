@@ -14,3 +14,99 @@ code {
   background-color: #1b6ec2;
   border-color: #1861ac;
 }
+
+#root {
+  display: flex;
+}
+
+.main {
+  flex-basis: 75%; 
+  margin: 0 auto; 
+  margin-top: 30px;
+}
+
+@media screen and (max-width: 1250px) {
+  body table {
+    font-size: 14px;
+  }
+
+  body .btn {
+    font-size: 14px;
+  }
+
+  body .form-control {
+    font-size: 14px;
+  }
+
+  body #sidebar ul li a {
+    font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 1120px) {
+  body table {
+    font-size: 13px;
+  }
+
+  body .btn {
+    font-size: 13px;
+  }
+
+  body .form-control {
+    font-size: 13px;
+  }
+
+  body #sidebar ul li a {
+    font-size: 13px;
+  }
+}
+
+@media screen and (max-width: 1085px) {
+  body table {
+    font-size: 12px;
+  }
+
+  body .btn {
+    font-size: 12px;
+  }
+
+  body .form-control {
+    font-size: 12px;
+  }
+
+  body #sidebar ul li a {
+    font-size: 12px;
+  }
+}
+
+@media screen and (max-width: 1030px) {
+  body table {
+    font-size: 11px;
+  }
+
+  body .btn {
+    font-size: 11px;
+  }
+
+  body .form-control {
+    font-size: 11px;
+  }
+
+  body #sidebar ul li a {
+    font-size: 11px;
+  }
+}
+
+@media screen and (max-width: 975px) {
+  body table {
+    font-size: 10px;
+  }
+
+  body .btn {
+    font-size: 10px;
+  }
+
+  body .form-control {
+    font-size: 10px;
+  }
+}

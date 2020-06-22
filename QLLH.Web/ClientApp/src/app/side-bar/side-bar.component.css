@@ -1,14 +1,12 @@
-.img {
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center center;
+.navicon {
+    display: none;
 }
 
 #sidebar {
-    flex-basis: 20%;
-    background: #32373d;
+    flex-basis: 15%;
+    height: 100vh;
     color: #fff;
-    transition: all 0.3s;
+    transition: all 0.5s;
     position: relative;
 }
 
