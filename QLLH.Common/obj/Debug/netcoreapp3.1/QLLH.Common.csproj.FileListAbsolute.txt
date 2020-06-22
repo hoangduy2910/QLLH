@@ -33,3 +33,15 @@ C:\Users\TiDK\Desktop\QLLopHoc\QLLH.Common\obj\Debug\netcoreapp3.1\QLLH.Common.d
 C:\Users\TiDK\Desktop\QLLopHoc\QLLH.Common\obj\Debug\netcoreapp3.1\QLLH.Common.pdb
 C:\Users\TiDK\Desktop\QLLopHoc\QLLH.Common\obj\Debug\netcoreapp3.1\QLLH.Common.genruntimeconfig.cache
 C:\Users\TiDK\Desktop\QLLH\QLLH.Common\obj\Debug\netcoreapp3.1\QLLH.Common.csprojAssemblyReference.cache
+C:\Users\TiDK\Desktop\LTCSDL_TH71_Nhom11\QLLH.Common\bin\Debug\netcoreapp3.1\QLLH.Common.deps.json
+C:\Users\TiDK\Desktop\LTCSDL_TH71_Nhom11\QLLH.Common\bin\Debug\netcoreapp3.1\QLLH.Common.runtimeconfig.json
+C:\Users\TiDK\Desktop\LTCSDL_TH71_Nhom11\QLLH.Common\bin\Debug\netcoreapp3.1\QLLH.Common.runtimeconfig.dev.json
+C:\Users\TiDK\Desktop\LTCSDL_TH71_Nhom11\QLLH.Common\bin\Debug\netcoreapp3.1\QLLH.Common.dll
+C:\Users\TiDK\Desktop\LTCSDL_TH71_Nhom11\QLLH.Common\bin\Debug\netcoreapp3.1\QLLH.Common.pdb
+C:\Users\TiDK\Desktop\LTCSDL_TH71_Nhom11\QLLH.Common\obj\Debug\netcoreapp3.1\QLLH.Common.csprojAssemblyReference.cache
+C:\Users\TiDK\Desktop\LTCSDL_TH71_Nhom11\QLLH.Common\obj\Debug\netcoreapp3.1\QLLH.Common.csproj.CoreCompileInputs.cache
+C:\Users\TiDK\Desktop\LTCSDL_TH71_Nhom11\QLLH.Common\obj\Debug\netcoreapp3.1\QLLH.Common.AssemblyInfoInputs.cache
+C:\Users\TiDK\Desktop\LTCSDL_TH71_Nhom11\QLLH.Common\obj\Debug\netcoreapp3.1\QLLH.Common.AssemblyInfo.cs
+C:\Users\TiDK\Desktop\LTCSDL_TH71_Nhom11\QLLH.Common\obj\Debug\netcoreapp3.1\QLLH.Common.dll
+C:\Users\TiDK\Desktop\LTCSDL_TH71_Nhom11\QLLH.Common\obj\Debug\netcoreapp3.1\QLLH.Common.pdb
+C:\Users\TiDK\Desktop\LTCSDL_TH71_Nhom11\QLLH.Common\obj\Debug\netcoreapp3.1\QLLH.Common.genruntimeconfig.cache

@@ -174,8 +174,6 @@ export class ChiTietTkbTheoGiaoVienComponent {
         if (res.success) {
           that.tkbOld = res.data;  
 
-          console.log(that.tkbOld);
-
           tkbNew = {
             maTkb: that.tkbOld.maTkb,
             maNgay: that.tkbOld.maNgay,

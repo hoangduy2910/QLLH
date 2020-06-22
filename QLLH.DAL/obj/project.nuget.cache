@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "0H6CAJwjQeoWWbEv6ALjBPc/wm81TitbBw8O5HbmE0ro7aYFUlzyuo//v0i348mnFVmphD7IkWagqqpVFdXI9Q==",
+  "dgSpecHash": "IPmfxih/73GRliZMvUB1svrbHA5pTp4EFMi8lWS0ew4JKoK+1UpVa+yN8WgvuQnE3EIXXnbfplPFMikH0WPb3g==",
   "success": true,
-  "projectFilePath": "C:\\Users\\TiDK\\Desktop\\QLLH\\QLLH.DAL\\QLLH.DAL.csproj",
+  "projectFilePath": "C:\\Users\\TiDK\\Desktop\\LTCSDL_TH71_Nhom11\\QLLH.DAL\\QLLH.DAL.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\TiDK\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
     "C:\\Users\\TiDK\\.nuget\\packages\\microsoft.bcl.hashcode\\1.1.0\\microsoft.bcl.hashcode.1.1.0.nupkg.sha512",

@@ -5006,11 +5006,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\TiDK\\Desktop\\QLLH\\QLLH.Common\\QLLH.Common.csproj",
+      "projectUniqueName": "C:\\Users\\TiDK\\Desktop\\LTCSDL_TH71_Nhom11\\QLLH.Common\\QLLH.Common.csproj",
       "projectName": "QLLH.Common",
-      "projectPath": "C:\\Users\\TiDK\\Desktop\\QLLH\\QLLH.Common\\QLLH.Common.csproj",
+      "projectPath": "C:\\Users\\TiDK\\Desktop\\LTCSDL_TH71_Nhom11\\QLLH.Common\\QLLH.Common.csproj",
       "packagesPath": "C:\\Users\\TiDK\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\TiDK\\Desktop\\QLLH\\QLLH.Common\\obj\\",
+      "outputPath": "C:\\Users\\TiDK\\Desktop\\LTCSDL_TH71_Nhom11\\QLLH.Common\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\TiDK\\AppData\\Roaming\\NuGet\\NuGet.Config",

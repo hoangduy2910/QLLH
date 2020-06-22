@@ -168,7 +168,9 @@ export class ChiTietTkbTheoLopComponent {
   }
 
   capNhatGVBM() {
-    location.replace("http://localhost:4200/chi-tiet-lop-hoc/" + this.maLop);
+    var arr = window.location.href.split("/")
+    var url = arr[0] + "//" + arr[2];
+    location.replace(url + "/chi-tiet-lop-hoc/" + this.maLop);
   }
 
   capNhatDanhSachThoiKhoaBieu() {

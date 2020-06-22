@@ -5026,11 +5026,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\TiDK\\Desktop\\QLLH\\QLLH.DAL\\QLLH.DAL.csproj",
+      "projectUniqueName": "C:\\Users\\TiDK\\Desktop\\LTCSDL_TH71_Nhom11\\QLLH.DAL\\QLLH.DAL.csproj",
       "projectName": "QLLH.DAL",
-      "projectPath": "C:\\Users\\TiDK\\Desktop\\QLLH\\QLLH.DAL\\QLLH.DAL.csproj",
+      "projectPath": "C:\\Users\\TiDK\\Desktop\\LTCSDL_TH71_Nhom11\\QLLH.DAL\\QLLH.DAL.csproj",
       "packagesPath": "C:\\Users\\TiDK\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\TiDK\\Desktop\\QLLH\\QLLH.DAL\\obj\\",
+      "outputPath": "C:\\Users\\TiDK\\Desktop\\LTCSDL_TH71_Nhom11\\QLLH.DAL\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\TiDK\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -5046,8 +5046,8 @@
       "frameworks": {
         "netcoreapp3.1": {
           "projectReferences": {
-            "C:\\Users\\TiDK\\Desktop\\QLLH\\QLLH.Common\\QLLH.Common.csproj": {
-              "projectPath": "C:\\Users\\TiDK\\Desktop\\QLLH\\QLLH.Common\\QLLH.Common.csproj"
+            "C:\\Users\\TiDK\\Desktop\\LTCSDL_TH71_Nhom11\\QLLH.Common\\QLLH.Common.csproj": {
+              "projectPath": "C:\\Users\\TiDK\\Desktop\\LTCSDL_TH71_Nhom11\\QLLH.Common\\QLLH.Common.csproj"
             }
           }
         }

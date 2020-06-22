@@ -116,7 +116,6 @@ export class QuanLyLopHocComponent {
       res = result;
       if (res.success) {
         this.listHocSinh = res.data;
-        console.log(this.listHocSinh);
       }
       else {
         alert(res.message);
@@ -132,7 +131,6 @@ export class QuanLyLopHocComponent {
       res = result;
       if (res.success) {
         this.GVCN = res.data;
-        console.log(this.GVCN);
       }
       else {
         alert(res.message);
